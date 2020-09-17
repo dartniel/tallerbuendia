@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<link
+		href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"
+		rel="stylesheet" />
+	<link
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+		rel="stylesheet" />
+	<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css"
+		rel="stylesheet" />
+	<h:outputStylesheet library="css" name="btncircle.css" />	
+	<title>Repuestos</title>
+</h:head>
+<body>
+
+	<div class="container">
+		<h:form id="registroRepuesto">
+		<br></br>
+		<br></br>
+		<h2>Agregar Repuesto Entrante</h2>
+			<div class="row">
+				<div class="col-md-6">
+					<label for="id" >ID Repuesto</label>
+					<div class="input-group mb-3">
+	  					<div class="input-group-prepend">
+	    					<span class="input-group-text"> <img src="./resources/icon/build_circle-24px.svg" width="20px" height="20px"/></span>
+	  					</div>
+						<h:inputText id="id" class="form-control" a:placeholder="ID de Producto" value="#{repuestoController.repuesto.idRepuesto}" />
+					</div>
+				</div>
+				<div class="col-md-6">
+                    <label for="nombre" >Nombre Del Repuesto</label>
+                    <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"> <img src="./resources/icon/miscellaneous_services-24px.svg" width="20px" height="20px"/></span>
+                          </div>
+                        <h:inputText id="nombre" class="form-control" a:placeholder="Nombre de Producto" value="#{repuestoController.repuesto.nombre}" />
+                    </div>
+                </div>
+            </div>
+			<div class="row">
+				<div class="col-md-6">
+                    <label for="marca" >Marca Del Repuesto</label>
+                    <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"> <img src="./resources/icon/museum-24px.svg" width="20px" height="20px"/></span>
+                          </div>
+                        <h:inputText  id="marca" class="form-control" a:placeholder="Marca de Producto" value="#{repuestoController.repuesto.marca}" />
+                    </div>
+                </div>
+				<div class="col-md-6">
+	            	<label for="cantidad" >Cantidad</label>
+	                <div class="input-group mb-3">
+	                	<div class="input-group-prepend">
+	                    	<span class="input-group-text"> <img src="./resources/icon/assignment_returned-24px.svg" width="20px" height="20px"/></span>
+	                     </div>
+	                     <h:inputText  id="cantidad" class="form-control" a:placeholder="Cantidad" value="#{repuestoController.repuesto.cantidad}" />
+	                </div>
+	             </div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+                    <label for="costo" >Costo Del Repuesto</label>
+                    <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"> <img src="./resources/icon/monetization_on-24px.svg" width="20px" height="20px"/></span>
+                          </div>
+                         <h:inputText id="costo" class="form-control" a:placeholder="Costo Del Repuesto" value="#{repuestoController.repuesto.costo}" />
+                    </div>
+                </div>
+				<div class="col-md-6">
+                    <label for="precio" >Precio Del Repuesto</label>
+                    <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"> <img src="./resources/icon/local_atm-24px.svg" width="20px" height="20px"/></span>
+                          </div>
+                          <h:inputText id="precio" class="form-control" a:placeholder="Precio de Venta" value="#{repuestoController.repuesto.precio_venta}" />
+                    </div>
+                </div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+                    <label for="fechaAdquisicion" >Fecha de Adquisición</label>
+                    <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"> <img src="./resources/icon/calendar.svg" width="20px" height="20px"/></span>
+                          </div>
+                          <h:inputText id="fechaAdquisicion" class="form-control" a:placeholder="MM/DD/YYYY" value="#{repuestoController.repuesto.fecha_adquisicion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    </div>
+                </div>
+			</div>
+			<h:commandButton class="btn btn-danger btn-circle btn-xl" action="#{repuestoController.agregarRepuesto()}" value="+"/>
+		</h:form>
+	</div>
+	
+
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+	<script>
+		$(document).ready(function() {
+		  $("#fechaAdquisicion").datepicker();
+		});
+	</script>
+</body>
+</html>

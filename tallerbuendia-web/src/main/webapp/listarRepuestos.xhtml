@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<link
+		href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"
+		rel="stylesheet" />
+	<link
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+		rel="stylesheet" />
+	<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css"
+		rel="stylesheet" />
+	<h:outputStylesheet library="css" name="btncircle.css" />	
+	<title>Ver Repuestos</title>
+</h:head>
+<body>
+	<br></br>
+	<br></br>
+	<div class="container">
+	<h2>Ver Repuestos</h2>
+	<br></br>
+	<br></br>
+		<div class="col-md-12">
+			<h:dataTable id="vistaRepuesto" var="r"
+				value="#{repuestoController.mostrarRepuesto}" class="table table-sm">
+				<h:column>
+					<f:facet name="header">DISPONIBLE</f:facet>
+					#{r.disponible}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+					#{r.idRepuesto}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">NOMBRE</f:facet>
+					#{r.nombre}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">MARCA</f:facet>
+					#{r.marca}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">FECHA DE ADQUISICION</f:facet>
+					#{r.fecha_adquisicion}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">COSTO</f:facet>
+					#{r.costo}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">PRECIO DE VENTA</f:facet>
+					#{r.precio_venta}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">CANTIDAD</f:facet>
+					#{r.cantidad}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header"></f:facet>
+						<div class="row">
+							<div class="col-md-4">
+								<h:commandButton value="Modificar" class="btn btn-warning" onclick="$('#modalModificar').modal('show');">
+									<f:setPropertyActionListener value="#{r}" target="#{repuestoController.accionRepuesto}" />
+									<f:ajax execute="@this" render=":formModificar"/>
+									
+								</h:commandButton>
+							</div>
+							<div class="col-md-4">
+								<h:commandButton value="Eliminar" class="btn btn-danger" onclick="$('#modalEliminar').modal('show');">
+									<f:setPropertyActionListener value="#{r}" target="#{repuestoController.accionRepuesto}" />
+									<f:ajax execute="@this" render=":formEliminar"/>	
+								</h:commandButton >
+							</div>
+							<div class="col-md-4">
+								<h:commandButton value="Agregar" class="btn btn-primary" onclick="$('#modalAgregar').modal('show');">
+									<f:setPropertyActionListener value="#{r}" target="#{repuestoController.accionRepuesto}" />
+									<f:ajax execute="@this" render=":formAgregar"/>	
+								</h:commandButton >
+							</div>
+						</div>
+				</h:column>
+			</h:dataTable>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modalModificar" tabindex="-1" aria-labelledby="modalModificarLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Modificar</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<h:form id="formModificar">
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-4">
+								<h:inputText class="form-control" a:placeholder="ID de Producto" value="#{repuestoController.accionRepuesto.idRepuesto}" disabled="true" />
+							</div>
+							<div class="col-md-4">
+								<h:inputText class="form-control" a:placeholder="Nombre de Producto" value="#{repuestoController.accionRepuesto.nombre}" />
+							</div>
+							<div class="col-md-4">
+								<h:inputText class="form-control" a:placeholder="Marca de Producto" value="#{repuestoController.accionRepuesto.marca}" />
+							</div>
+						</div>
+						<br />
+						<div class="row">
+							<div class="col-md-4 date">
+								<h:inputText class="form-control" a:placeholder="Cantidad" value="#{repuestoController.accionRepuesto.cantidad}" />
+							</div>
+			
+							<div class="col-md-4">
+								<h:inputText class="form-control" a:placeholder="Costo de Repuesto" value="#{repuestoController.accionRepuesto.costo}" />
+							</div>
+			
+							<div class="col-md-4">
+								<h:inputText class="form-control" a:placeholder="Precio de Venta" value="#{repuestoController.accionRepuesto.precio_venta}" />
+							</div>
+						</div>
+						<br />
+						<div class="row">
+							<div class="col-md-4">
+								<h:inputText id="fechaAdquisicion" class="form-control" a:placeholder="Fecha de Aqusicion" value="#{repuestoController.accionRepuesto.fecha_adquisicion}">
+									<f:convertDateTime pattern="MM/dd/yyyy" />
+								</h:inputText>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<h:commandButton class="btn btn-success" actionListener="#{repuestoController.modificarRepuesto()}"
+							value="Guardar" onclick="$('#modalModificar').modal('hide');" />
+					</div>
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Modificar</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<h:form id="formEliminar">
+					<div class="modal-body">
+						¿Desea eliminar el repuesto #{repuestoController.accionRepuesto.nombre}?
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<h:commandButton class="btn btn-danger" actionListener="#{repuestoController.eliminarRepuesto()}"
+							value="Eliminar" onclick="$('#modalEliminar').modal('hide');" />
+					</div>
+				</h:form>
+			</div>
+		</div>
+		
+	</div>
+		<div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Agregar Cantidad</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<h:form id="formAgregar">
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-4">
+								<h:inputText class="form-control" a:placeholder="Cantidad" value="#{repuestoController.restarCantidad}"/>
+							</div>
+							<div class="col-md-4">
+								<h:inputText class="form-control" a:placeholder="Cantidad" value="#{repuestoController.accionRepuesto.cantidad}" disabled="true"/>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<h:commandButton class="btn btn-success" actionListener="#{repuestoController.restaDeCantidad()}"
+							value="Guardar" onclick="$('#modalAgregar').modal('hide');" />
+					</div>
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+	<script>
+		$(document).ready(function() {
+		  $("#fechaAdquisicion").datepicker();
+		});
+	</script>
+</body>
+</html>
