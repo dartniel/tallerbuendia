@@ -18,18 +18,18 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>sv.com.taller</groupId>
-			<artifactId>tallerbuendia-ejb</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<type>ejb</type>
-		</dependency>
-
+		
 		<dependency>
 			<groupId>sv.com.taller</groupId>
 			<artifactId>tallerbuendia-web</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>sv.com.taller</groupId>
+			<artifactId>tallerbuendia-ejb</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>ejb</type>
 		</dependency>
 	</dependencies>
 	<build>
