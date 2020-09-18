@@ -43,7 +43,9 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text"> <img src="./resources/icon/miscellaneous_services-24px.svg" width="20px" height="20px"/></span>
                           </div>
-                        <h:inputText id="proveedor" class="form-control" a:placeholder="Nombre de Proveedor" value="#{repuestoController.repuesto.proveedor}" />
+                        <h:selectOneMenu id="proveedor" class="form-control" value="#{repuestoController.repuesto.proveedor.idProveedor}">
+                        		<f:selectItems value="#{proveedorController.selectOneProveedor}"/>
+                        </h:selectOneMenu>
                     </div>
                 </div>
             </div>
@@ -100,7 +102,7 @@
                     </div>
                 </div>
 			</div>
-			<h:commandButton class="btn btn-danger btn-circle btn-xl" action="#{repuestoController.agregarRepuesto()}" value="+"/>
+			<h:commandButton class="btn btn-danger btn-circle btn-xl" actionListener="#{repuestoController.agregarRepuesto()}" value="+"/>
 		</h:form>
 	</div>
 	

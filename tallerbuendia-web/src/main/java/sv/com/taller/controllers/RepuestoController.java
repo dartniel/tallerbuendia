@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import sv.com.taller.entities.Proveedor;
 import sv.com.taller.entities.Repuesto;
 import sv.com.taller.repositories.RepuestoRepository;
 
@@ -53,6 +54,7 @@ public class RepuestoController implements Serializable{
 	@PostConstruct
 	public void init() {
 		this.repuesto = new Repuesto();
+		this.repuesto.setProveedor(new Proveedor());
 		this.accionRepuesto = new Repuesto();
 	}
 
@@ -60,8 +62,7 @@ public class RepuestoController implements Serializable{
 	private RepuestoRepository repuestoRepository;
 	
 	public void agregarRepuesto() {
-		//repuestoRepository.agregar(repuesto);
-		System.out.println(repuesto);
+		repuestoRepository.agregar(repuesto);
 		this.repuesto.setNombre("");
 		this.repuesto.setMarca("");
 		this.repuesto.setCantidad(0);

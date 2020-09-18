@@ -51,7 +51,7 @@
 
 				<h:column>
 					<f:facet name="header">FECHA DE ADQUISICION</f:facet>
-					#{r.fecha_adquisicion}
+					#{r.fechaAdquisicion}
 				</h:column>
 
 				<h:column>
@@ -61,7 +61,7 @@
 
 				<h:column>
 					<f:facet name="header">PRECIO DE VENTA</f:facet>
-					#{r.precio_venta}
+					#{r.precioVenta}
 				</h:column>
 
 				<h:column>
@@ -130,13 +130,13 @@
 							</div>
 			
 							<div class="col-md-4">
-								<h:inputText class="form-control" a:placeholder="Precio de Venta" value="#{repuestoController.accionRepuesto.precio_venta}" />
+								<h:inputText class="form-control" a:placeholder="Precio de Venta" value="#{repuestoController.accionRepuesto.precioVenta}" />
 							</div>
 						</div>
 						<br />
 						<div class="row">
 							<div class="col-md-4">
-								<h:inputText id="fechaAdquisicion" class="form-control" a:placeholder="Fecha de Aqusicion" value="#{repuestoController.accionRepuesto.fecha_adquisicion}">
+								<h:inputText id="fechaAdquisicion" class="form-control" a:placeholder="Fecha de Aqusicion" value="#{repuestoController.accionRepuesto.fechaAdquisicion}">
 									<f:convertDateTime pattern="MM/dd/yyyy" />
 								</h:inputText>
 							</div>
