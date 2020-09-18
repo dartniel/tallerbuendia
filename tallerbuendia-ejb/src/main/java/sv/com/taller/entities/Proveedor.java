@@ -134,4 +134,11 @@ public class Proveedor implements Serializable {
 		return solicitud;
 	}
 
+	@Override
+	public String toString() {
+		return "Proveedor [idProveedor=" + idProveedor + ", direccion=" + direccion + ", marcaRepuesto=" + marcaRepuesto
+				+ ", nombre=" + nombre + ", telefono=" + telefono + ", tipoRepuesto=" + tipoRepuesto + ", repuestos="
+				+ repuestos + ", solicituds=" + solicituds + "]";
+	}
+
 }
