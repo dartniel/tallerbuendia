@@ -20,23 +20,15 @@
 	<title>Ver Repuestos</title>
 </h:head>
 <body>
-	<br></br>
-	<br></br>
+	
 	<div class="container">
-	<h2>Ver Repuestos</h2>
-	<br></br>
-	<br></br>
-		<div class="col-md-12">
+		
+		<div class="col-md-12 mt-3 ">
 			<h:dataTable id="vistaRepuesto" var="r"
 				value="#{repuestoController.mostrarRepuesto}" class="table table-sm">
 				<h:column>
 					<f:facet name="header">DISPONIBLE</f:facet>
 					#{r.disponible}
-				</h:column>
-
-				<h:column>
-					<f:facet name="header">ID</f:facet>
-					#{r.idRepuesto}
 				</h:column>
 
 				<h:column>
@@ -50,7 +42,7 @@
 				</h:column>
 
 				<h:column>
-					<f:facet name="header">FECHA DE ADQUISICION</f:facet>
+					<f:facet name="header">ADQUISICION</f:facet>
 					#{r.fechaAdquisicion}
 				</h:column>
 

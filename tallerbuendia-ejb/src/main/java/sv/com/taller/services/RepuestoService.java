@@ -83,10 +83,14 @@ public class RepuestoService implements RepuestoRepository{
 		return repuestos;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Repuesto> buscar(Repuesto repuesto) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Repuesto> repuestos = null;
+		Query query = entity.createQuery("FROM Repuesto r WHERE r.idRepuesto = :idRepuesto");
+		query.setParameter("idRepuesto", repuesto.getIdRepuesto());
+		repuestos = query.getResultList();
+		return repuestos;
 	}
 
 }
