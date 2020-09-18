@@ -28,15 +28,6 @@
 		<h2>Agregar Repuesto Entrante</h2>
 			<div class="row">
 				<div class="col-md-6">
-					<label for="id" >ID Repuesto</label>
-					<div class="input-group mb-3">
-	  					<div class="input-group-prepend">
-	    					<span class="input-group-text"> <img src="./resources/icon/build_circle-24px.svg" width="20px" height="20px"/></span>
-	  					</div>
-						<h:inputText id="id" class="form-control" a:placeholder="ID de Producto" value="#{repuestoController.repuesto.idRepuesto}" />
-					</div>
-				</div>
-				<div class="col-md-6">
                     <label for="nombre" >Nombre Del Repuesto</label>
                     <div class="input-group mb-3">
                           <div class="input-group-prepend">
@@ -82,7 +73,7 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text"> <img src="./resources/icon/local_atm-24px.svg" width="20px" height="20px"/></span>
                           </div>
-                          <h:inputText id="precio" class="form-control" a:placeholder="Precio de Venta" value="#{repuestoController.repuesto.precio_venta}" />
+                          <h:inputText id="precio" class="form-control" a:placeholder="Precio de Venta" value="#{repuestoController.repuesto.precioVenta}" />
                     </div>
                 </div>
 			</div>
@@ -93,7 +84,7 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text"> <img src="./resources/icon/calendar.svg" width="20px" height="20px"/></span>
                           </div>
-                          <h:inputText id="fechaAdquisicion" class="form-control" a:placeholder="MM/DD/YYYY" value="#{repuestoController.repuesto.fecha_adquisicion}">
+                          <h:inputText id="fechaAdquisicion" class="form-control" a:placeholder="MM/DD/YYYY" value="#{repuestoController.repuesto.fechaAdquisicion}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
                     </div>

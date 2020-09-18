@@ -2,6 +2,7 @@ package sv.com.taller.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
@@ -16,13 +17,19 @@ public class Automovil implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID_AUTOMOVIL")
 	private int idAutomovil;
 
 	private String chasis;
 
 	private String color;
 
-	private String estado_recibido;
+	@Column(name="ESTADO_RECIBE")
+	private String estadoRecibe;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="FECHA_REGISTRO")
+	private Date fechaRegistro;
 
 	private String marca;
 
@@ -32,26 +39,14 @@ public class Automovil implements Serializable {
 
 	private String placa;
 
-	//bi-directional many-to-many association to Cliente
-	@ManyToMany
-	@JoinTable(
-		name="automovil_cliente"
-		, joinColumns={
-			@JoinColumn(name="idAutomovil")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="idCliente")
-			}
-		)
-	private List<Cliente> clientes;
+	//bi-directional many-to-one association to Empleado
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_EMPLEADO")
+	private Empleado empleado;
 
-	//bi-directional many-to-one association to AutomovilCliente
+	//bi-directional many-to-one association to Reparacion
 	@OneToMany(mappedBy="automovil")
-	private List<AutomovilCliente> automovilClientes;
-
-	//bi-directional many-to-one association to InformacionReparacion
-	@OneToMany(mappedBy="automovil")
-	private List<InformacionReparacion> informacionReparacions;
+	private List<Reparacion> reparacions;
 
 	public Automovil() {
 	}
@@ -80,12 +75,20 @@ public class Automovil implements Serializable {
 		this.color = color;
 	}
 
-	public String getEstado_recibido() {
-		return this.estado_recibido;
+	public String getEstadoRecibe() {
+		return this.estadoRecibe;
 	}
 
-	public void setEstado_recibido(String estado_recibido) {
-		this.estado_recibido = estado_recibido;
+	public void setEstadoRecibe(String estadoRecibe) {
+		this.estadoRecibe = estadoRecibe;
+	}
+
+	public Date getFechaRegistro() {
+		return this.fechaRegistro;
+	}
+
+	public void setFechaRegistro(Date fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
 	}
 
 	public String getMarca() {
@@ -120,56 +123,34 @@ public class Automovil implements Serializable {
 		this.placa = placa;
 	}
 
-	public List<Cliente> getClientes() {
-		return this.clientes;
+	public Empleado getEmpleado() {
+		return this.empleado;
 	}
 
-	public void setClientes(List<Cliente> clientes) {
-		this.clientes = clientes;
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
 	}
 
-	public List<AutomovilCliente> getAutomovilClientes() {
-		return this.automovilClientes;
+	public List<Reparacion> getReparacions() {
+		return this.reparacions;
 	}
 
-	public void setAutomovilClientes(List<AutomovilCliente> automovilClientes) {
-		this.automovilClientes = automovilClientes;
+	public void setReparacions(List<Reparacion> reparacions) {
+		this.reparacions = reparacions;
 	}
 
-	public AutomovilCliente addAutomovilCliente(AutomovilCliente automovilCliente) {
-		getAutomovilClientes().add(automovilCliente);
-		automovilCliente.setAutomovil(this);
+	public Reparacion addReparacion(Reparacion reparacion) {
+		getReparacions().add(reparacion);
+		reparacion.setAutomovil(this);
 
-		return automovilCliente;
+		return reparacion;
 	}
 
-	public AutomovilCliente removeAutomovilCliente(AutomovilCliente automovilCliente) {
-		getAutomovilClientes().remove(automovilCliente);
-		automovilCliente.setAutomovil(null);
+	public Reparacion removeReparacion(Reparacion reparacion) {
+		getReparacions().remove(reparacion);
+		reparacion.setAutomovil(null);
 
-		return automovilCliente;
-	}
-
-	public List<InformacionReparacion> getInformacionReparacions() {
-		return this.informacionReparacions;
-	}
-
-	public void setInformacionReparacions(List<InformacionReparacion> informacionReparacions) {
-		this.informacionReparacions = informacionReparacions;
-	}
-
-	public InformacionReparacion addInformacionReparacion(InformacionReparacion informacionReparacion) {
-		getInformacionReparacions().add(informacionReparacion);
-		informacionReparacion.setAutomovil(this);
-
-		return informacionReparacion;
-	}
-
-	public InformacionReparacion removeInformacionReparacion(InformacionReparacion informacionReparacion) {
-		getInformacionReparacions().remove(informacionReparacion);
-		informacionReparacion.setAutomovil(null);
-
-		return informacionReparacion;
+		return reparacion;
 	}
 
 }

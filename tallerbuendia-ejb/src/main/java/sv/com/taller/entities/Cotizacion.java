@@ -17,16 +17,32 @@ public class Cotizacion implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID_COTIZACION")
 	private int idCotizacion;
 
 	@Temporal(TemporalType.DATE)
-	private Date fecha_entrega;
+	@Column(name="FECHA_ENTREGA")
+	private Date fechaEntrega;
 
-	private double total;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="FECHA_REGISTRO")
+	private Date fechaRegistro;
 
-	//bi-directional many-to-one association to CotizacionServicio
+	private float total;
+
+	//bi-directional many-to-one association to Chequeo
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_CHEQUEO")
+	private Chequeo chequeo;
+
+	//bi-directional many-to-one association to Empleado
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_EMPLEADO")
+	private Empleado empleado;
+
+	//bi-directional many-to-one association to Reparacion
 	@OneToMany(mappedBy="cotizacion")
-	private List<CotizacionServicio> cotizacionServicios;
+	private List<Reparacion> reparacions;
 
 	public Cotizacion() {
 	}
@@ -39,42 +55,66 @@ public class Cotizacion implements Serializable {
 		this.idCotizacion = idCotizacion;
 	}
 
-	public Date getFecha_entrega() {
-		return this.fecha_entrega;
+	public Date getFechaEntrega() {
+		return this.fechaEntrega;
 	}
 
-	public void setFecha_entrega(Date fecha_entrega) {
-		this.fecha_entrega = fecha_entrega;
+	public void setFechaEntrega(Date fechaEntrega) {
+		this.fechaEntrega = fechaEntrega;
 	}
 
-	public double getTotal() {
+	public Date getFechaRegistro() {
+		return this.fechaRegistro;
+	}
+
+	public void setFechaRegistro(Date fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
+	}
+
+	public float getTotal() {
 		return this.total;
 	}
 
-	public void setTotal(double total) {
+	public void setTotal(float total) {
 		this.total = total;
 	}
 
-	public List<CotizacionServicio> getCotizacionServicios() {
-		return this.cotizacionServicios;
+	public Chequeo getChequeo() {
+		return this.chequeo;
 	}
 
-	public void setCotizacionServicios(List<CotizacionServicio> cotizacionServicios) {
-		this.cotizacionServicios = cotizacionServicios;
+	public void setChequeo(Chequeo chequeo) {
+		this.chequeo = chequeo;
 	}
 
-	public CotizacionServicio addCotizacionServicio(CotizacionServicio cotizacionServicio) {
-		getCotizacionServicios().add(cotizacionServicio);
-		cotizacionServicio.setCotizacion(this);
-
-		return cotizacionServicio;
+	public Empleado getEmpleado() {
+		return this.empleado;
 	}
 
-	public CotizacionServicio removeCotizacionServicio(CotizacionServicio cotizacionServicio) {
-		getCotizacionServicios().remove(cotizacionServicio);
-		cotizacionServicio.setCotizacion(null);
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}
 
-		return cotizacionServicio;
+	public List<Reparacion> getReparacions() {
+		return this.reparacions;
+	}
+
+	public void setReparacions(List<Reparacion> reparacions) {
+		this.reparacions = reparacions;
+	}
+
+	public Reparacion addReparacion(Reparacion reparacion) {
+		getReparacions().add(reparacion);
+		reparacion.setCotizacion(this);
+
+		return reparacion;
+	}
+
+	public Reparacion removeReparacion(Reparacion reparacion) {
+		getReparacions().remove(reparacion);
+		reparacion.setCotizacion(null);
+
+		return reparacion;
 	}
 
 }

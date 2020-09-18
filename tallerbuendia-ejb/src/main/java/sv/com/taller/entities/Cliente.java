@@ -3,7 +3,6 @@ package sv.com.taller.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -17,6 +16,7 @@ public class Cliente implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID_CLIENTE")
 	private String idCliente;
 
 	private String apellido;
@@ -26,9 +26,15 @@ public class Cliente implements Serializable {
 	private String dui;
 
 	@Temporal(TemporalType.DATE)
-	private Date fecha_Nacimiento;
+	@Column(name="FECHA_NACIMIENTO")
+	private Date fechaNacimiento;
 
-	private String lugar_trabajo;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="FECHA_REGISTRO")
+	private Date fechaRegistro;
+
+	@Column(name="LUGAR_TRABAJO")
+	private String lugarTrabajo;
 
 	private String nit;
 
@@ -36,17 +42,11 @@ public class Cliente implements Serializable {
 
 	private String telefono;
 
-	private String telefono_trabajo;
+	@Column(name="TELEFONO_TRABAJO")
+	private String telefonoTrabajo;
 
-	private String tipo_Seguro;
-
-	//bi-directional many-to-many association to Automovil
-	@ManyToMany(mappedBy="clientes")
-	private List<Automovil> automovils;
-
-	//bi-directional many-to-one association to AutomovilCliente
-	@OneToMany(mappedBy="cliente")
-	private List<AutomovilCliente> automovilClientes;
+	@Column(name="TIPO_SEGURO")
+	private String tipoSeguro;
 
 	public Cliente() {
 	}
@@ -83,20 +83,28 @@ public class Cliente implements Serializable {
 		this.dui = dui;
 	}
 
-	public Date getFecha_Nacimiento() {
-		return this.fecha_Nacimiento;
+	public Date getFechaNacimiento() {
+		return this.fechaNacimiento;
 	}
 
-	public void setFecha_Nacimiento(Date fecha_Nacimiento) {
-		this.fecha_Nacimiento = fecha_Nacimiento;
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public String getLugar_trabajo() {
-		return this.lugar_trabajo;
+	public Date getFechaRegistro() {
+		return this.fechaRegistro;
 	}
 
-	public void setLugar_trabajo(String lugar_trabajo) {
-		this.lugar_trabajo = lugar_trabajo;
+	public void setFechaRegistro(Date fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
+	}
+
+	public String getLugarTrabajo() {
+		return this.lugarTrabajo;
+	}
+
+	public void setLugarTrabajo(String lugarTrabajo) {
+		this.lugarTrabajo = lugarTrabajo;
 	}
 
 	public String getNit() {
@@ -123,50 +131,20 @@ public class Cliente implements Serializable {
 		this.telefono = telefono;
 	}
 
-	public String getTelefono_trabajo() {
-		return this.telefono_trabajo;
+	public String getTelefonoTrabajo() {
+		return this.telefonoTrabajo;
 	}
 
-	public void setTelefono_trabajo(String telefono_trabajo) {
-		this.telefono_trabajo = telefono_trabajo;
+	public void setTelefonoTrabajo(String telefonoTrabajo) {
+		this.telefonoTrabajo = telefonoTrabajo;
 	}
 
-	public String getTipo_Seguro() {
-		return this.tipo_Seguro;
+	public String getTipoSeguro() {
+		return this.tipoSeguro;
 	}
 
-	public void setTipo_Seguro(String tipo_Seguro) {
-		this.tipo_Seguro = tipo_Seguro;
-	}
-
-	public List<Automovil> getAutomovils() {
-		return this.automovils;
-	}
-
-	public void setAutomovils(List<Automovil> automovils) {
-		this.automovils = automovils;
-	}
-
-	public List<AutomovilCliente> getAutomovilClientes() {
-		return this.automovilClientes;
-	}
-
-	public void setAutomovilClientes(List<AutomovilCliente> automovilClientes) {
-		this.automovilClientes = automovilClientes;
-	}
-
-	public AutomovilCliente addAutomovilCliente(AutomovilCliente automovilCliente) {
-		getAutomovilClientes().add(automovilCliente);
-		automovilCliente.setCliente(this);
-
-		return automovilCliente;
-	}
-
-	public AutomovilCliente removeAutomovilCliente(AutomovilCliente automovilCliente) {
-		getAutomovilClientes().remove(automovilCliente);
-		automovilCliente.setCliente(null);
-
-		return automovilCliente;
+	public void setTipoSeguro(String tipoSeguro) {
+		this.tipoSeguro = tipoSeguro;
 	}
 
 }

@@ -19,8 +19,8 @@ public class RepuestoService implements RepuestoRepository{
 	public void agregar(Repuesto repuesto) {
 		try {
 			entity.getTransaction().begin();
-			Repuesto repuestos = new Repuesto(repuesto.getIdRepuesto(),repuesto.getCantidad(),repuesto.getCosto(),repuesto.getFecha_adquisicion(),
-					repuesto.getMarca(),repuesto.getNombre(),repuesto.getPrecio_venta());
+			Repuesto repuestos = new Repuesto(repuesto.getCantidad(),repuesto.getCosto(),repuesto.getFechaAdquisicion(),
+					repuesto.getMarca(),repuesto.getNombre(),repuesto.getPrecioVenta(),repuesto.getProveedor());
 			entity.persist(repuestos);
 			entity.getTransaction().commit();
 			System.out.println("Repuesto Agregado");
@@ -62,7 +62,7 @@ public class RepuestoService implements RepuestoRepository{
 	@Override
 	public void restarCantidad(Repuesto repuesto, int cantidad) {
 		try {
-			Repuesto cantidad1 = new Repuesto(repuesto.getCantidad()-cantidad);
+			Repuesto cantidad1 = new Repuesto();
 			entity.getTransaction().begin();
 			entity.merge(cantidad1.getCantidad());
 			entity.getTransaction().commit();

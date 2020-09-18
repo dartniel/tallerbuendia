@@ -16,13 +16,21 @@ public class Chequeo implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID_CHEQUEO")
 	private int idChequeo;
 
 	private String adicionales;
 
-	//bi-directional many-to-one association to InformacionReparacion
+	private String diagnostico;
+
+	//bi-directional many-to-one association to ServicoRepuesto
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_SERVICIO_REPUESTO")
+	private ServicoRepuesto servicoRepuesto;
+
+	//bi-directional many-to-one association to Cotizacion
 	@OneToMany(mappedBy="chequeo")
-	private List<InformacionReparacion> informacionReparacions;
+	private List<Cotizacion> cotizacions;
 
 	public Chequeo() {
 	}
@@ -43,26 +51,42 @@ public class Chequeo implements Serializable {
 		this.adicionales = adicionales;
 	}
 
-	public List<InformacionReparacion> getInformacionReparacions() {
-		return this.informacionReparacions;
+	public String getDiagnostico() {
+		return this.diagnostico;
 	}
 
-	public void setInformacionReparacions(List<InformacionReparacion> informacionReparacions) {
-		this.informacionReparacions = informacionReparacions;
+	public void setDiagnostico(String diagnostico) {
+		this.diagnostico = diagnostico;
 	}
 
-	public InformacionReparacion addInformacionReparacion(InformacionReparacion informacionReparacion) {
-		getInformacionReparacions().add(informacionReparacion);
-		informacionReparacion.setChequeo(this);
-
-		return informacionReparacion;
+	public ServicoRepuesto getServicoRepuesto() {
+		return this.servicoRepuesto;
 	}
 
-	public InformacionReparacion removeInformacionReparacion(InformacionReparacion informacionReparacion) {
-		getInformacionReparacions().remove(informacionReparacion);
-		informacionReparacion.setChequeo(null);
+	public void setServicoRepuesto(ServicoRepuesto servicoRepuesto) {
+		this.servicoRepuesto = servicoRepuesto;
+	}
 
-		return informacionReparacion;
+	public List<Cotizacion> getCotizacions() {
+		return this.cotizacions;
+	}
+
+	public void setCotizacions(List<Cotizacion> cotizacions) {
+		this.cotizacions = cotizacions;
+	}
+
+	public Cotizacion addCotizacion(Cotizacion cotizacion) {
+		getCotizacions().add(cotizacion);
+		cotizacion.setChequeo(this);
+
+		return cotizacion;
+	}
+
+	public Cotizacion removeCotizacion(Cotizacion cotizacion) {
+		getCotizacions().remove(cotizacion);
+		cotizacion.setChequeo(null);
+
+		return cotizacion;
 	}
 
 }

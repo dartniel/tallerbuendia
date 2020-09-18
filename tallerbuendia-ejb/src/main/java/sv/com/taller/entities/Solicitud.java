@@ -3,7 +3,6 @@ package sv.com.taller.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -17,11 +16,12 @@ public class Solicitud implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID_SOLICITUD")
 	private int idSolicitud;
 
-	private int año;
+	private String anio;
 
-	private String cantidad;
+	private int cantidad;
 
 	private String descripcion;
 
@@ -32,9 +32,15 @@ public class Solicitud implements Serializable {
 
 	private String modelo;
 
-	//bi-directional many-to-one association to SolicitudProveedor
-	@OneToMany(mappedBy="solicitud")
-	private List<SolicitudProveedor> solicitudProveedors;
+	//bi-directional many-to-one association to Empleado
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_EMPLEADO")
+	private Empleado empleado;
+
+	//bi-directional many-to-one association to Proveedor
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_PROVEEDOR")
+	private Proveedor proveedor;
 
 	public Solicitud() {
 	}
@@ -47,19 +53,19 @@ public class Solicitud implements Serializable {
 		this.idSolicitud = idSolicitud;
 	}
 
-	public int getAño() {
-		return this.año;
+	public String getAnio() {
+		return this.anio;
 	}
 
-	public void setAño(int año) {
-		this.año = año;
+	public void setAnio(String anio) {
+		this.anio = anio;
 	}
 
-	public String getCantidad() {
+	public int getCantidad() {
 		return this.cantidad;
 	}
 
-	public void setCantidad(String cantidad) {
+	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
 
@@ -95,26 +101,20 @@ public class Solicitud implements Serializable {
 		this.modelo = modelo;
 	}
 
-	public List<SolicitudProveedor> getSolicitudProveedors() {
-		return this.solicitudProveedors;
+	public Empleado getEmpleado() {
+		return this.empleado;
 	}
 
-	public void setSolicitudProveedors(List<SolicitudProveedor> solicitudProveedors) {
-		this.solicitudProveedors = solicitudProveedors;
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
 	}
 
-	public SolicitudProveedor addSolicitudProveedor(SolicitudProveedor solicitudProveedor) {
-		getSolicitudProveedors().add(solicitudProveedor);
-		solicitudProveedor.setSolicitud(this);
-
-		return solicitudProveedor;
+	public Proveedor getProveedor() {
+		return this.proveedor;
 	}
 
-	public SolicitudProveedor removeSolicitudProveedor(SolicitudProveedor solicitudProveedor) {
-		getSolicitudProveedors().remove(solicitudProveedor);
-		solicitudProveedor.setSolicitud(null);
-
-		return solicitudProveedor;
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
 	}
 
 }

@@ -16,41 +16,38 @@ public class Proveedor implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private String idProveedor;
-
-	private String apellido;
+	@Column(name="ID_PROVEEDOR")
+	private int idProveedor;
 
 	private String direccion;
 
-	private String marca_repuesto;
+	@Column(name="MARCA_REPUESTO")
+	private String marcaRepuesto;
 
 	private String nombre;
 
-	private String telefono_contacto;
+	private String telefono;
 
-	private String tipo_repuesto;
+	@Column(name="TIPO_REPUESTO")
+	private String tipoRepuesto;
 
-	//bi-directional many-to-one association to SolicitudProveedor
+	//bi-directional many-to-one association to Repuesto
 	@OneToMany(mappedBy="proveedor")
-	private List<SolicitudProveedor> solicitudProveedors;
+	private List<Repuesto> repuestos;
+
+	//bi-directional many-to-one association to Solicitud
+	@OneToMany(mappedBy="proveedor")
+	private List<Solicitud> solicituds;
 
 	public Proveedor() {
 	}
 
-	public String getIdProveedor() {
+	public int getIdProveedor() {
 		return this.idProveedor;
 	}
 
-	public void setIdProveedor(String idProveedor) {
+	public void setIdProveedor(int idProveedor) {
 		this.idProveedor = idProveedor;
-	}
-
-	public String getApellido() {
-		return this.apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
 	}
 
 	public String getDireccion() {
@@ -61,12 +58,12 @@ public class Proveedor implements Serializable {
 		this.direccion = direccion;
 	}
 
-	public String getMarca_repuesto() {
-		return this.marca_repuesto;
+	public String getMarcaRepuesto() {
+		return this.marcaRepuesto;
 	}
 
-	public void setMarca_repuesto(String marca_repuesto) {
-		this.marca_repuesto = marca_repuesto;
+	public void setMarcaRepuesto(String marcaRepuesto) {
+		this.marcaRepuesto = marcaRepuesto;
 	}
 
 	public String getNombre() {
@@ -77,42 +74,64 @@ public class Proveedor implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public String getTelefono_contacto() {
-		return this.telefono_contacto;
+	public String getTelefono() {
+		return this.telefono;
 	}
 
-	public void setTelefono_contacto(String telefono_contacto) {
-		this.telefono_contacto = telefono_contacto;
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
-	public String getTipo_repuesto() {
-		return this.tipo_repuesto;
+	public String getTipoRepuesto() {
+		return this.tipoRepuesto;
 	}
 
-	public void setTipo_repuesto(String tipo_repuesto) {
-		this.tipo_repuesto = tipo_repuesto;
+	public void setTipoRepuesto(String tipoRepuesto) {
+		this.tipoRepuesto = tipoRepuesto;
 	}
 
-	public List<SolicitudProveedor> getSolicitudProveedors() {
-		return this.solicitudProveedors;
+	public List<Repuesto> getRepuestos() {
+		return this.repuestos;
 	}
 
-	public void setSolicitudProveedors(List<SolicitudProveedor> solicitudProveedors) {
-		this.solicitudProveedors = solicitudProveedors;
+	public void setRepuestos(List<Repuesto> repuestos) {
+		this.repuestos = repuestos;
 	}
 
-	public SolicitudProveedor addSolicitudProveedor(SolicitudProveedor solicitudProveedor) {
-		getSolicitudProveedors().add(solicitudProveedor);
-		solicitudProveedor.setProveedor(this);
+	public Repuesto addRepuesto(Repuesto repuesto) {
+		getRepuestos().add(repuesto);
+		repuesto.setProveedor(this);
 
-		return solicitudProveedor;
+		return repuesto;
 	}
 
-	public SolicitudProveedor removeSolicitudProveedor(SolicitudProveedor solicitudProveedor) {
-		getSolicitudProveedors().remove(solicitudProveedor);
-		solicitudProveedor.setProveedor(null);
+	public Repuesto removeRepuesto(Repuesto repuesto) {
+		getRepuestos().remove(repuesto);
+		repuesto.setProveedor(null);
 
-		return solicitudProveedor;
+		return repuesto;
+	}
+
+	public List<Solicitud> getSolicituds() {
+		return this.solicituds;
+	}
+
+	public void setSolicituds(List<Solicitud> solicituds) {
+		this.solicituds = solicituds;
+	}
+
+	public Solicitud addSolicitud(Solicitud solicitud) {
+		getSolicituds().add(solicitud);
+		solicitud.setProveedor(this);
+
+		return solicitud;
+	}
+
+	public Solicitud removeSolicitud(Solicitud solicitud) {
+		getSolicituds().remove(solicitud);
+		solicitud.setProveedor(null);
+
+		return solicitud;
 	}
 
 }

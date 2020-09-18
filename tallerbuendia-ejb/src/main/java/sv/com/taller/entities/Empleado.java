@@ -2,6 +2,7 @@ package sv.com.taller.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
@@ -16,47 +17,52 @@ public class Empleado implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private String idEmpleado;
+	@Column(name="ID_EMPLEADO")
+	private int idEmpleado;
 
 	private String apellido;
 
+	private String clave;
+
 	private String direccion;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="FECHA_REGISTRO")
+	private Date fechaRegistro;
 
 	private String nombre;
 
-	private String password;
+	private String telefono;
 
-	private int telefono;
-
-	//bi-directional many-to-many association to Rol
-	@ManyToMany
-	@JoinTable(
-		name="empleado_rol"
-		, joinColumns={
-			@JoinColumn(name="idEmpleado")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="idRol")
-			}
-		)
-	private List<Rol> rols;
-
-	//bi-directional many-to-one association to InformacionReparacion
+	//bi-directional many-to-one association to Automovil
 	@OneToMany(mappedBy="empleado")
-	private List<InformacionReparacion> informacionReparacions;
+	private List<Automovil> automovils;
 
-	//bi-directional many-to-one association to SolicitudProveedor
+	//bi-directional many-to-one association to Cotizacion
 	@OneToMany(mappedBy="empleado")
-	private List<SolicitudProveedor> solicitudProveedors;
+	private List<Cotizacion> cotizacions;
+
+	//bi-directional many-to-one association to Rol
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_ROL")
+	private Rol rol;
+
+	//bi-directional many-to-one association to Reparacion
+	@OneToMany(mappedBy="empleado")
+	private List<Reparacion> reparacions;
+
+	//bi-directional many-to-one association to Solicitud
+	@OneToMany(mappedBy="empleado")
+	private List<Solicitud> solicituds;
 
 	public Empleado() {
 	}
 
-	public String getIdEmpleado() {
+	public int getIdEmpleado() {
 		return this.idEmpleado;
 	}
 
-	public void setIdEmpleado(String idEmpleado) {
+	public void setIdEmpleado(int idEmpleado) {
 		this.idEmpleado = idEmpleado;
 	}
 
@@ -68,12 +74,28 @@ public class Empleado implements Serializable {
 		this.apellido = apellido;
 	}
 
+	public String getClave() {
+		return this.clave;
+	}
+
+	public void setClave(String clave) {
+		this.clave = clave;
+	}
+
 	public String getDireccion() {
 		return this.direccion;
 	}
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
+	}
+
+	public Date getFechaRegistro() {
+		return this.fechaRegistro;
+	}
+
+	public void setFechaRegistro(Date fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
 	}
 
 	public String getNombre() {
@@ -84,72 +106,108 @@ public class Empleado implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public String getPassword() {
-		return this.password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public int getTelefono() {
+	public String getTelefono() {
 		return this.telefono;
 	}
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
-	public List<Rol> getRols() {
-		return this.rols;
+	public List<Automovil> getAutomovils() {
+		return this.automovils;
 	}
 
-	public void setRols(List<Rol> rols) {
-		this.rols = rols;
+	public void setAutomovils(List<Automovil> automovils) {
+		this.automovils = automovils;
 	}
 
-	public List<InformacionReparacion> getInformacionReparacions() {
-		return this.informacionReparacions;
+	public Automovil addAutomovil(Automovil automovil) {
+		getAutomovils().add(automovil);
+		automovil.setEmpleado(this);
+
+		return automovil;
 	}
 
-	public void setInformacionReparacions(List<InformacionReparacion> informacionReparacions) {
-		this.informacionReparacions = informacionReparacions;
+	public Automovil removeAutomovil(Automovil automovil) {
+		getAutomovils().remove(automovil);
+		automovil.setEmpleado(null);
+
+		return automovil;
 	}
 
-	public InformacionReparacion addInformacionReparacion(InformacionReparacion informacionReparacion) {
-		getInformacionReparacions().add(informacionReparacion);
-		informacionReparacion.setEmpleado(this);
-
-		return informacionReparacion;
+	public List<Cotizacion> getCotizacions() {
+		return this.cotizacions;
 	}
 
-	public InformacionReparacion removeInformacionReparacion(InformacionReparacion informacionReparacion) {
-		getInformacionReparacions().remove(informacionReparacion);
-		informacionReparacion.setEmpleado(null);
-
-		return informacionReparacion;
+	public void setCotizacions(List<Cotizacion> cotizacions) {
+		this.cotizacions = cotizacions;
 	}
 
-	public List<SolicitudProveedor> getSolicitudProveedors() {
-		return this.solicitudProveedors;
+	public Cotizacion addCotizacion(Cotizacion cotizacion) {
+		getCotizacions().add(cotizacion);
+		cotizacion.setEmpleado(this);
+
+		return cotizacion;
 	}
 
-	public void setSolicitudProveedors(List<SolicitudProveedor> solicitudProveedors) {
-		this.solicitudProveedors = solicitudProveedors;
+	public Cotizacion removeCotizacion(Cotizacion cotizacion) {
+		getCotizacions().remove(cotizacion);
+		cotizacion.setEmpleado(null);
+
+		return cotizacion;
 	}
 
-	public SolicitudProveedor addSolicitudProveedor(SolicitudProveedor solicitudProveedor) {
-		getSolicitudProveedors().add(solicitudProveedor);
-		solicitudProveedor.setEmpleado(this);
-
-		return solicitudProveedor;
+	public Rol getRol() {
+		return this.rol;
 	}
 
-	public SolicitudProveedor removeSolicitudProveedor(SolicitudProveedor solicitudProveedor) {
-		getSolicitudProveedors().remove(solicitudProveedor);
-		solicitudProveedor.setEmpleado(null);
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
 
-		return solicitudProveedor;
+	public List<Reparacion> getReparacions() {
+		return this.reparacions;
+	}
+
+	public void setReparacions(List<Reparacion> reparacions) {
+		this.reparacions = reparacions;
+	}
+
+	public Reparacion addReparacion(Reparacion reparacion) {
+		getReparacions().add(reparacion);
+		reparacion.setEmpleado(this);
+
+		return reparacion;
+	}
+
+	public Reparacion removeReparacion(Reparacion reparacion) {
+		getReparacions().remove(reparacion);
+		reparacion.setEmpleado(null);
+
+		return reparacion;
+	}
+
+	public List<Solicitud> getSolicituds() {
+		return this.solicituds;
+	}
+
+	public void setSolicituds(List<Solicitud> solicituds) {
+		this.solicituds = solicituds;
+	}
+
+	public Solicitud addSolicitud(Solicitud solicitud) {
+		getSolicituds().add(solicitud);
+		solicitud.setEmpleado(this);
+
+		return solicitud;
+	}
+
+	public Solicitud removeSolicitud(Solicitud solicitud) {
+		getSolicituds().remove(solicitud);
+		solicitud.setEmpleado(null);
+
+		return solicitud;
 	}
 
 }

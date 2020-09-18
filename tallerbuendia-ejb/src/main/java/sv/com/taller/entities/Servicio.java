@@ -16,13 +16,17 @@ public class Servicio implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID_SERVICIO")
 	private int idServicio;
 
-	private String nombre_servicio;
+	@Column(name="NOMBRE_SERVICIO")
+	private String nombreServicio;
 
-	//bi-directional many-to-one association to CotizacionServicio
+	private float precio;
+
+	//bi-directional many-to-one association to ServicoRepuesto
 	@OneToMany(mappedBy="servicio")
-	private List<CotizacionServicio> cotizacionServicios;
+	private List<ServicoRepuesto> servicoRepuestos;
 
 	public Servicio() {
 	}
@@ -35,34 +39,42 @@ public class Servicio implements Serializable {
 		this.idServicio = idServicio;
 	}
 
-	public String getNombre_servicio() {
-		return this.nombre_servicio;
+	public String getNombreServicio() {
+		return this.nombreServicio;
 	}
 
-	public void setNombre_servicio(String nombre_servicio) {
-		this.nombre_servicio = nombre_servicio;
+	public void setNombreServicio(String nombreServicio) {
+		this.nombreServicio = nombreServicio;
 	}
 
-	public List<CotizacionServicio> getCotizacionServicios() {
-		return this.cotizacionServicios;
+	public float getPrecio() {
+		return this.precio;
 	}
 
-	public void setCotizacionServicios(List<CotizacionServicio> cotizacionServicios) {
-		this.cotizacionServicios = cotizacionServicios;
+	public void setPrecio(float precio) {
+		this.precio = precio;
 	}
 
-	public CotizacionServicio addCotizacionServicio(CotizacionServicio cotizacionServicio) {
-		getCotizacionServicios().add(cotizacionServicio);
-		cotizacionServicio.setServicio(this);
-
-		return cotizacionServicio;
+	public List<ServicoRepuesto> getServicoRepuestos() {
+		return this.servicoRepuestos;
 	}
 
-	public CotizacionServicio removeCotizacionServicio(CotizacionServicio cotizacionServicio) {
-		getCotizacionServicios().remove(cotizacionServicio);
-		cotizacionServicio.setServicio(null);
+	public void setServicoRepuestos(List<ServicoRepuesto> servicoRepuestos) {
+		this.servicoRepuestos = servicoRepuestos;
+	}
 
-		return cotizacionServicio;
+	public ServicoRepuesto addServicoRepuesto(ServicoRepuesto servicoRepuesto) {
+		getServicoRepuestos().add(servicoRepuesto);
+		servicoRepuesto.setServicio(this);
+
+		return servicoRepuesto;
+	}
+
+	public ServicoRepuesto removeServicoRepuesto(ServicoRepuesto servicoRepuesto) {
+		getServicoRepuestos().remove(servicoRepuesto);
+		servicoRepuesto.setServicio(null);
+
+		return servicoRepuesto;
 	}
 
 }

@@ -2,8 +2,6 @@ package sv.com.taller.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -17,20 +15,26 @@ public class Reparacion implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID_REPARACION")
 	private int idReparacion;
 
-	private String detalle_reparacion;
+	@Column(name="DETALLE_REPACION")
+	private String detalleRepacion;
 
-	@Temporal(TemporalType.DATE)
-	private Date fecha_reparacion;
+	//bi-directional many-to-one association to Automovil
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_AUTOMOVIL")
+	private Automovil automovil;
 
-	//bi-directional many-to-one association to InformacionReparacion
-	@OneToMany(mappedBy="reparacion")
-	private List<InformacionReparacion> informacionReparacions;
+	//bi-directional many-to-one association to Cotizacion
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_COTIZACION")
+	private Cotizacion cotizacion;
 
-	//bi-directional many-to-one association to ServicioReparacion
-	@OneToMany(mappedBy="reparacion")
-	private List<ServicioReparacion> servicioReparacions;
+	//bi-directional many-to-one association to Empleado
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_EMPLEADO")
+	private Empleado empleado;
 
 	public Reparacion() {
 	}
@@ -43,64 +47,36 @@ public class Reparacion implements Serializable {
 		this.idReparacion = idReparacion;
 	}
 
-	public String getDetalle_reparacion() {
-		return this.detalle_reparacion;
+	public String getDetalleRepacion() {
+		return this.detalleRepacion;
 	}
 
-	public void setDetalle_reparacion(String detalle_reparacion) {
-		this.detalle_reparacion = detalle_reparacion;
+	public void setDetalleRepacion(String detalleRepacion) {
+		this.detalleRepacion = detalleRepacion;
 	}
 
-	public Date getFecha_reparacion() {
-		return this.fecha_reparacion;
+	public Automovil getAutomovil() {
+		return this.automovil;
 	}
 
-	public void setFecha_reparacion(Date fecha_reparacion) {
-		this.fecha_reparacion = fecha_reparacion;
+	public void setAutomovil(Automovil automovil) {
+		this.automovil = automovil;
 	}
 
-	public List<InformacionReparacion> getInformacionReparacions() {
-		return this.informacionReparacions;
+	public Cotizacion getCotizacion() {
+		return this.cotizacion;
 	}
 
-	public void setInformacionReparacions(List<InformacionReparacion> informacionReparacions) {
-		this.informacionReparacions = informacionReparacions;
+	public void setCotizacion(Cotizacion cotizacion) {
+		this.cotizacion = cotizacion;
 	}
 
-	public InformacionReparacion addInformacionReparacion(InformacionReparacion informacionReparacion) {
-		getInformacionReparacions().add(informacionReparacion);
-		informacionReparacion.setReparacion(this);
-
-		return informacionReparacion;
+	public Empleado getEmpleado() {
+		return this.empleado;
 	}
 
-	public InformacionReparacion removeInformacionReparacion(InformacionReparacion informacionReparacion) {
-		getInformacionReparacions().remove(informacionReparacion);
-		informacionReparacion.setReparacion(null);
-
-		return informacionReparacion;
-	}
-
-	public List<ServicioReparacion> getServicioReparacions() {
-		return this.servicioReparacions;
-	}
-
-	public void setServicioReparacions(List<ServicioReparacion> servicioReparacions) {
-		this.servicioReparacions = servicioReparacions;
-	}
-
-	public ServicioReparacion addServicioReparacion(ServicioReparacion servicioReparacion) {
-		getServicioReparacions().add(servicioReparacion);
-		servicioReparacion.setReparacion(this);
-
-		return servicioReparacion;
-	}
-
-	public ServicioReparacion removeServicioReparacion(ServicioReparacion servicioReparacion) {
-		getServicioReparacions().remove(servicioReparacion);
-		servicioReparacion.setReparacion(null);
-
-		return servicioReparacion;
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
 	}
 
 }

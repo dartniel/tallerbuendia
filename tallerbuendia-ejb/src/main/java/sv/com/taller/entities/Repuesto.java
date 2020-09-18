@@ -14,51 +14,55 @@ import java.util.List;
 @NamedQuery(name="Repuesto.findAll", query="SELECT r FROM Repuesto r")
 public class Repuesto implements Serializable {
 	private static final long serialVersionUID = 1L;
-public Repuesto() {}
+
+	public Repuesto() {}
 	
 	public Repuesto(Repuesto repuesto) {}
 	
-	public Repuesto(int idRepuesto, int cantidad, double costo, Date fecha_adquisicion, String marca, String nombre,
-			double precio_venta) {
-		this.idRepuesto = idRepuesto;
+	public Repuesto(int cantidad, float costo, Date fechaAdquisicion, String marca, String nombre,
+			float precioVenta, Proveedor proveedor) {
 		this.cantidad = cantidad;
 		this.costo = costo;
-		this.fecha_adquisicion = fecha_adquisicion;
+		this.fechaAdquisicion = fechaAdquisicion;
 		this.marca = marca;
 		this.nombre = nombre;
-		this.precio_venta = precio_venta;
-	}
-	public Repuesto(int cantidad) {
-		this.cantidad = cantidad;
+		this.precioVenta = precioVenta;
+		this.proveedor = proveedor;
 	}
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID_REPUESTO")
 	private int idRepuesto;
 
 	private int cantidad;
 
-	private double costo;
+	private float costo;
 
 	private int disponible;
 
 	@Temporal(TemporalType.DATE)
-	private Date fecha_adquisicion;
+	@Column(name="FECHA_ADQUISICION")
+	private Date fechaAdquisicion;
 
 	private String marca;
 
 	private String nombre;
 
-	private double precio_venta;
+	@Column(name="PRECIO_VENTA")
+	private float precioVenta;
 
-	//bi-directional many-to-one association to CotizacionServicio
-	@OneToMany(mappedBy="repuesto")
-	private List<CotizacionServicio> cotizacionServicios;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_PROVEEDOR")
+	private Proveedor proveedor;
 
-	//bi-directional many-to-one association to SolicitudProveedor
+	
 	@OneToMany(mappedBy="repuesto")
-	private List<SolicitudProveedor> solicitudProveedors;
+	private List<ServicoRepuesto> servicoRepuestos;
+
 	public int getIdRepuesto() {
-		return idRepuesto;
+		return this.idRepuesto;
 	}
 
 	public void setIdRepuesto(int idRepuesto) {
@@ -66,39 +70,39 @@ public Repuesto() {}
 	}
 
 	public int getCantidad() {
-		return cantidad;
+		return this.cantidad;
 	}
 
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
 
-	public double getCosto() {
-		return costo;
+	public float getCosto() {
+		return this.costo;
 	}
 
-	public void setCosto(double costo) {
+	public void setCosto(float costo) {
 		this.costo = costo;
 	}
 
 	public int getDisponible() {
-		return disponible;
+		return this.disponible;
 	}
 
 	public void setDisponible(int disponible) {
 		this.disponible = disponible;
 	}
 
-	public Date getFecha_adquisicion() {
-		return fecha_adquisicion;
+	public Date getFechaAdquisicion() {
+		return this.fechaAdquisicion;
 	}
 
-	public void setFecha_adquisicion(Date fecha_adquisicion) {
-		this.fecha_adquisicion = fecha_adquisicion;
+	public void setFechaAdquisicion(Date fechaAdquisicion) {
+		this.fechaAdquisicion = fechaAdquisicion;
 	}
 
 	public String getMarca() {
-		return marca;
+		return this.marca;
 	}
 
 	public void setMarca(String marca) {
@@ -106,46 +110,57 @@ public Repuesto() {}
 	}
 
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public double getPrecio_venta() {
-		return precio_venta;
+	public float getPrecioVenta() {
+		return this.precioVenta;
 	}
 
-	public void setPrecio_venta(double precio_venta) {
-		this.precio_venta = precio_venta;
+	public void setPrecioVenta(float precioVenta) {
+		this.precioVenta = precioVenta;
 	}
 
-	public List<CotizacionServicio> getCotizacionServicios() {
-		return cotizacionServicios;
+	public Proveedor getProveedor() {
+		return this.proveedor;
 	}
 
-	public void setCotizacionServicios(List<CotizacionServicio> cotizacionServicios) {
-		this.cotizacionServicios = cotizacionServicios;
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
 	}
 
-	public List<SolicitudProveedor> getSolicitudProveedors() {
-		return solicitudProveedors;
+	public List<ServicoRepuesto> getServicoRepuestos() {
+		return this.servicoRepuestos;
 	}
 
-	public void setSolicitudProveedors(List<SolicitudProveedor> solicitudProveedors) {
-		this.solicitudProveedors = solicitudProveedors;
+	public void setServicoRepuestos(List<ServicoRepuesto> servicoRepuestos) {
+		this.servicoRepuestos = servicoRepuestos;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public ServicoRepuesto addServicoRepuesto(ServicoRepuesto servicoRepuesto) {
+		getServicoRepuestos().add(servicoRepuesto);
+		servicoRepuesto.setRepuesto(this);
+
+		return servicoRepuesto;
+	}
+
+	public ServicoRepuesto removeServicoRepuesto(ServicoRepuesto servicoRepuesto) {
+		getServicoRepuestos().remove(servicoRepuesto);
+		servicoRepuesto.setRepuesto(null);
+
+		return servicoRepuesto;
 	}
 
 	@Override
 	public String toString() {
 		return "Repuesto [idRepuesto=" + idRepuesto + ", cantidad=" + cantidad + ", costo=" + costo + ", disponible="
-				+ disponible + ", fecha_adquisicion=" + fecha_adquisicion + ", marca=" + marca + ", nombre=" + nombre
-				+ ", precio_venta=" + precio_venta + "]";
+				+ disponible + ", fechaAdquisicion=" + fechaAdquisicion + ", marca=" + marca + ", nombre=" + nombre
+				+ ", precioVenta=" + precioVenta + ", proveedor=" + proveedor + ", servicoRepuestos=" + servicoRepuestos
+				+ "]";
 	}
 
 }

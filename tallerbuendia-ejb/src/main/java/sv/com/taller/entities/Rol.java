@@ -16,12 +16,13 @@ public class Rol implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID_ROL")
 	private int idRol;
 
-	private String nombre_rol;
+	private String nombre;
 
-	//bi-directional many-to-many association to Empleado
-	@ManyToMany(mappedBy="rols")
+	//bi-directional many-to-one association to Empleado
+	@OneToMany(mappedBy="rol")
 	private List<Empleado> empleados;
 
 	public Rol() {
@@ -35,12 +36,12 @@ public class Rol implements Serializable {
 		this.idRol = idRol;
 	}
 
-	public String getNombre_rol() {
-		return this.nombre_rol;
+	public String getNombre() {
+		return this.nombre;
 	}
 
-	public void setNombre_rol(String nombre_rol) {
-		this.nombre_rol = nombre_rol;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public List<Empleado> getEmpleados() {
@@ -49,6 +50,20 @@ public class Rol implements Serializable {
 
 	public void setEmpleados(List<Empleado> empleados) {
 		this.empleados = empleados;
+	}
+
+	public Empleado addEmpleado(Empleado empleado) {
+		getEmpleados().add(empleado);
+		empleado.setRol(this);
+
+		return empleado;
+	}
+
+	public Empleado removeEmpleado(Empleado empleado) {
+		getEmpleados().remove(empleado);
+		empleado.setRol(null);
+
+		return empleado;
 	}
 
 }
