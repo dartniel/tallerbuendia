@@ -28,6 +28,15 @@
 		<h2>Agregar Repuesto Entrante</h2>
 			<div class="row">
 				<div class="col-md-6">
+                    <label for="nombre" >ID</label>
+                    <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"> <img src="./resources/icon/miscellaneous_services-24px.svg" width="20px" height="20px"/></span>
+                          </div>
+                        <h:inputText id="idRepuesto" class="form-control" a:placeholder="Id de Repuesto" value="#{repuestoController.repuesto.idRepuesto}" />
+                    </div>
+                </div>
+				<div class="col-md-6">
                     <label for="nombre" >Nombre Del Repuesto</label>
                     <div class="input-group mb-3">
                           <div class="input-group-prepend">
@@ -36,27 +45,19 @@
                         <h:inputText id="nombre" class="form-control" a:placeholder="Nombre de Producto" value="#{repuestoController.repuesto.nombre}" />
                     </div>
                 </div>
-                
-                <div class="col-md-6">
-                    <label for="nombre" >Proveedor</label>
-                    <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"> <img src="./resources/icon/miscellaneous_services-24px.svg" width="20px" height="20px"/></span>
-                          </div>
-                        <h:selectOneMenu id="proveedor" class="form-control" value="#{repuestoController.repuesto.proveedor.idProveedor}">
-                        		<f:selectItems value="#{proveedorController.selectOneProveedor}"/>
-                        </h:selectOneMenu>
-                    </div>
-                </div>
             </div>
 			<div class="row">
 				<div class="col-md-6">
-                    <label for="marca" >Marca Del Repuesto</label>
+                    <label for="nombre" >Proveedor</label>
                     <div class="input-group mb-3">
                           <div class="input-group-prepend">
                             <span class="input-group-text"> <img src="./resources/icon/museum-24px.svg" width="20px" height="20px"/></span>
                           </div>
-                        <h:inputText  id="marca" class="form-control" a:placeholder="Marca de Producto" value="#{repuestoController.repuesto.marca}" />
+                        <h:selectOneMenu id="proveedor" class="form-control" value="#{repuestoController.repuesto.proveedorMarca.idProveedorMarca}">
+                        		<f:selectItems value="#{proveedorController.mostrarProveedores}" var="p" 
+                        		itemLabel="#{p.proveedor.nombre} - #{p.marcaRepuesto.nombre} - #{p.marcaCarro.marcarNombre} #{p.marcaCarro.modelo} #{p.marcaCarro.anio}"
+                        		itemValue="#{p.idProveedorMarca}"/>
+                        </h:selectOneMenu>
                     </div>
                 </div>
 				<div class="col-md-6">

@@ -21,9 +21,6 @@ public class Proveedor implements Serializable {
 
 	private String direccion;
 
-	@Column(name="MARCA_REPUESTO")
-	private String marcaRepuesto;
-
 	private String nombre;
 
 	private String telefono;
@@ -31,13 +28,13 @@ public class Proveedor implements Serializable {
 	@Column(name="TIPO_REPUESTO")
 	private String tipoRepuesto;
 
-	//bi-directional many-to-one association to Repuesto
-	@OneToMany(mappedBy="proveedor")
-	private List<Repuesto> repuestos;
-
 	//bi-directional many-to-one association to Solicitud
 	@OneToMany(mappedBy="proveedor")
 	private List<Solicitud> solicituds;
+
+	//bi-directional many-to-one association to ProveedorMarca
+	@OneToMany(mappedBy="proveedor")
+	private List<ProveedorMarca> proveedorMarcas;
 
 	public Proveedor() {
 	}
@@ -56,14 +53,6 @@ public class Proveedor implements Serializable {
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
-	}
-
-	public String getMarcaRepuesto() {
-		return this.marcaRepuesto;
-	}
-
-	public void setMarcaRepuesto(String marcaRepuesto) {
-		this.marcaRepuesto = marcaRepuesto;
 	}
 
 	public String getNombre() {
@@ -90,28 +79,6 @@ public class Proveedor implements Serializable {
 		this.tipoRepuesto = tipoRepuesto;
 	}
 
-	public List<Repuesto> getRepuestos() {
-		return this.repuestos;
-	}
-
-	public void setRepuestos(List<Repuesto> repuestos) {
-		this.repuestos = repuestos;
-	}
-
-	public Repuesto addRepuesto(Repuesto repuesto) {
-		getRepuestos().add(repuesto);
-		repuesto.setProveedor(this);
-
-		return repuesto;
-	}
-
-	public Repuesto removeRepuesto(Repuesto repuesto) {
-		getRepuestos().remove(repuesto);
-		repuesto.setProveedor(null);
-
-		return repuesto;
-	}
-
 	public List<Solicitud> getSolicituds() {
 		return this.solicituds;
 	}
@@ -134,11 +101,26 @@ public class Proveedor implements Serializable {
 		return solicitud;
 	}
 
-	@Override
-	public String toString() {
-		return "Proveedor [idProveedor=" + idProveedor + ", direccion=" + direccion + ", marcaRepuesto=" + marcaRepuesto
-				+ ", nombre=" + nombre + ", telefono=" + telefono + ", tipoRepuesto=" + tipoRepuesto + ", repuestos="
-				+ repuestos + ", solicituds=" + solicituds + "]";
+	public List<ProveedorMarca> getProveedorMarcas() {
+		return this.proveedorMarcas;
+	}
+
+	public void setProveedorMarcas(List<ProveedorMarca> proveedorMarcas) {
+		this.proveedorMarcas = proveedorMarcas;
+	}
+
+	public ProveedorMarca addProveedorMarca(ProveedorMarca proveedorMarca) {
+		getProveedorMarcas().add(proveedorMarca);
+		proveedorMarca.setProveedor(this);
+
+		return proveedorMarca;
+	}
+
+	public ProveedorMarca removeProveedorMarca(ProveedorMarca proveedorMarca) {
+		getProveedorMarcas().remove(proveedorMarca);
+		proveedorMarca.setProveedor(null);
+
+		return proveedorMarca;
 	}
 
 }

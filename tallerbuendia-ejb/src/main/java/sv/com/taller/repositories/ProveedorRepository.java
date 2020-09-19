@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import sv.com.taller.entities.Proveedor;
+import sv.com.taller.entities.ProveedorMarca;
 
 @Local
 public interface ProveedorRepository {
 
-	public List<Proveedor> mostrar();
+	public List<ProveedorMarca> mostrar();
 }

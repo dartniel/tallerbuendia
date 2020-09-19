@@ -19,21 +19,20 @@ public class Repuesto implements Serializable {
 	
 	public Repuesto(Repuesto repuesto) {}
 	
-	public Repuesto(int cantidad, float costo, Date fechaAdquisicion, String marca, String nombre,
-			float precioVenta, Proveedor proveedor) {
+	public Repuesto(String idRepuesto, int cantidad, float costo, Date fechaAdquisicion, String nombre,
+			float precioVenta, ProveedorMarca proveedorMarca) {
+		this.idRepuesto = idRepuesto;
 		this.cantidad = cantidad;
 		this.costo = costo;
 		this.fechaAdquisicion = fechaAdquisicion;
-		this.marca = marca;
 		this.nombre = nombre;
 		this.precioVenta = precioVenta;
-		this.proveedor = proveedor;
+		this.proveedorMarca = proveedorMarca;
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_REPUESTO")
-	private int idRepuesto;
+	private String idRepuesto;
 
 	private int cantidad;
 
@@ -45,27 +44,27 @@ public class Repuesto implements Serializable {
 	@Column(name="FECHA_ADQUISICION")
 	private Date fechaAdquisicion;
 
-	private String marca;
-
 	private String nombre;
 
 	@Column(name="PRECIO_VENTA")
 	private float precioVenta;
 
-	
+	//bi-directional many-to-one association to ProveedorMarca
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_PROVEEDOR")
-	private Proveedor proveedor;
+	@JoinColumn(name="ID_PROVEEDOR_MARCA")
+	private ProveedorMarca proveedorMarca;
+
+	//bi-directional many-to-one association to ServicioRepuesto
+	@OneToMany(mappedBy="repuesto")
+	private List<ServicioRepuesto> servicioRepuestos;
 
 	
-	@OneToMany(mappedBy="repuesto")
-	private List<ServicoRepuesto> servicoRepuestos;
 
-	public int getIdRepuesto() {
+	public String getIdRepuesto() {
 		return this.idRepuesto;
 	}
 
-	public void setIdRepuesto(int idRepuesto) {
+	public void setIdRepuesto(String idRepuesto) {
 		this.idRepuesto = idRepuesto;
 	}
 
@@ -101,14 +100,6 @@ public class Repuesto implements Serializable {
 		this.fechaAdquisicion = fechaAdquisicion;
 	}
 
-	public String getMarca() {
-		return this.marca;
-	}
-
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -125,42 +116,34 @@ public class Repuesto implements Serializable {
 		this.precioVenta = precioVenta;
 	}
 
-	public Proveedor getProveedor() {
-		return this.proveedor;
+	public ProveedorMarca getProveedorMarca() {
+		return this.proveedorMarca;
 	}
 
-	public void setProveedor(Proveedor proveedor) {
-		this.proveedor = proveedor;
+	public void setProveedorMarca(ProveedorMarca proveedorMarca) {
+		this.proveedorMarca = proveedorMarca;
 	}
 
-	public List<ServicoRepuesto> getServicoRepuestos() {
-		return this.servicoRepuestos;
+	public List<ServicioRepuesto> getServicioRepuestos() {
+		return this.servicioRepuestos;
 	}
 
-	public void setServicoRepuestos(List<ServicoRepuesto> servicoRepuestos) {
-		this.servicoRepuestos = servicoRepuestos;
+	public void setServicioRepuestos(List<ServicioRepuesto> servicioRepuestos) {
+		this.servicioRepuestos = servicioRepuestos;
 	}
 
-	public ServicoRepuesto addServicoRepuesto(ServicoRepuesto servicoRepuesto) {
-		getServicoRepuestos().add(servicoRepuesto);
-		servicoRepuesto.setRepuesto(this);
+	public ServicioRepuesto addServicioRepuesto(ServicioRepuesto servicioRepuesto) {
+		getServicioRepuestos().add(servicioRepuesto);
+		servicioRepuesto.setRepuesto(this);
 
-		return servicoRepuesto;
+		return servicioRepuesto;
 	}
 
-	public ServicoRepuesto removeServicoRepuesto(ServicoRepuesto servicoRepuesto) {
-		getServicoRepuestos().remove(servicoRepuesto);
-		servicoRepuesto.setRepuesto(null);
+	public ServicioRepuesto removeServicioRepuesto(ServicioRepuesto servicioRepuesto) {
+		getServicioRepuestos().remove(servicioRepuesto);
+		servicioRepuesto.setRepuesto(null);
 
-		return servicoRepuesto;
-	}
-
-	@Override
-	public String toString() {
-		return "Repuesto [idRepuesto=" + idRepuesto + ", cantidad=" + cantidad + ", costo=" + costo + ", disponible="
-				+ disponible + ", fechaAdquisicion=" + fechaAdquisicion + ", marca=" + marca + ", nombre=" + nombre
-				+ ", precioVenta=" + precioVenta + ", proveedor=" + proveedor + ", servicoRepuestos=" + servicoRepuestos
-				+ "]";
+		return servicioRepuesto;
 	}
 
 }

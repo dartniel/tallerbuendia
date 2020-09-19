@@ -11,6 +11,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import sv.com.taller.entities.Proveedor;
+import sv.com.taller.entities.ProveedorMarca;
 import sv.com.taller.repositories.ProveedorRepository;
 
 @Named
@@ -19,7 +20,7 @@ public class ProveedorController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private List<Proveedor> mostrarProveedores;
+	private List<ProveedorMarca> mostrarProveedores;
 
 	private List<SelectItem> selectOneProveedor;
 	
@@ -41,17 +42,17 @@ public class ProveedorController implements Serializable {
 	@EJB
 	private ProveedorRepository proveedorRepository;
 	
-	public List<Proveedor> getMostrarProveedores() {
+	public List<ProveedorMarca> getMostrarProveedores() {
 		this.mostrarProveedores = proveedorRepository.mostrar();
 		return mostrarProveedores;
 	}
 
 	public List<SelectItem> getSelectOneProveedor() {
 		this.selectOneProveedor = new ArrayList<SelectItem>();
-		List<Proveedor> proveedores = proveedorRepository.mostrar();
+		List<ProveedorMarca> proveedores = proveedorRepository.mostrar();
 		
-		for(Proveedor p : proveedores) {
-			SelectItem proveedorItem = new SelectItem(p.getIdProveedor(), p.getNombre());
+		for(ProveedorMarca p : proveedores) {
+			SelectItem proveedorItem = new SelectItem(p.getIdProveedorMarca());
 			this.selectOneProveedor.add(proveedorItem);
 		}
 		return selectOneProveedor;

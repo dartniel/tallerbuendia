@@ -7,12 +7,15 @@
 		<class>sv.com.taller.entities.Cliente</class>
 		<class>sv.com.taller.entities.Cotizacion</class>
 		<class>sv.com.taller.entities.Empleado</class>
+		<class>sv.com.taller.entities.MarcaCarro</class>
+		<class>sv.com.taller.entities.MarcaRepuesto</class>
 		<class>sv.com.taller.entities.Proveedor</class>
+		<class>sv.com.taller.entities.ProveedorMarca</class>
 		<class>sv.com.taller.entities.Reparacion</class>
 		<class>sv.com.taller.entities.Repuesto</class>
 		<class>sv.com.taller.entities.Rol</class>
 		<class>sv.com.taller.entities.Servicio</class>
-		<class>sv.com.taller.entities.ServicoRepuesto</class>
+		<class>sv.com.taller.entities.ServicioRepuesto</class>
 		<class>sv.com.taller.entities.Solicitud</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>

@@ -19,5 +19,5 @@ public interface RepuestoRepository {
 	
 	public List<Repuesto> mostrar();
 	
-	public List<Repuesto> buscar(Repuesto repuesto);
+	public List<Repuesto> buscar(String repuesto);
 }

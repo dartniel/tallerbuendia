@@ -6,22 +6,22 @@ import java.util.List;
 
 
 /**
- * The persistent class for the servico_repuesto database table.
+ * The persistent class for the servicio_repuesto database table.
  * 
  */
 @Entity
-@Table(name="servico_repuesto")
-@NamedQuery(name="ServicoRepuesto.findAll", query="SELECT s FROM ServicoRepuesto s")
-public class ServicoRepuesto implements Serializable {
+@Table(name="servicio_repuesto")
+@NamedQuery(name="ServicioRepuesto.findAll", query="SELECT s FROM ServicioRepuesto s")
+public class ServicioRepuesto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID_SERVICO_REPUESTO")
-	private int idServicoRepuesto;
+	@Column(name="ID_SERVICIO_REPUESTO")
+	private int idServicioRepuesto;
 
 	//bi-directional many-to-one association to Chequeo
-	@OneToMany(mappedBy="servicoRepuesto")
+	@OneToMany(mappedBy="servicioRepuesto")
 	private List<Chequeo> chequeos;
 
 	//bi-directional many-to-one association to Repuesto
@@ -34,15 +34,15 @@ public class ServicoRepuesto implements Serializable {
 	@JoinColumn(name="ID_SERVICIO")
 	private Servicio servicio;
 
-	public ServicoRepuesto() {
+	public ServicioRepuesto() {
 	}
 
-	public int getIdServicoRepuesto() {
-		return this.idServicoRepuesto;
+	public int getIdServicioRepuesto() {
+		return this.idServicioRepuesto;
 	}
 
-	public void setIdServicoRepuesto(int idServicoRepuesto) {
-		this.idServicoRepuesto = idServicoRepuesto;
+	public void setIdServicioRepuesto(int idServicioRepuesto) {
+		this.idServicioRepuesto = idServicioRepuesto;
 	}
 
 	public List<Chequeo> getChequeos() {
@@ -55,14 +55,14 @@ public class ServicoRepuesto implements Serializable {
 
 	public Chequeo addChequeo(Chequeo chequeo) {
 		getChequeos().add(chequeo);
-		chequeo.setServicoRepuesto(this);
+		chequeo.setServicioRepuesto(this);
 
 		return chequeo;
 	}
 
 	public Chequeo removeChequeo(Chequeo chequeo) {
 		getChequeos().remove(chequeo);
-		chequeo.setServicoRepuesto(null);
+		chequeo.setServicioRepuesto(null);
 
 		return chequeo;
 	}

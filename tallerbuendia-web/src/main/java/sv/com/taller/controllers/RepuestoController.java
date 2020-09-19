@@ -8,7 +8,7 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import sv.com.taller.entities.Proveedor;
+import sv.com.taller.entities.ProveedorMarca;
 import sv.com.taller.entities.Repuesto;
 import sv.com.taller.repositories.RepuestoRepository;
 
@@ -21,16 +21,15 @@ public class RepuestoController implements Serializable{
 	private Repuesto repuesto;
 	
 	private Repuesto accionRepuesto;
-	
-	private int restarCantidad;
-	
 
-	public int getRestarCantidad() {
-		return restarCantidad;
+	private String buscarRepuesto;
+
+	public String getBuscarRepuesto() {
+		return buscarRepuesto;
 	}
 
-	public void setRestarCantidad(int restarCantidad) {
-		this.restarCantidad = restarCantidad;
+	public void setBuscarRepuesto(String buscarRepuesto) {
+		this.buscarRepuesto = buscarRepuesto;
 	}
 
 	public Repuesto getAccionRepuesto() {
@@ -54,7 +53,7 @@ public class RepuestoController implements Serializable{
 	@PostConstruct
 	public void init() {
 		this.repuesto = new Repuesto();
-		this.repuesto.setProveedor(new Proveedor());
+		this.repuesto.setProveedorMarca(new ProveedorMarca());
 		this.accionRepuesto = new Repuesto();
 	}
 
@@ -64,7 +63,6 @@ public class RepuestoController implements Serializable{
 	public void agregarRepuesto() {
 		repuestoRepository.agregar(repuesto);
 		this.repuesto.setNombre("");
-		this.repuesto.setMarca("");
 		this.repuesto.setCantidad(0);
 		this.repuesto.setCosto(0);
 		this.repuesto.setPrecioVenta(0);
@@ -83,9 +81,9 @@ public class RepuestoController implements Serializable{
 		this.mostrarRepuesto = repuestoRepository.mostrar();
 		return mostrarRepuesto;
 	}
-	public void restaDeCantidad() {
-		repuestoRepository.restarCantidad(accionRepuesto, restarCantidad);
-	}
 	
+	public void buscquedaRepuesto() {
+		repuestoRepository.buscar(buscarRepuesto);
+	}
 	
 }

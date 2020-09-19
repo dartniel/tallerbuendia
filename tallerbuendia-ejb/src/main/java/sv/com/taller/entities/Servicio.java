@@ -24,9 +24,9 @@ public class Servicio implements Serializable {
 
 	private float precio;
 
-	//bi-directional many-to-one association to ServicoRepuesto
+	//bi-directional many-to-one association to ServicioRepuesto
 	@OneToMany(mappedBy="servicio")
-	private List<ServicoRepuesto> servicoRepuestos;
+	private List<ServicioRepuesto> servicioRepuestos;
 
 	public Servicio() {
 	}
@@ -55,26 +55,26 @@ public class Servicio implements Serializable {
 		this.precio = precio;
 	}
 
-	public List<ServicoRepuesto> getServicoRepuestos() {
-		return this.servicoRepuestos;
+	public List<ServicioRepuesto> getServicioRepuestos() {
+		return this.servicioRepuestos;
 	}
 
-	public void setServicoRepuestos(List<ServicoRepuesto> servicoRepuestos) {
-		this.servicoRepuestos = servicoRepuestos;
+	public void setServicioRepuestos(List<ServicioRepuesto> servicioRepuestos) {
+		this.servicioRepuestos = servicioRepuestos;
 	}
 
-	public ServicoRepuesto addServicoRepuesto(ServicoRepuesto servicoRepuesto) {
-		getServicoRepuestos().add(servicoRepuesto);
-		servicoRepuesto.setServicio(this);
+	public ServicioRepuesto addServicioRepuesto(ServicioRepuesto servicioRepuesto) {
+		getServicioRepuestos().add(servicioRepuesto);
+		servicioRepuesto.setServicio(this);
 
-		return servicoRepuesto;
+		return servicioRepuesto;
 	}
 
-	public ServicoRepuesto removeServicoRepuesto(ServicoRepuesto servicoRepuesto) {
-		getServicoRepuestos().remove(servicoRepuesto);
-		servicoRepuesto.setServicio(null);
+	public ServicioRepuesto removeServicioRepuesto(ServicioRepuesto servicioRepuesto) {
+		getServicioRepuestos().remove(servicioRepuesto);
+		servicioRepuesto.setServicio(null);
 
-		return servicoRepuesto;
+		return servicioRepuesto;
 	}
 
 }

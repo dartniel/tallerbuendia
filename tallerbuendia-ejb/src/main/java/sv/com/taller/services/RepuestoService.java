@@ -19,8 +19,8 @@ public class RepuestoService implements RepuestoRepository{
 	public void agregar(Repuesto repuesto) {
 		try {
 			entity.getTransaction().begin();
-			Repuesto repuestos = new Repuesto(repuesto.getCantidad(),repuesto.getCosto(),repuesto.getFechaAdquisicion(),
-					repuesto.getMarca(),repuesto.getNombre(),repuesto.getPrecioVenta(),repuesto.getProveedor());
+			Repuesto repuestos = new Repuesto(repuesto.getIdRepuesto(),repuesto.getCantidad(),repuesto.getCosto(),repuesto.getFechaAdquisicion(),
+					repuesto.getNombre(),repuesto.getPrecioVenta(),repuesto.getProveedorMarca());
 			entity.persist(repuestos);
 			entity.getTransaction().commit();
 			System.out.println("Repuesto Agregado");
@@ -85,10 +85,19 @@ public class RepuestoService implements RepuestoRepository{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Repuesto> buscar(Repuesto repuesto) {
+	public List<Repuesto> buscar(String repuesto) {
 		List<Repuesto> repuestos = null;
+		/*
+		 * ID REPUESTA
+		 * NOMBRE DE REPUESTO
+		 * MODELO DE CARRO
+		 * MARCA DE REPUESTO
+		 */
+		if(repuesto.equals("codigo")) {
+			
+		}
 		Query query = entity.createQuery("FROM Repuesto r WHERE r.idRepuesto = :idRepuesto");
-		query.setParameter("idRepuesto", repuesto.getIdRepuesto());
+		query.setParameter("idRepuesto", repuesto);
 		repuestos = query.getResultList();
 		return repuestos;
 	}

@@ -23,14 +23,14 @@ public class Chequeo implements Serializable {
 
 	private String diagnostico;
 
-	//bi-directional many-to-one association to ServicoRepuesto
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_SERVICIO_REPUESTO")
-	private ServicoRepuesto servicoRepuesto;
-
 	//bi-directional many-to-one association to Cotizacion
 	@OneToMany(mappedBy="chequeo")
 	private List<Cotizacion> cotizacions;
+
+	//bi-directional many-to-one association to ServicioRepuesto
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_SERVICIO_REPUESTO")
+	private ServicioRepuesto servicioRepuesto;
 
 	public Chequeo() {
 	}
@@ -59,14 +59,6 @@ public class Chequeo implements Serializable {
 		this.diagnostico = diagnostico;
 	}
 
-	public ServicoRepuesto getServicoRepuesto() {
-		return this.servicoRepuesto;
-	}
-
-	public void setServicoRepuesto(ServicoRepuesto servicoRepuesto) {
-		this.servicoRepuesto = servicoRepuesto;
-	}
-
 	public List<Cotizacion> getCotizacions() {
 		return this.cotizacions;
 	}
@@ -87,6 +79,14 @@ public class Chequeo implements Serializable {
 		cotizacion.setChequeo(null);
 
 		return cotizacion;
+	}
+
+	public ServicioRepuesto getServicioRepuesto() {
+		return this.servicioRepuesto;
+	}
+
+	public void setServicioRepuesto(ServicioRepuesto servicioRepuesto) {
+		this.servicioRepuesto = servicioRepuesto;
 	}
 
 }
