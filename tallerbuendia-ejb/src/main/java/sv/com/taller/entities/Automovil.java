@@ -24,29 +24,31 @@ public class Automovil implements Serializable {
 
 	private String color;
 
-	@Column(name="ESTADO_RECIBE")
-	private String estadoRecibe;
-
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_REGISTRO")
 	private Date fechaRegistro;
-
-	private String marca;
-
-	private String modelo;
 
 	private String observacion;
 
 	private String placa;
 
-	//bi-directional many-to-one association to Empleado
+	//bi-directional many-to-one association to Cliente
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_EMPLEADO")
-	private Empleado empleado;
+	@JoinColumn(name="ID_CLIENTE")
+	private Cliente cliente;
+
+	//bi-directional many-to-one association to PertenciaAutomovil
+	@OneToMany(mappedBy="automovil")
+	private List<PertenciaAutomovil> pertenciaAutomovils;
 
 	//bi-directional many-to-one association to Reparacion
 	@OneToMany(mappedBy="automovil")
 	private List<Reparacion> reparacions;
+
+	//bi-directional many-to-one association to DetalleCarro
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_DETALLE_CARRO")
+	private DetalleCarro detalleCarro;
 
 	public Automovil() {
 	}
@@ -75,36 +77,12 @@ public class Automovil implements Serializable {
 		this.color = color;
 	}
 
-	public String getEstadoRecibe() {
-		return this.estadoRecibe;
-	}
-
-	public void setEstadoRecibe(String estadoRecibe) {
-		this.estadoRecibe = estadoRecibe;
-	}
-
 	public Date getFechaRegistro() {
 		return this.fechaRegistro;
 	}
 
 	public void setFechaRegistro(Date fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
-	}
-
-	public String getMarca() {
-		return this.marca;
-	}
-
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
-	public String getModelo() {
-		return this.modelo;
-	}
-
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
 	}
 
 	public String getObservacion() {
@@ -123,12 +101,34 @@ public class Automovil implements Serializable {
 		this.placa = placa;
 	}
 
-	public Empleado getEmpleado() {
-		return this.empleado;
+	public Cliente getCliente() {
+		return this.cliente;
 	}
 
-	public void setEmpleado(Empleado empleado) {
-		this.empleado = empleado;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public List<PertenciaAutomovil> getPertenciaAutomovils() {
+		return this.pertenciaAutomovils;
+	}
+
+	public void setPertenciaAutomovils(List<PertenciaAutomovil> pertenciaAutomovils) {
+		this.pertenciaAutomovils = pertenciaAutomovils;
+	}
+
+	public PertenciaAutomovil addPertenciaAutomovil(PertenciaAutomovil pertenciaAutomovil) {
+		getPertenciaAutomovils().add(pertenciaAutomovil);
+		pertenciaAutomovil.setAutomovil(this);
+
+		return pertenciaAutomovil;
+	}
+
+	public PertenciaAutomovil removePertenciaAutomovil(PertenciaAutomovil pertenciaAutomovil) {
+		getPertenciaAutomovils().remove(pertenciaAutomovil);
+		pertenciaAutomovil.setAutomovil(null);
+
+		return pertenciaAutomovil;
 	}
 
 	public List<Reparacion> getReparacions() {
@@ -151,6 +151,14 @@ public class Automovil implements Serializable {
 		reparacion.setAutomovil(null);
 
 		return reparacion;
+	}
+
+	public DetalleCarro getDetalleCarro() {
+		return this.detalleCarro;
+	}
+
+	public void setDetalleCarro(DetalleCarro detalleCarro) {
+		this.detalleCarro = detalleCarro;
 	}
 
 }

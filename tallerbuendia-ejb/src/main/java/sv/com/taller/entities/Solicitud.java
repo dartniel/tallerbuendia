@@ -19,18 +19,12 @@ public class Solicitud implements Serializable {
 	@Column(name="ID_SOLICITUD")
 	private int idSolicitud;
 
-	private String anio;
-
 	private int cantidad;
 
 	private String descripcion;
 
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
-
-	private String marca;
-
-	private String modelo;
 
 	//bi-directional many-to-one association to Empleado
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -51,14 +45,6 @@ public class Solicitud implements Serializable {
 
 	public void setIdSolicitud(int idSolicitud) {
 		this.idSolicitud = idSolicitud;
-	}
-
-	public String getAnio() {
-		return this.anio;
-	}
-
-	public void setAnio(String anio) {
-		this.anio = anio;
 	}
 
 	public int getCantidad() {
@@ -83,22 +69,6 @@ public class Solicitud implements Serializable {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
-	}
-
-	public String getMarca() {
-		return this.marca;
-	}
-
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
-	public String getModelo() {
-		return this.modelo;
-	}
-
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
 	}
 
 	public Empleado getEmpleado() {

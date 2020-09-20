@@ -5,12 +5,12 @@
 		<class>sv.com.taller.entities.Automovil</class>
 		<class>sv.com.taller.entities.Chequeo</class>
 		<class>sv.com.taller.entities.Cliente</class>
-		<class>sv.com.taller.entities.Cotizacion</class>
+		<class>sv.com.taller.entities.DetalleCarro</class>
+		<class>sv.com.taller.entities.DetalleChequeo</class>
 		<class>sv.com.taller.entities.Empleado</class>
-		<class>sv.com.taller.entities.MarcaCarro</class>
-		<class>sv.com.taller.entities.MarcaRepuesto</class>
+		<class>sv.com.taller.entities.PertenciaAutomovil</class>
+		<class>sv.com.taller.entities.Pertenencia</class>
 		<class>sv.com.taller.entities.Proveedor</class>
-		<class>sv.com.taller.entities.ProveedorMarca</class>
 		<class>sv.com.taller.entities.Reparacion</class>
 		<class>sv.com.taller.entities.Repuesto</class>
 		<class>sv.com.taller.entities.Rol</class>

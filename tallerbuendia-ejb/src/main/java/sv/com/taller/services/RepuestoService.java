@@ -19,8 +19,8 @@ public class RepuestoService implements RepuestoRepository{
 	public void agregar(Repuesto repuesto) {
 		try {
 			entity.getTransaction().begin();
-			Repuesto repuestos = new Repuesto(repuesto.getIdRepuesto(),repuesto.getCantidad(),repuesto.getCosto(),repuesto.getFechaAdquisicion(),
-					repuesto.getNombre(),repuesto.getPrecioVenta(),repuesto.getProveedorMarca());
+			Repuesto repuestos = new Repuesto(repuesto.getIdRepuesto(),repuesto.getCantidad(),repuesto.getCosto(),
+					repuesto.getFechaAdquisicion(),repuesto.getMarcaRepuesto(), repuesto.getNombre(),repuesto.getPrecioVenta(),repuesto.getProveedor());
 			entity.persist(repuestos);
 			entity.getTransaction().commit();
 			System.out.println("Repuesto Agregado");

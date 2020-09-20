@@ -16,97 +16,109 @@
 		rel="stylesheet" />
 	<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css"
 		rel="stylesheet" />
-	<h:outputStylesheet library="css" name="btncircle.css" />	
+	<h:outputStylesheet library="css" name="btncircle.css" />
 	<title>Repuestos</title>
 </h:head>
 <body>
 
 	<div class="container">
 		<h:form id="registroRepuesto">
-		<br></br>
-		<br></br>
-		<h2>Agregar Repuesto Entrante</h2>
+			<br></br>
+			<br></br>
+			<h2>Agregar Repuesto Entrante</h2>
 			<div class="row">
 				<div class="col-md-6">
-                    <label for="nombre" >ID</label>
-                    <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"> <img src="./resources/icon/miscellaneous_services-24px.svg" width="20px" height="20px"/></span>
-                          </div>
-                        <h:inputText id="idRepuesto" class="form-control" a:placeholder="Id de Repuesto" value="#{repuestoController.repuesto.idRepuesto}" />
-                    </div>
-                </div>
+					<label for="nombre">ID</label>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <img src="./resources/icon/miscellaneous_services-24px.svg" width="20px" height="20px" /></span>
+						</div>
+						<h:inputText id="idRepuesto" class="form-control" a:placeholder="Id de Repuesto" value="#{repuestoController.repuesto.idRepuesto}" />
+					</div>
+				</div>
 				<div class="col-md-6">
-                    <label for="nombre" >Nombre Del Repuesto</label>
-                    <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"> <img src="./resources/icon/miscellaneous_services-24px.svg" width="20px" height="20px"/></span>
-                          </div>
-                        <h:inputText id="nombre" class="form-control" a:placeholder="Nombre de Producto" value="#{repuestoController.repuesto.nombre}" />
-                    </div>
-                </div>
-            </div>
-			<div class="row">
-				<div class="col-md-6">
-                    <label for="nombre" >Proveedor</label>
-                    <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"> <img src="./resources/icon/museum-24px.svg" width="20px" height="20px"/></span>
-                          </div>
-                        <h:selectOneMenu id="proveedor" class="form-control" value="#{repuestoController.repuesto.proveedorMarca.idProveedorMarca}">
-                        		<f:selectItems value="#{proveedorController.mostrarProveedores}" var="p" 
-                        		itemLabel="#{p.proveedor.nombre} - #{p.marcaRepuesto.nombre} - #{p.marcaCarro.marcarNombre} #{p.marcaCarro.modelo} #{p.marcaCarro.anio}"
-                        		itemValue="#{p.idProveedorMarca}"/>
-                        </h:selectOneMenu>
-                    </div>
-                </div>
-				<div class="col-md-6">
-	            	<label for="cantidad" >Cantidad</label>
-	                <div class="input-group mb-3">
-	                	<div class="input-group-prepend">
-	                    	<span class="input-group-text"> <img src="./resources/icon/assignment_returned-24px.svg" width="20px" height="20px"/></span>
-	                     </div>
-	                     <h:inputText  id="cantidad" class="form-control" a:placeholder="Cantidad" value="#{repuestoController.repuesto.cantidad}" />
-	                </div>
-	             </div>
+					<label for="nombre">Nombre Del Repuesto</label>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <img src="./resources/icon/miscellaneous_services-24px.svg" width="20px" height="20px" /></span>
+						</div>
+						<h:inputText id="nombre" class="form-control" a:placeholder="Nombre de Producto" value="#{repuestoController.repuesto.nombre}" />
+					</div>
+				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-                    <label for="costo" >Costo Del Repuesto</label>
-                    <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"> <img src="./resources/icon/monetization_on-24px.svg" width="20px" height="20px"/></span>
-                          </div>
-                         <h:inputText id="costo" class="form-control" a:placeholder="Costo Del Repuesto" value="#{repuestoController.repuesto.costo}" />
-                    </div>
-                </div>
+					<label for="nombre">Proveedor</label>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <img src="./resources/icon/museum-24px.svg" width="20px" height="20px" /></span>
+						</div>
+						<h:selectOneMenu id="proveedor" class="form-control" value="#{repuestoController.repuesto.proveedor.idProveedor}">
+							<f:selectItems value="#{proveedorController.mostrarProveedores}" 
+							var="p" itemLabel="#{p.nombre}" itemValue="#{p.idProveedor}" />
+						</h:selectOneMenu>
+					</div>
+				</div>
 				<div class="col-md-6">
-                    <label for="precio" >Precio Del Repuesto</label>
-                    <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"> <img src="./resources/icon/local_atm-24px.svg" width="20px" height="20px"/></span>
-                          </div>
-                          <h:inputText id="precio" class="form-control" a:placeholder="Precio de Venta" value="#{repuestoController.repuesto.precioVenta}" />
-                    </div>
-                </div>
+					<label for="nombre">Marca de Repuesto</label>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <img src="./resources/icon/museum-24px.svg" width="20px" height="20px" /></span>
+						</div>
+						<h:inputText id="marcaRepuesto" class="form-control" a:placeholder="Marca de Repuesto" value="#{repuestoController.repuesto.marcaRepuesto}" />
+					</div>
+				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-                    <label for="fechaAdquisicion" >Fecha de Adquisición</label>
-                    <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"> <img src="./resources/icon/calendar.svg" width="20px" height="20px"/></span>
-                          </div>
-                          <h:inputText id="fechaAdquisicion" class="form-control" a:placeholder="MM/DD/YYYY" value="#{repuestoController.repuesto.fechaAdquisicion}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    </div>
-                </div>
+					<label for="cantidad">Costo</label>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> 
+							<img src="./resources/icon/assignment_returned-24px.svg" width="20px" height="20px" /></span>
+						</div>
+						<h:inputText id="costo" class="form-control" a:placeholder="Costo" value="#{repuestoController.repuesto.costo}" />
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label for="fechaAdquisicion">Precio de Venta</label>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <img
+								src="./resources/icon/calendar.svg" width="20px" height="20px" /></span>
+						</div>
+						<h:inputText id="precioVenta" class="form-control" a:placeholder="Precio de Venta" value="#{repuestoController.repuesto.precioVenta}"/>
+					</div>
+				</div>
 			</div>
-			<h:commandButton class="btn btn-danger btn-circle btn-xl" actionListener="#{repuestoController.agregarRepuesto()}" value="+"/>
+			<div class="row">
+				<div class="col-md-6">
+					<label for="cantidad">Cantidad</label>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> 
+							<img src="./resources/icon/assignment_returned-24px.svg" width="20px" height="20px" /></span>
+						</div>
+						<h:inputText id="cantidad" class="form-control" a:placeholder="Cantidad" value="#{repuestoController.repuesto.cantidad}" />
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label for="fechaAdquisicion">Fecha de Adquisición</label>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> 
+							<img src="./resources/icon/calendar.svg" width="20px" height="20px" /></span>
+						</div>
+						<h:inputText id="fechaAdquisicion" class="form-control" a:placeholder="MM/DD/YYYY" value="#{repuestoController.repuesto.fechaAdquisicion}">
+							<f:convertDateTime pattern="MM/dd/yyyy" />
+						</h:inputText>
+					</div>
+				</div>
+			</div>
+			<h:commandButton class="btn btn-danger btn-circle btn-xl" actionListener="#{repuestoController.agregarRepuesto()}" value="+" />
 		</h:form>
 	</div>
-	
+
 
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>

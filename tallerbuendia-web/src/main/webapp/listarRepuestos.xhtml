@@ -6,17 +6,11 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
-	<link
-		href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"
-		rel="stylesheet" />
-	<link
-		href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-		rel="stylesheet" />
-	<link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-		rel="stylesheet" />
-	<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css"
-		rel="stylesheet" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" />
+	<link href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet" />
+	<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" />
 	<h:outputStylesheet library="css" name="btncircle.css" />	
 	<h:outputStylesheet library="DataTables" name="datatables.css" />	
 	<title>Ver Repuestos</title>
@@ -25,12 +19,7 @@
 	
 	<div class="container">
 		<div class="col-md-12 mt-3 ">
-			<h:dataTable id="vistaRepuesto" var="r"
-				value="#{repuestoController.mostrarRepuesto}" class="table table-sm">
-				<h:column>
-					<f:facet name="header">DISPONIBLE</f:facet>
-					#{r.disponible}
-				</h:column>
+			<h:dataTable id="vistaRepuesto" var="r" value="#{repuestoController.mostrarRepuesto}" class="table table-sm">
 
 				<h:column>
 					<f:facet name="header">NOMBRE</f:facet>
@@ -39,14 +28,9 @@
 
 				<h:column>
 					<f:facet name="header">MARCA</f:facet>
-					#{r.proveedorMarca.marcaRepuesto.nombre}
+					#{r.marcaRepuesto}
 				</h:column>
 				
-				<h:column>
-					<f:facet name="header">MARCA CARRO</f:facet>
-					#{r.proveedorMarca.marcaCarro.marcarNombre}
-				</h:column>
-
 				<h:column>
 					<f:facet name="header">ADQUISICION</f:facet>
 					#{r.fechaAdquisicion}
@@ -108,7 +92,7 @@
 								<h:inputText class="form-control" a:placeholder="Nombre de Producto" value="#{repuestoController.accionRepuesto.nombre}" />
 							</div>
 							<div class="col-md-4">
-								<h:inputText class="form-control" a:placeholder="Marca de Producto" value="#{repuestoController.accionRepuesto.proveedorMarca.idProveedorMarca}" />
+								<h:inputText class="form-control" a:placeholder="Marca de Producto" value="#{repuestoController.accionRepuesto.marcaRepuesto}" />
 							</div>
 						</div>
 						<br />

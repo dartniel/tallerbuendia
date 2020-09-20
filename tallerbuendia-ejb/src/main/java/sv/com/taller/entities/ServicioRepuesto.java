@@ -20,10 +20,6 @@ public class ServicioRepuesto implements Serializable {
 	@Column(name="ID_SERVICIO_REPUESTO")
 	private int idServicioRepuesto;
 
-	//bi-directional many-to-one association to Chequeo
-	@OneToMany(mappedBy="servicioRepuesto")
-	private List<Chequeo> chequeos;
-
 	//bi-directional many-to-one association to Repuesto
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_REPUESTO")
@@ -34,6 +30,10 @@ public class ServicioRepuesto implements Serializable {
 	@JoinColumn(name="ID_SERVICIO")
 	private Servicio servicio;
 
+	//bi-directional many-to-one association to DetalleChequeo
+	@OneToMany(mappedBy="servicioRepuesto")
+	private List<DetalleChequeo> detalleChequeos;
+
 	public ServicioRepuesto() {
 	}
 
@@ -43,28 +43,6 @@ public class ServicioRepuesto implements Serializable {
 
 	public void setIdServicioRepuesto(int idServicioRepuesto) {
 		this.idServicioRepuesto = idServicioRepuesto;
-	}
-
-	public List<Chequeo> getChequeos() {
-		return this.chequeos;
-	}
-
-	public void setChequeos(List<Chequeo> chequeos) {
-		this.chequeos = chequeos;
-	}
-
-	public Chequeo addChequeo(Chequeo chequeo) {
-		getChequeos().add(chequeo);
-		chequeo.setServicioRepuesto(this);
-
-		return chequeo;
-	}
-
-	public Chequeo removeChequeo(Chequeo chequeo) {
-		getChequeos().remove(chequeo);
-		chequeo.setServicioRepuesto(null);
-
-		return chequeo;
 	}
 
 	public Repuesto getRepuesto() {
@@ -81,6 +59,28 @@ public class ServicioRepuesto implements Serializable {
 
 	public void setServicio(Servicio servicio) {
 		this.servicio = servicio;
+	}
+
+	public List<DetalleChequeo> getDetalleChequeos() {
+		return this.detalleChequeos;
+	}
+
+	public void setDetalleChequeos(List<DetalleChequeo> detalleChequeos) {
+		this.detalleChequeos = detalleChequeos;
+	}
+
+	public DetalleChequeo addDetalleChequeo(DetalleChequeo detalleChequeo) {
+		getDetalleChequeos().add(detalleChequeo);
+		detalleChequeo.setServicioRepuesto(this);
+
+		return detalleChequeo;
+	}
+
+	public DetalleChequeo removeDetalleChequeo(DetalleChequeo detalleChequeo) {
+		getDetalleChequeos().remove(detalleChequeo);
+		detalleChequeo.setServicioRepuesto(null);
+
+		return detalleChequeo;
 	}
 
 }

@@ -3,6 +3,7 @@ package sv.com.taller.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -47,6 +48,14 @@ public class Cliente implements Serializable {
 
 	@Column(name="TIPO_SEGURO")
 	private String tipoSeguro;
+
+	//bi-directional many-to-one association to Automovil
+	@OneToMany(mappedBy="cliente")
+	private List<Automovil> automovils;
+
+	//bi-directional many-to-one association to Chequeo
+	@OneToMany(mappedBy="cliente")
+	private List<Chequeo> chequeos;
 
 	public Cliente() {
 	}
@@ -145,6 +154,50 @@ public class Cliente implements Serializable {
 
 	public void setTipoSeguro(String tipoSeguro) {
 		this.tipoSeguro = tipoSeguro;
+	}
+
+	public List<Automovil> getAutomovils() {
+		return this.automovils;
+	}
+
+	public void setAutomovils(List<Automovil> automovils) {
+		this.automovils = automovils;
+	}
+
+	public Automovil addAutomovil(Automovil automovil) {
+		getAutomovils().add(automovil);
+		automovil.setCliente(this);
+
+		return automovil;
+	}
+
+	public Automovil removeAutomovil(Automovil automovil) {
+		getAutomovils().remove(automovil);
+		automovil.setCliente(null);
+
+		return automovil;
+	}
+
+	public List<Chequeo> getChequeos() {
+		return this.chequeos;
+	}
+
+	public void setChequeos(List<Chequeo> chequeos) {
+		this.chequeos = chequeos;
+	}
+
+	public Chequeo addChequeo(Chequeo chequeo) {
+		getChequeos().add(chequeo);
+		chequeo.setCliente(this);
+
+		return chequeo;
+	}
+
+	public Chequeo removeChequeo(Chequeo chequeo) {
+		getChequeos().remove(chequeo);
+		chequeo.setCliente(null);
+
+		return chequeo;
 	}
 
 }

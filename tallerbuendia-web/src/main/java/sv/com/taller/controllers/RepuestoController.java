@@ -8,8 +8,9 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import sv.com.taller.entities.ProveedorMarca;
+import sv.com.taller.entities.Proveedor;
 import sv.com.taller.entities.Repuesto;
+import sv.com.taller.repositories.ProveedorRepository;
 import sv.com.taller.repositories.RepuestoRepository;
 
 @Named
@@ -21,16 +22,6 @@ public class RepuestoController implements Serializable{
 	private Repuesto repuesto;
 	
 	private Repuesto accionRepuesto;
-
-	private String buscarRepuesto;
-
-	public String getBuscarRepuesto() {
-		return buscarRepuesto;
-	}
-
-	public void setBuscarRepuesto(String buscarRepuesto) {
-		this.buscarRepuesto = buscarRepuesto;
-	}
 
 	public Repuesto getAccionRepuesto() {
 		return accionRepuesto;
@@ -49,16 +40,19 @@ public class RepuestoController implements Serializable{
 	public void setRepuesto(Repuesto repuesto) {
 		this.repuesto = repuesto;
 	}
-	
+
 	@PostConstruct
 	public void init() {
 		this.repuesto = new Repuesto();
-		this.repuesto.setProveedorMarca(new ProveedorMarca());
+		this.repuesto.setProveedor(new Proveedor());
 		this.accionRepuesto = new Repuesto();
 	}
 
 	@EJB
 	private RepuestoRepository repuestoRepository;
+	
+	@EJB
+	private ProveedorRepository proveedorRepository;
 	
 	public void agregarRepuesto() {
 		repuestoRepository.agregar(repuesto);
@@ -82,8 +76,5 @@ public class RepuestoController implements Serializable{
 		return mostrarRepuesto;
 	}
 	
-	public void buscquedaRepuesto() {
-		repuestoRepository.buscar(buscarRepuesto);
-	}
 	
 }

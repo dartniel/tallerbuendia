@@ -19,15 +19,16 @@ public class Repuesto implements Serializable {
 	
 	public Repuesto(Repuesto repuesto) {}
 	
-	public Repuesto(String idRepuesto, int cantidad, float costo, Date fechaAdquisicion, String nombre,
-			float precioVenta, ProveedorMarca proveedorMarca) {
+	public Repuesto(String idRepuesto, int cantidad, float costo, Date fechaAdquisicion, String marcaRepuesto,
+			String nombre, float precioVenta, Proveedor proveedor) {
 		this.idRepuesto = idRepuesto;
 		this.cantidad = cantidad;
 		this.costo = costo;
 		this.fechaAdquisicion = fechaAdquisicion;
+		this.marcaRepuesto = marcaRepuesto;
 		this.nombre = nombre;
 		this.precioVenta = precioVenta;
-		this.proveedorMarca = proveedorMarca;
+		this.proveedor = proveedor;
 	}
 
 	@Id
@@ -44,21 +45,22 @@ public class Repuesto implements Serializable {
 	@Column(name="FECHA_ADQUISICION")
 	private Date fechaAdquisicion;
 
+	@Column(name="MARCA_REPUESTO")
+	private String marcaRepuesto;
+
 	private String nombre;
 
 	@Column(name="PRECIO_VENTA")
 	private float precioVenta;
 
-	//bi-directional many-to-one association to ProveedorMarca
+	//bi-directional many-to-one association to Proveedor
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_PROVEEDOR_MARCA")
-	private ProveedorMarca proveedorMarca;
+	@JoinColumn(name="ID_PROVEEDOR")
+	private Proveedor proveedor;
 
 	//bi-directional many-to-one association to ServicioRepuesto
 	@OneToMany(mappedBy="repuesto")
 	private List<ServicioRepuesto> servicioRepuestos;
-
-	
 
 	public String getIdRepuesto() {
 		return this.idRepuesto;
@@ -100,6 +102,14 @@ public class Repuesto implements Serializable {
 		this.fechaAdquisicion = fechaAdquisicion;
 	}
 
+	public String getMarcaRepuesto() {
+		return this.marcaRepuesto;
+	}
+
+	public void setMarcaRepuesto(String marcaRepuesto) {
+		this.marcaRepuesto = marcaRepuesto;
+	}
+
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -116,12 +126,12 @@ public class Repuesto implements Serializable {
 		this.precioVenta = precioVenta;
 	}
 
-	public ProveedorMarca getProveedorMarca() {
-		return this.proveedorMarca;
+	public Proveedor getProveedor() {
+		return this.proveedor;
 	}
 
-	public void setProveedorMarca(ProveedorMarca proveedorMarca) {
-		this.proveedorMarca = proveedorMarca;
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
 	}
 
 	public List<ServicioRepuesto> getServicioRepuestos() {

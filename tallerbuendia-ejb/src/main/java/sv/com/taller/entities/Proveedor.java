@@ -28,13 +28,13 @@ public class Proveedor implements Serializable {
 	@Column(name="TIPO_REPUESTO")
 	private String tipoRepuesto;
 
+	//bi-directional many-to-one association to Repuesto
+	@OneToMany(mappedBy="proveedor")
+	private List<Repuesto> repuestos;
+
 	//bi-directional many-to-one association to Solicitud
 	@OneToMany(mappedBy="proveedor")
 	private List<Solicitud> solicituds;
-
-	//bi-directional many-to-one association to ProveedorMarca
-	@OneToMany(mappedBy="proveedor")
-	private List<ProveedorMarca> proveedorMarcas;
 
 	public Proveedor() {
 	}
@@ -79,6 +79,28 @@ public class Proveedor implements Serializable {
 		this.tipoRepuesto = tipoRepuesto;
 	}
 
+	public List<Repuesto> getRepuestos() {
+		return this.repuestos;
+	}
+
+	public void setRepuestos(List<Repuesto> repuestos) {
+		this.repuestos = repuestos;
+	}
+
+	public Repuesto addRepuesto(Repuesto repuesto) {
+		getRepuestos().add(repuesto);
+		repuesto.setProveedor(this);
+
+		return repuesto;
+	}
+
+	public Repuesto removeRepuesto(Repuesto repuesto) {
+		getRepuestos().remove(repuesto);
+		repuesto.setProveedor(null);
+
+		return repuesto;
+	}
+
 	public List<Solicitud> getSolicituds() {
 		return this.solicituds;
 	}
@@ -99,28 +121,6 @@ public class Proveedor implements Serializable {
 		solicitud.setProveedor(null);
 
 		return solicitud;
-	}
-
-	public List<ProveedorMarca> getProveedorMarcas() {
-		return this.proveedorMarcas;
-	}
-
-	public void setProveedorMarcas(List<ProveedorMarca> proveedorMarcas) {
-		this.proveedorMarcas = proveedorMarcas;
-	}
-
-	public ProveedorMarca addProveedorMarca(ProveedorMarca proveedorMarca) {
-		getProveedorMarcas().add(proveedorMarca);
-		proveedorMarca.setProveedor(this);
-
-		return proveedorMarca;
-	}
-
-	public ProveedorMarca removeProveedorMarca(ProveedorMarca proveedorMarca) {
-		getProveedorMarcas().remove(proveedorMarca);
-		proveedorMarca.setProveedor(null);
-
-		return proveedorMarca;
 	}
 
 }

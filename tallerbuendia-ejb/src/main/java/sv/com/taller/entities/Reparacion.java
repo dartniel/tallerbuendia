@@ -26,11 +26,6 @@ public class Reparacion implements Serializable {
 	@JoinColumn(name="ID_AUTOMOVIL")
 	private Automovil automovil;
 
-	//bi-directional many-to-one association to Cotizacion
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_COTIZACION")
-	private Cotizacion cotizacion;
-
 	//bi-directional many-to-one association to Empleado
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_EMPLEADO")
@@ -61,14 +56,6 @@ public class Reparacion implements Serializable {
 
 	public void setAutomovil(Automovil automovil) {
 		this.automovil = automovil;
-	}
-
-	public Cotizacion getCotizacion() {
-		return this.cotizacion;
-	}
-
-	public void setCotizacion(Cotizacion cotizacion) {
-		this.cotizacion = cotizacion;
 	}
 
 	public Empleado getEmpleado() {

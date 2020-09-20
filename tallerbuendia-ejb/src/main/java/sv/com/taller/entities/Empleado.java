@@ -18,7 +18,7 @@ public class Empleado implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_EMPLEADO")
-	private int idEmpleado;
+	private String idEmpleado;
 
 	private String apellido;
 
@@ -33,14 +33,6 @@ public class Empleado implements Serializable {
 	private String nombre;
 
 	private String telefono;
-
-	//bi-directional many-to-one association to Automovil
-	@OneToMany(mappedBy="empleado")
-	private List<Automovil> automovils;
-
-	//bi-directional many-to-one association to Cotizacion
-	@OneToMany(mappedBy="empleado")
-	private List<Cotizacion> cotizacions;
 
 	//bi-directional many-to-one association to Rol
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -58,11 +50,11 @@ public class Empleado implements Serializable {
 	public Empleado() {
 	}
 
-	public int getIdEmpleado() {
+	public String getIdEmpleado() {
 		return this.idEmpleado;
 	}
 
-	public void setIdEmpleado(int idEmpleado) {
+	public void setIdEmpleado(String idEmpleado) {
 		this.idEmpleado = idEmpleado;
 	}
 
@@ -112,50 +104,6 @@ public class Empleado implements Serializable {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
-	}
-
-	public List<Automovil> getAutomovils() {
-		return this.automovils;
-	}
-
-	public void setAutomovils(List<Automovil> automovils) {
-		this.automovils = automovils;
-	}
-
-	public Automovil addAutomovil(Automovil automovil) {
-		getAutomovils().add(automovil);
-		automovil.setEmpleado(this);
-
-		return automovil;
-	}
-
-	public Automovil removeAutomovil(Automovil automovil) {
-		getAutomovils().remove(automovil);
-		automovil.setEmpleado(null);
-
-		return automovil;
-	}
-
-	public List<Cotizacion> getCotizacions() {
-		return this.cotizacions;
-	}
-
-	public void setCotizacions(List<Cotizacion> cotizacions) {
-		this.cotizacions = cotizacions;
-	}
-
-	public Cotizacion addCotizacion(Cotizacion cotizacion) {
-		getCotizacions().add(cotizacion);
-		cotizacion.setEmpleado(this);
-
-		return cotizacion;
-	}
-
-	public Cotizacion removeCotizacion(Cotizacion cotizacion) {
-		getCotizacions().remove(cotizacion);
-		cotizacion.setEmpleado(null);
-
-		return cotizacion;
 	}
 
 	public Rol getRol() {
