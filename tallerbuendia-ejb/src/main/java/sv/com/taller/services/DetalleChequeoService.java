@@ -3,6 +3,8 @@ package sv.com.taller.services;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -17,6 +19,7 @@ public class DetalleChequeoService implements DetalleChequeoRepository {
 
 	EntityManager entity = JPAUtil.getEntityManagerFactory().createEntityManager();
 	
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<DetalleChequeo> mostrar(Chequeo chequeo) {
@@ -30,6 +33,7 @@ public class DetalleChequeoService implements DetalleChequeoRepository {
 
 	@Override
 	public void actualizarExistencia(DetalleChequeo detalleChequeo) {
+		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			Repuesto valorExistencia = null;
 			
@@ -37,14 +41,16 @@ public class DetalleChequeoService implements DetalleChequeoRepository {
 			query.setParameter("idRepuesto", detalleChequeo.getServicioRepuesto().getRepuesto().getIdRepuesto());
 			valorExistencia = (Repuesto) query.getSingleResult();
 			
-			int nuevaExistencia =valorExistencia.getCantidad() - detalleChequeo.getCantidad();
-			valorExistencia.setCantidad(nuevaExistencia);
+			int nuevaExistencia = valorExistencia.getCantidad() - detalleChequeo.getCantidad();
 			
-			entity.getTransaction().begin();
-			entity.merge(valorExistencia);
-			entity.getTransaction().commit();
-			
-			System.out.println("Se modifico stock");
+			if(nuevaExistencia < 0) {
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El stock no tiene los suministros necesarios", null));
+			}else {
+				valorExistencia.setCantidad(nuevaExistencia);
+				entity.getTransaction().begin();
+				entity.merge(valorExistencia);
+				entity.getTransaction().commit();
+			}
 		}catch(Exception e) {
 			entity.close();
 			e.printStackTrace();
