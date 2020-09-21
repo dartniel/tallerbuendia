@@ -19,6 +19,10 @@ public class Repuesto implements Serializable {
 	
 	public Repuesto(Repuesto repuesto) {}
 	
+	public Repuesto(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
 	public Repuesto(String idRepuesto, int cantidad, float costo, Date fechaAdquisicion, String marcaRepuesto,
 			String nombre, float precioVenta, Proveedor proveedor) {
 		this.idRepuesto = idRepuesto;
@@ -154,6 +158,13 @@ public class Repuesto implements Serializable {
 		servicioRepuesto.setRepuesto(null);
 
 		return servicioRepuesto;
+	}
+
+	@Override
+	public String toString() {
+		return "Repuesto [idRepuesto=" + idRepuesto + ", cantidad=" + cantidad + ", costo=" + costo + ", disponible="
+				+ disponible + ", fechaAdquisicion=" + fechaAdquisicion + ", marcaRepuesto=" + marcaRepuesto
+				+ ", nombre=" + nombre + ", precioVenta=" + precioVenta + ", proveedor=" + proveedor + "]";
 	}
 
 }

@@ -77,4 +77,10 @@ public class DetalleChequeo implements Serializable {
 		this.servicioRepuesto = servicioRepuesto;
 	}
 
+	@Override
+	public String toString() {
+		return "DetalleChequeo [idDetalleChequeo=" + idDetalleChequeo + ", cantidad=" + cantidad + ", precioUnitario="
+				+ precioUnitario + ", chequeo=" + chequeo + ", servicioRepuesto=" + servicioRepuesto + "]";
+	}
+
 }

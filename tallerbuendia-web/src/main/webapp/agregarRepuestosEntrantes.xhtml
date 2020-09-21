@@ -103,7 +103,8 @@
 							<span class="input-group-text"> 
 							<img src="./resources/icon/calendar.svg" width="20px" height="20px" /></span>
 						</div>
-						<h:inputText id="fechaAdquisicion" class="form-control" a:placeholder="MM/DD/YYYY" value="#{repuestoController.repuesto.fechaAdquisicion}">
+						<h:inputText id="fechaAdquisicion" class="form-control" a:placeholder="MM/DD/YYYY" 
+						a:type="date" value="#{repuestoController.repuesto.fechaAdquisicion}">
 							<f:convertDateTime pattern="MM/dd/yyyy" />
 						</h:inputText>
 					</div>
