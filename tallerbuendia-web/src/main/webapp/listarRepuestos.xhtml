@@ -6,219 +6,224 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
-	<link href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet" />
-	<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet" />
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" />
-	<h:outputStylesheet library="css" name="btncircle.css" />	
-	<h:outputStylesheet library="DataTables" name="datatables.css" />	
+	<link
+		href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"
+		rel="stylesheet" />
+	<link
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+		rel="stylesheet" />
+	<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css"
+		rel="stylesheet" />
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" />
+	<h:outputStylesheet library="css" name="btncircle.css" />
+	<h:outputStylesheet library="DataTables" name="datatables.css" />
 	<title>Ver Repuestos</title>
 </h:head>
 <body>
 	<nav class="navbar navbar-light flex-md-nowrap p-0 shadow" style="background-color: #F35959;">
-  
-  
-  <div class="text-center">
-  <img src="./resources/img/logo.png" max-width="100%" height="70"></img>
-</div>
-</nav>
 
-<div class="container-fluid">
-  <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-      <div class="sidebar-sticky pt-3">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link" href="inicio.xhtml">
-              <span><img src="./resources/icon/home-24px.svg" width="20px" height="20px" /></span>
-              Inicio
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="agregarRepuestosEntrantes.xhtml">
-              <span><img src="./resources/icon/playlist_add-24px.svg" width="20px" height="20px" /></span>
-              Agregar repuesto
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="listarRepuestos.xhtml">
-              <span><img src="./resources/icon/search-24px.svg" width="20px" height="20px" /></span>
-              Buscar Repuestos
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="repuestoSaliente.xhtml">
-              <span><img src="./resources/icon/camera_rear-24px.svg" width="20px" height="20px" /></span>
-              Salida Repuestos
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span><img src="./resources/icon/system_update_alt-24px.svg" width="20px" height="20px" /></span>
-              Solicitar Repuesto
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-    	 <div class="container">
-		<div class="col-md-12 mt-3 ">
-			<h:dataTable id="vistaRepuesto" var="r" value="#{repuestoController.mostrarRepuesto}" class="table table-sm">
 
-				<h:column>
-					<f:facet name="header">NOMBRE</f:facet>
+	<div class="text-center">
+		<img src="./resources/img/logo.png" max-width="100%" height="70"></img>
+	</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<nav id="sidebarMenu"
+				class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+			<div class="sidebar-sticky pt-3">
+				<ul class="nav flex-column">
+					<li class="nav-item"><a class="nav-link" href="inicio.xhtml">
+							<span><img src="./resources/icon/home-24px.svg"
+								width="20px" height="20px" /></span> Inicio
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="agregarRepuestosEntrantes.xhtml"> <span><img
+								src="./resources/icon/playlist_add-24px.svg" width="20px"
+								height="20px" /></span> Agregar repuesto
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="listarRepuestos.xhtml"> <span><img
+								src="./resources/icon/search-24px.svg" width="20px"
+								height="20px" /></span> Buscar Repuestos
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="repuestoSaliente.xhtml"> <span><img
+								src="./resources/icon/camera_rear-24px.svg" width="20px"
+								height="20px" /></span> Salida Repuestos
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="#"> <span><img
+								src="./resources/icon/system_update_alt-24px.svg" width="20px"
+								height="20px" /></span> Solicitar Repuesto
+					</a></li>
+				</ul>
+			</div>
+			</nav>
+			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+			<div class="container">
+				<div class="col-md-12 mt-3 ">
+					<h:dataTable id="vistaRepuesto" var="r"
+						value="#{repuestoController.mostrarRepuesto}"
+						class="table table-sm">
+
+						<h:column>
+							<f:facet name="header">NOMBRE</f:facet>
 					#{r.nombre}
 				</h:column>
 
-				<h:column>
-					<f:facet name="header">MARCA</f:facet>
+						<h:column>
+							<f:facet name="header">MARCA</f:facet>
 					#{r.marcaRepuesto}
 				</h:column>
-				
-				<h:column>
-					<f:facet name="header">ADQUISICION</f:facet>
+
+						<h:column>
+							<f:facet name="header">ADQUISICION</f:facet>
 					#{r.fechaAdquisicion}
 				</h:column>
 
-				<h:column>
-					<f:facet name="header">COSTO</f:facet>
+						<h:column>
+							<f:facet name="header">COSTO</f:facet>
 					#{r.costo}
 				</h:column>
 
-				<h:column>
-					<f:facet name="header">PRECIO DE VENTA</f:facet>
+						<h:column>
+							<f:facet name="header">PRECIO DE VENTA</f:facet>
 					#{r.precioVenta}
 				</h:column>
 
-				<h:column>
-					<f:facet name="header">CANTIDAD</f:facet>
+						<h:column>
+							<f:facet name="header">CANTIDAD</f:facet>
 					#{r.cantidad}
 				</h:column>
 
-				<h:column>
-					<f:facet name="header"></f:facet>
-						<div class="row">
-							<div class="col-md-4">
-								<h:commandLink style="color:black; text-decoration:none;" class="fas fa-wrench" onclick="$('#modalModificar').modal('show');">
-									<f:setPropertyActionListener value="#{r}" target="#{repuestoController.accionRepuesto}" />
-									<f:ajax execute="@this" render=":formModificar"/>
-									
-								</h:commandLink>
+						<h:column>
+							<f:facet name="header"></f:facet>
+							<div class="row">
+								<div class="col-md-4">
+									<h:commandLink style="color:black; text-decoration:none;"
+										class="fas fa-wrench"
+										onclick="$('#modalModificar').modal('show');">
+										<f:setPropertyActionListener value="#{r}"
+											target="#{repuestoController.accionRepuesto}" />
+										<f:ajax execute="@this" render=":formModificar" />
+
+									</h:commandLink>
+								</div>
 							</div>
-							<div class="col-md-4">
-								<h:commandLink style="color:red; text-decoration:none;" class="fas fa-trash-alt" onclick="$('#modalEliminar').modal('show');">
-									<f:setPropertyActionListener value="#{r}" target="#{repuestoController.accionRepuesto}" />
-									<f:ajax execute="@this" render=":formEliminar"/>	
-								</h:commandLink >
-							</div>
+						</h:column>
+					</h:dataTable>
+				</div>
+			</div>
+
+			<div class="modal fade" id="modalModificar" tabindex="-1"
+				aria-labelledby="modalModificarLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Modificar</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+
+								<span aria-hidden="true">&times;</span>
+							</button>
 						</div>
-				</h:column>
-			</h:dataTable>
+						<div id="mensaje">
+							<h:form id="formModificar">
+								<div class="modal-body">
+									<div class="row">
+										<div class="col-md-4">
+											<h:inputText class="form-control"
+												a:placeholder="ID de Producto"
+												value="#{repuestoController.accionRepuesto.idRepuesto}"
+												disabled="true" />
+										</div>
+										<div class="col-md-4">
+											<h:inputText class="form-control"
+												a:placeholder="Nombre de Producto"
+												value="#{repuestoController.accionRepuesto.nombre}"
+												id="nombre" />
+											<div id="nombreDiv"></div>
+										</div>
+										<div class="col-md-4">
+											<h:inputText class="form-control"
+												a:placeholder="Marca de Producto"
+												value="#{repuestoController.accionRepuesto.marcaRepuesto}"
+												id="marcaRepuesto" />
+											<div id="marcaRepuestoDiv"></div>
+										</div>
+									</div>
+									<br />
+									<div class="row">
+										<div class="col-md-4 date">
+											<h:inputText class="form-control" a:type="number"
+												a:placeholder="Cantidad"
+												value="#{repuestoController.accionRepuesto.cantidad}"
+												id="cantidad" />
+											<div id="cantidadDiv"></div>
+										</div>
+
+										<div class="col-md-4">
+											<h:inputText class="form-control" a:type="number"
+												a:placeholder="Costo de Repuesto"
+												value="#{repuestoController.accionRepuesto.costo}"
+												id="costo" />
+											<div id="costoDiv"></div>
+										</div>
+
+										<div class="col-md-4">
+											<h:inputText class="form-control" a:type="number"
+												a:placeholder="Precio de Venta"
+												value="#{repuestoController.accionRepuesto.precioVenta}"
+												id="precioVenta" />
+											<div id="precioVentaDiv"></div>
+										</div>
+									</div>
+									<br />
+									<div class="row">
+										<div class="col-md-6">
+											<h:inputText id="fechaAdquisicion" class="form-control"
+												a:type="date" a:placeholder="Fecha de Aqusicion"
+												value="#{repuestoController.accionRepuesto.fechaAdquisicion}">
+												<f:convertDateTime pattern="yyyy-MM-dd" />
+											</h:inputText>
+											<div id="fechaAdquisicionDiv"></div>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Cerrar</button>
+									<h:commandButton class="btn btn-success"
+										actionListener="#{repuestoController.modificarRepuesto()}"
+										value="Guardar" onclick="$('#modalModificar').modal('hide');"
+										id="button1" />
+								</div>
+							</h:form>
+						</div>
+					</div>
+				</div>
+			</div>
+			</main>
 		</div>
 	</div>
 
-	<div class="modal fade" id="modalModificar" tabindex="-1" aria-labelledby="modalModificarLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Modificar</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div id="mensaje">
-				<h:form id="formModificar">
-					<div class="modal-body">
-						<div class="row">
-							<div class="col-md-4">
-								<h:inputText class="form-control" a:placeholder="ID de Producto" value="#{repuestoController.accionRepuesto.idRepuesto}" disabled="true" />
-							</div>
-							<div class="col-md-4">
-								<h:inputText class="form-control" a:placeholder="Nombre de Producto" value="#{repuestoController.accionRepuesto.nombre}" id="nombre" />
-								<div id="nombreDiv"></div>
-							</div>
-							<div class="col-md-4">
-								<h:inputText class="form-control" a:placeholder="Marca de Producto" value="#{repuestoController.accionRepuesto.marcaRepuesto}" id="marcaRepuesto"/>
-								<div id="marcaRepuestoDiv"></div>
-							</div>
-						</div>
-						<br />
-						<div class="row">
-							<div class="col-md-4 date">
-								<h:inputText class="form-control" a:type="number" a:placeholder="Cantidad" value="#{repuestoController.accionRepuesto.cantidad}" id="cantidad"/>
-								<div id="cantidadDiv"></div>
-							</div>
-			
-							<div class="col-md-4">
-								<h:inputText class="form-control" a:type="number" a:placeholder="Costo de Repuesto" value="#{repuestoController.accionRepuesto.costo}" id="costo" />
-								<div id="costoDiv"></div>
-							</div>
-			
-							<div class="col-md-4">
-								<h:inputText class="form-control" a:type="number" a:placeholder="Precio de Venta" value="#{repuestoController.accionRepuesto.precioVenta}" id="precioVenta"/>
-								<div id="precioVentaDiv"></div>
-							</div>
-						</div>
-						<br />
-						<div class="row">
-							<div class="col-md-6">
-								<h:inputText id="fechaAdquisicion" class="form-control" a:type="date" a:placeholder="Fecha de Aqusicion" value="#{repuestoController.accionRepuesto.fechaAdquisicion}" >
-									<f:convertDateTime pattern="yyyy-MM-dd" />
-								</h:inputText>
-								<div id="fechaAdquisicionDiv"></div>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-						<h:commandButton class="btn btn-success" actionListener="#{repuestoController.modificarRepuesto()}"
-							value="Guardar" onclick="$('#modalModificar').modal('hide');" id="button1" />
-					</div>
-				</h:form>
-				</div>
-			</div>
-		</div>
-	</div>
 
-	<div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<h:form id="formEliminar">
-					<div class="modal-body">
-						¿Desea eliminar el repuesto #{repuestoController.accionRepuesto.nombre}?
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-						<h:commandButton class="btn btn-danger" actionListener="#{repuestoController.eliminarRepuesto()}"
-							value="Eliminar" onclick="$('#modalEliminar').modal('hide');" />
-					</div>
-				</h:form>
-			</div>
-		</div>
-	</div>
- 	</main>
-   </div>
-</div>
-	
-	
 
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-	<h:outputScript library="DataTables" name="datatables.js"/>
-	<h:outputScript library="DataTables/DataTables-1.10.22/js" name="jquery.dataTables.js"/>
-	<h:outputScript library="js" name="validaciones_modificarRepuesto.js"/>
+	<h:outputScript library="DataTables" name="datatables.js" />
+	<h:outputScript library="DataTables/DataTables-1.10.22/js"
+		name="jquery.dataTables.js" />
+	<h:outputScript library="js" name="validaciones_modificarRepuesto.js" />
 	<script>
 		$(document).ready(function() {
 		  $("#fechaAdquisicion").datepicker();

@@ -56,6 +56,7 @@ public class RepuestoController implements Serializable{
 	
 	public void agregarRepuesto() {
 		repuestoRepository.agregar(repuesto);
+		this.repuesto.setIdRepuesto("");
 		this.repuesto.setNombre("");
 		this.repuesto.setCantidad(0);
 		this.repuesto.setCosto(0);

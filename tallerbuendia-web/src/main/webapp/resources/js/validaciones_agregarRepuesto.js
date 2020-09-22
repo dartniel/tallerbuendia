@@ -1,7 +1,7 @@
 const button = document.getElementById('registroRepuesto:button');
 const formulario = document.getElementById('registroRepuesto');
 button.addEventListener('click', function(e){
-    //Leer del formulario de gastos
+    // Leer del formulario de gastos
     const idRepuesto = document.getElementById('registroRepuesto:idRepuesto').value;
     const nombre= document.getElementById('registroRepuesto:nombre').value;
     const proveedor = document.getElementById('registroRepuesto:proveedor').value;
@@ -11,11 +11,11 @@ button.addEventListener('click', function(e){
     const cantidad = document.getElementById('registroRepuesto:cantidad').value;
     const fechaAdquisicion = document.getElementById('registroRepuesto:fechaAdquisicion').value;
 
-    //Instanciar la interfaz
+    // Instanciar la interfaz
     const ui = new Interfaz();
-    //Comprobar que los campos no estem vacíos
+    // Comprobar que los campos no estem vacíos
     if(idRepuesto === '' || nombre === '' || proveedor === '' || marcaRepuesto === '' || costo === '' || precioVenta === '' || cantidad === '' || fechaAdquisicion === ''){
-        //2 parámetros mensaje y tipo
+        // 2 parámetros mensaje y tipo
        ui.camposVacios('No pueden quedar campos vacíos', 'error');
        e.preventDefault();
     }
@@ -68,7 +68,7 @@ button.addEventListener('click', function(e){
 
    
     
-    //ui.camposVacios('Se agregó el repuesto correctamente', 'correcto');
+    // ui.camposVacios('Se agregó el repuesto correctamente', 'correcto');
 
 })
 
@@ -84,9 +84,9 @@ class Interfaz{
         }
 
         divMensaje.appendChild(document.createTextNode(mensaje));
-        //Insertar en el DOM
+        // Insertar en el DOM
         document.querySelector('.mensaje').insertBefore(divMensaje, formulario);
-        //Quitar el alert después de 3 segundos
+        // Quitar el alert después de 3 segundos
         setTimeout(function(){
             document.querySelector('.mensaje .alert').remove();
         },5000)
@@ -101,9 +101,9 @@ class Interfaz{
         }
 
         divMensaje.appendChild(document.createTextNode(mensaje));
-        //Insertar en el DOM
+        // Insertar en el DOM
         document.querySelector(`#${id}`).appendChild(divMensaje);
-        //Quitar el alert después de 3 segundos
+        // Quitar el alert después de 3 segundos
         setTimeout(function(){
             document.querySelector('.alert-danger').remove();
             
