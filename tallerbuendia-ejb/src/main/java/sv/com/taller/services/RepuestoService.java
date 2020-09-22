@@ -87,12 +87,6 @@ public class RepuestoService implements RepuestoRepository{
 	@Override
 	public List<Repuesto> buscar(String repuesto) {
 		List<Repuesto> repuestos = null;
-		/*
-		 * ID REPUESTA
-		 * NOMBRE DE REPUESTO
-		 * MODELO DE CARRO
-		 * MARCA DE REPUESTO
-		 */
 		if(repuesto.equals("codigo")) {
 			
 		}

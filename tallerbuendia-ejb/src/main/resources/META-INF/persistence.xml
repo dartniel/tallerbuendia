@@ -8,6 +8,8 @@
 		<class>sv.com.taller.entities.DetalleCarro</class>
 		<class>sv.com.taller.entities.DetalleChequeo</class>
 		<class>sv.com.taller.entities.Empleado</class>
+		<class>sv.com.taller.entities.Marca</class>
+		<class>sv.com.taller.entities.MarcaProveedor</class>
 		<class>sv.com.taller.entities.PertenciaAutomovil</class>
 		<class>sv.com.taller.entities.Pertenencia</class>
 		<class>sv.com.taller.entities.Proveedor</class>

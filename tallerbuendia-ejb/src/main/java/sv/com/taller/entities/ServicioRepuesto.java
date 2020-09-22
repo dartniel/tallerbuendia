@@ -20,6 +20,10 @@ public class ServicioRepuesto implements Serializable {
 	@Column(name="ID_SERVICIO_REPUESTO")
 	private int idServicioRepuesto;
 
+	//bi-directional many-to-one association to DetalleChequeo
+	@OneToMany(mappedBy="servicioRepuesto")
+	private List<DetalleChequeo> detalleChequeos;
+
 	//bi-directional many-to-one association to Repuesto
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_REPUESTO")
@@ -30,10 +34,6 @@ public class ServicioRepuesto implements Serializable {
 	@JoinColumn(name="ID_SERVICIO")
 	private Servicio servicio;
 
-	//bi-directional many-to-one association to DetalleChequeo
-	@OneToMany(mappedBy="servicioRepuesto")
-	private List<DetalleChequeo> detalleChequeos;
-
 	public ServicioRepuesto() {
 	}
 
@@ -43,22 +43,6 @@ public class ServicioRepuesto implements Serializable {
 
 	public void setIdServicioRepuesto(int idServicioRepuesto) {
 		this.idServicioRepuesto = idServicioRepuesto;
-	}
-
-	public Repuesto getRepuesto() {
-		return this.repuesto;
-	}
-
-	public void setRepuesto(Repuesto repuesto) {
-		this.repuesto = repuesto;
-	}
-
-	public Servicio getServicio() {
-		return this.servicio;
-	}
-
-	public void setServicio(Servicio servicio) {
-		this.servicio = servicio;
 	}
 
 	public List<DetalleChequeo> getDetalleChequeos() {
@@ -81,6 +65,22 @@ public class ServicioRepuesto implements Serializable {
 		detalleChequeo.setServicioRepuesto(null);
 
 		return detalleChequeo;
+	}
+
+	public Repuesto getRepuesto() {
+		return this.repuesto;
+	}
+
+	public void setRepuesto(Repuesto repuesto) {
+		this.repuesto = repuesto;
+	}
+
+	public Servicio getServicio() {
+		return this.servicio;
+	}
+
+	public void setServicio(Servicio servicio) {
+		this.servicio = servicio;
 	}
 
 }

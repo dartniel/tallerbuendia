@@ -28,6 +28,10 @@ public class Proveedor implements Serializable {
 	@Column(name="TIPO_REPUESTO")
 	private String tipoRepuesto;
 
+	//bi-directional many-to-one association to MarcaProveedor
+	@OneToMany(mappedBy="proveedor")
+	private List<MarcaProveedor> marcaProveedors;
+
 	//bi-directional many-to-one association to Repuesto
 	@OneToMany(mappedBy="proveedor")
 	private List<Repuesto> repuestos;
@@ -77,6 +81,28 @@ public class Proveedor implements Serializable {
 
 	public void setTipoRepuesto(String tipoRepuesto) {
 		this.tipoRepuesto = tipoRepuesto;
+	}
+
+	public List<MarcaProveedor> getMarcaProveedors() {
+		return this.marcaProveedors;
+	}
+
+	public void setMarcaProveedors(List<MarcaProveedor> marcaProveedors) {
+		this.marcaProveedors = marcaProveedors;
+	}
+
+	public MarcaProveedor addMarcaProveedor(MarcaProveedor marcaProveedor) {
+		getMarcaProveedors().add(marcaProveedor);
+		marcaProveedor.setProveedor(this);
+
+		return marcaProveedor;
+	}
+
+	public MarcaProveedor removeMarcaProveedor(MarcaProveedor marcaProveedor) {
+		getMarcaProveedors().remove(marcaProveedor);
+		marcaProveedor.setProveedor(null);
+
+		return marcaProveedor;
 	}
 
 	public List<Repuesto> getRepuestos() {
