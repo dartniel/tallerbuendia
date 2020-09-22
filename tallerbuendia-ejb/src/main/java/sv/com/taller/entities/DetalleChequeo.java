@@ -21,6 +21,8 @@ public class DetalleChequeo implements Serializable {
 
 	private int cantidad;
 
+	private int estado = 1;
+
 	@Column(name="PRECIO_UNITARIO")
 	private float precioUnitario;
 
@@ -51,6 +53,14 @@ public class DetalleChequeo implements Serializable {
 
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
+	}
+
+	public int getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 
 	public float getPrecioUnitario() {

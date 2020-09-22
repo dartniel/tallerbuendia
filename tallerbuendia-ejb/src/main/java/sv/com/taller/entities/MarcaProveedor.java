@@ -2,6 +2,7 @@ package sv.com.taller.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -29,6 +30,10 @@ public class MarcaProveedor implements Serializable {
 	@JoinColumn(name="ID_PROVEEDOR")
 	private Proveedor proveedor;
 
+	//bi-directional many-to-one association to Repuesto
+	@OneToMany(mappedBy="marcaProveedor")
+	private List<Repuesto> repuestos;
+
 	public MarcaProveedor() {
 	}
 
@@ -54,6 +59,28 @@ public class MarcaProveedor implements Serializable {
 
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
+	}
+
+	public List<Repuesto> getRepuestos() {
+		return this.repuestos;
+	}
+
+	public void setRepuestos(List<Repuesto> repuestos) {
+		this.repuestos = repuestos;
+	}
+
+	public Repuesto addRepuesto(Repuesto repuesto) {
+		getRepuestos().add(repuesto);
+		repuesto.setMarcaProveedor(this);
+
+		return repuesto;
+	}
+
+	public Repuesto removeRepuesto(Repuesto repuesto) {
+		getRepuestos().remove(repuesto);
+		repuesto.setMarcaProveedor(null);
+
+		return repuesto;
 	}
 
 }

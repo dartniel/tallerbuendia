@@ -15,7 +15,7 @@ import java.util.List;
 public class Repuesto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	public Repuesto() {}
+public Repuesto() {}
 	
 	public Repuesto(Repuesto repuesto) {}
 	
@@ -23,18 +23,19 @@ public class Repuesto implements Serializable {
 		this.cantidad = cantidad;
 	}
 
-	public Repuesto(String idRepuesto, int cantidad, float costo, Date fechaAdquisicion, String marcaRepuesto,
-			String nombre, float precioVenta, Proveedor proveedor) {
+	
+	
+	public Repuesto(String idRepuesto, int cantidad, float costo, Date fechaAdquisicion, String nombre,
+			float precioVenta, MarcaProveedor marcaProveedor) {
 		this.idRepuesto = idRepuesto;
 		this.cantidad = cantidad;
 		this.costo = costo;
 		this.fechaAdquisicion = fechaAdquisicion;
-		this.marcaRepuesto = marcaRepuesto;
 		this.nombre = nombre;
 		this.precioVenta = precioVenta;
-		this.proveedor = proveedor;
+		this.marcaProveedor = marcaProveedor;
 	}
-
+	
 	@Id
 	@Column(name="ID_REPUESTO")
 	private String idRepuesto;
@@ -43,24 +44,21 @@ public class Repuesto implements Serializable {
 
 	private float costo;
 
-	private int disponible;
+	private int disponible = 1;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_ADQUISICION")
 	private Date fechaAdquisicion;
-
-	@Column(name="MARCA_REPUESTO")
-	private String marcaRepuesto;
 
 	private String nombre;
 
 	@Column(name="PRECIO_VENTA")
 	private float precioVenta;
 
-	//bi-directional many-to-one association to Proveedor
+	//bi-directional many-to-one association to MarcaProveedor
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_PROVEEDOR")
-	private Proveedor proveedor;
+	@JoinColumn(name="ID_MARCA_PROVEEDOR")
+	private MarcaProveedor marcaProveedor;
 
 	//bi-directional many-to-one association to ServicioRepuesto
 	@OneToMany(mappedBy="repuesto")
@@ -106,14 +104,6 @@ public class Repuesto implements Serializable {
 		this.fechaAdquisicion = fechaAdquisicion;
 	}
 
-	public String getMarcaRepuesto() {
-		return this.marcaRepuesto;
-	}
-
-	public void setMarcaRepuesto(String marcaRepuesto) {
-		this.marcaRepuesto = marcaRepuesto;
-	}
-
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -130,12 +120,12 @@ public class Repuesto implements Serializable {
 		this.precioVenta = precioVenta;
 	}
 
-	public Proveedor getProveedor() {
-		return this.proveedor;
+	public MarcaProveedor getMarcaProveedor() {
+		return this.marcaProveedor;
 	}
 
-	public void setProveedor(Proveedor proveedor) {
-		this.proveedor = proveedor;
+	public void setMarcaProveedor(MarcaProveedor marcaProveedor) {
+		this.marcaProveedor = marcaProveedor;
 	}
 
 	public List<ServicioRepuesto> getServicioRepuestos() {
@@ -162,9 +152,9 @@ public class Repuesto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Repuesto [idRepuesto=" + idRepuesto + ", cantidad=" + cantidad + ", costo=" + costo + ", disponible="
-				+ disponible + ", fechaAdquisicion=" + fechaAdquisicion + ", marcaRepuesto=" + marcaRepuesto
-				+ ", nombre=" + nombre + ", precioVenta=" + precioVenta + ", proveedor=" + proveedor + "]";
+		return "Repuesto [idRepuesto=" + idRepuesto + ", cantidad=" + cantidad + ", costo=" + costo
+				+ ", fechaAdquisicion=" + fechaAdquisicion + ", nombre=" + nombre + ", precioVenta=" + precioVenta
+				+ ", marcaProveedor=" + marcaProveedor + "]";
 	}
 
 }

@@ -23,6 +23,8 @@ public class Chequeo implements Serializable {
 
 	private String diagnostico;
 
+	private int estado = 1;
+
 	//bi-directional many-to-one association to Cliente
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_CLIENTE")
@@ -57,6 +59,14 @@ public class Chequeo implements Serializable {
 
 	public void setDiagnostico(String diagnostico) {
 		this.diagnostico = diagnostico;
+	}
+
+	public int getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 
 	public Cliente getCliente() {

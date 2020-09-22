@@ -32,10 +32,6 @@ public class Proveedor implements Serializable {
 	@OneToMany(mappedBy="proveedor")
 	private List<MarcaProveedor> marcaProveedors;
 
-	//bi-directional many-to-one association to Repuesto
-	@OneToMany(mappedBy="proveedor")
-	private List<Repuesto> repuestos;
-
 	//bi-directional many-to-one association to Solicitud
 	@OneToMany(mappedBy="proveedor")
 	private List<Solicitud> solicituds;
@@ -103,28 +99,6 @@ public class Proveedor implements Serializable {
 		marcaProveedor.setProveedor(null);
 
 		return marcaProveedor;
-	}
-
-	public List<Repuesto> getRepuestos() {
-		return this.repuestos;
-	}
-
-	public void setRepuestos(List<Repuesto> repuestos) {
-		this.repuestos = repuestos;
-	}
-
-	public Repuesto addRepuesto(Repuesto repuesto) {
-		getRepuestos().add(repuesto);
-		repuesto.setProveedor(this);
-
-		return repuesto;
-	}
-
-	public Repuesto removeRepuesto(Repuesto repuesto) {
-		getRepuestos().remove(repuesto);
-		repuesto.setProveedor(null);
-
-		return repuesto;
 	}
 
 	public List<Solicitud> getSolicituds() {

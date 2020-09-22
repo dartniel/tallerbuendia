@@ -21,6 +21,8 @@ public class Reparacion implements Serializable {
 	@Column(name="DETALLE_REPACION")
 	private String detalleRepacion;
 
+	private int estado;
+
 	//bi-directional many-to-one association to Automovil
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_AUTOMOVIL")
@@ -48,6 +50,14 @@ public class Reparacion implements Serializable {
 
 	public void setDetalleRepacion(String detalleRepacion) {
 		this.detalleRepacion = detalleRepacion;
+	}
+
+	public int getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 
 	public Automovil getAutomovil() {

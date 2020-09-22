@@ -37,6 +37,11 @@ public class Automovil implements Serializable {
 	@JoinColumn(name="ID_CLIENTE")
 	private Cliente cliente;
 
+	//bi-directional many-to-one association to DetalleCarro
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_DETALLE_CARRO")
+	private DetalleCarro detalleCarro;
+
 	//bi-directional many-to-one association to PertenciaAutomovil
 	@OneToMany(mappedBy="automovil")
 	private List<PertenciaAutomovil> pertenciaAutomovils;
@@ -44,11 +49,6 @@ public class Automovil implements Serializable {
 	//bi-directional many-to-one association to Reparacion
 	@OneToMany(mappedBy="automovil")
 	private List<Reparacion> reparacions;
-
-	//bi-directional many-to-one association to DetalleCarro
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_DETALLE_CARRO")
-	private DetalleCarro detalleCarro;
 
 	public Automovil() {
 	}
@@ -109,6 +109,14 @@ public class Automovil implements Serializable {
 		this.cliente = cliente;
 	}
 
+	public DetalleCarro getDetalleCarro() {
+		return this.detalleCarro;
+	}
+
+	public void setDetalleCarro(DetalleCarro detalleCarro) {
+		this.detalleCarro = detalleCarro;
+	}
+
 	public List<PertenciaAutomovil> getPertenciaAutomovils() {
 		return this.pertenciaAutomovils;
 	}
@@ -151,14 +159,6 @@ public class Automovil implements Serializable {
 		reparacion.setAutomovil(null);
 
 		return reparacion;
-	}
-
-	public DetalleCarro getDetalleCarro() {
-		return this.detalleCarro;
-	}
-
-	public void setDetalleCarro(DetalleCarro detalleCarro) {
-		this.detalleCarro = detalleCarro;
 	}
 
 }
