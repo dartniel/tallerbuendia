@@ -3,6 +3,8 @@ package sv.com.taller.services;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -17,13 +19,14 @@ public class RepuestoService implements RepuestoRepository{
 	
 	@Override
 	public void agregar(Repuesto repuesto) {
+		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			entity.getTransaction().begin();
 			Repuesto repuestos = new Repuesto(repuesto.getIdRepuesto(),repuesto.getCantidad(),repuesto.getCosto(),
-					repuesto.getFechaAdquisicion(),repuesto.getMarcaRepuesto(), repuesto.getNombre(),repuesto.getPrecioVenta(),repuesto.getProveedor());
+					repuesto.getFechaAdquisicion(), repuesto.getNombre(),repuesto.getPrecioVenta(),repuesto.getMarcaProveedor());
 			entity.persist(repuestos);
 			entity.getTransaction().commit();
-			System.out.println("Repuesto Agregado");
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "El Repuesto se agrego al invetario", null));
 		}catch(Exception e) {
 			entity.close();
 			e.printStackTrace();

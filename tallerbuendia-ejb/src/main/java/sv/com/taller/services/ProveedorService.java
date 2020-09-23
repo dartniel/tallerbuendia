@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import sv.com.taller.JPAUtils.JPAUtil;
+import sv.com.taller.entities.MarcaProveedor;
 import sv.com.taller.entities.Proveedor;
 import sv.com.taller.repositories.ProveedorRepository;
 
@@ -22,6 +23,16 @@ public class ProveedorService implements ProveedorRepository {
 		Query query = entity.createQuery("FROM Proveedor p");
 		proveedores = query.getResultList();
 		return proveedores;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<MarcaProveedor> mostrarMarcaProveedor(Proveedor proveedor) {
+		List<MarcaProveedor> marcas = null;
+		Query query = entity.createQuery("From MarcaProveedor m WHERE m.proveedor = :proveedor");
+		query.setParameter("proveedor", 	proveedor);
+		marcas = query.getResultList();
+		return marcas;
 	}
 
 }

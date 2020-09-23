@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+
+	<link href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet" />
+	<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet" />
+	<link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet" />
+	<h:outputStylesheet library="DataTables" name="datatables.css" />
+	<h:outputStylesheet library="css" name="btncircle.css" />
+	<h:outputStylesheet library="css" name="styleNav.css" />
+	<h:outputStylesheet library="css" name="myComponents.css" />
+	<title>#{tituloPagina}</title>
+</h:head> 
+<body> 
+	
+	
+	<div class="container-fluid">
+		<div class="row">
+			<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar shadow collapse menu-lateral  position-fixed">
+				<a class="navbar-brand" href="../index.html">
+					<img src="./resources/icon/Logo.png" width="100%" height="50px"></img>
+		          
+        		</a>
+        		<hr class="separator" />
+				<div class="sidebar-sticky pt-3">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link" href="inicio.xhtml">
+								<span><i class="fas fa-home"></i></span> 
+								Inicio
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="agregarRepuestosEntrantes.xhtml"> 
+								<span><i class="fas fa-plus-circle"></i></span> 
+								Agregar repuesto
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="listarRepuestos.xhtml"> 
+								<span><i class="fas fa-search"></i></span>
+								 Buscar Repuestos
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="repuestoSaliente.xhtml"> 
+								<span><i class="fas fa-minus-circle"></i></span> 
+								Salida Repuestos
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#"> 
+								<span><i class="fas fa-file-alt"></i></span> 
+								Solicitar Repuesto
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			
+			
+			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+				<div class="container-fluid">
+					<ul class="nav justify-content-end">
+						<li class="nav-item dropdown">
+					        <a style="text-decoration:none;color:grey;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					          Mario Tejeda 
+					        </a>
+					        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="#">Action</a>
+					          	<a class="dropdown-item" href="#">Another action</a>
+					        </div>
+						</li>
+					</ul>
+				</div>
+				<ui:insert name="titulo"/>
+				<hr/>
+				<ui:insert name="contenido"/>
+			</main>
+		</div>
+	</div>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+	<script src="./resources/js/validaciones_agregarRepuesto.js"></script>
+	<h:outputScript library="DataTables" name="datatables.js" />
+	<h:outputScript library="DataTables/DataTables-1.10.22/js" name="jquery.dataTables.js" />
+	<h:outputScript library="js" name="validaciones_modificarRepuesto.js" />
+	<script>
+		$(document).ready(function() {
+		  $("#fechaAdquisicion").datepicker();
+		});
+
+		$(document).ready( function () {
+		    $('#vistaRepuesto').DataTable({
+	            "language": {
+	                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+	            }
+	        });
+		} );
+	</script>
+</body> 
+</html>

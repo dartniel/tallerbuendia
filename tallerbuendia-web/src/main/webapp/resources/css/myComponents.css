@@ -1,0 +1,10 @@
+body main{
+	overflow: hidden;
+}
+.fondo-repuesto {
+	background: #fff;
+	padding: 25px;
+	-webkit-box-shadow: 3px 5px 11px -2px rgba(0, 0, 0, 0.64);
+	box-shadow: 3px 5px 11px -2px rgba(0, 0, 0, 0.64);
+	border-radius:15px;
+}

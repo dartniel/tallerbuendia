@@ -83,4 +83,10 @@ public class MarcaProveedor implements Serializable {
 		return repuesto;
 	}
 
+	@Override
+	public String toString() {
+		return "MarcaProveedor [idMarcaProveedor=" + idMarcaProveedor + ", marca=" + marca + ", proveedor=" + proveedor
+				+ "]";
+	}
+
 }
