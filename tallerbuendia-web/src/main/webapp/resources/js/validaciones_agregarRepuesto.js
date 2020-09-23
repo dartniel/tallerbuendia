@@ -1,76 +1,194 @@
 const button = document.getElementById('registroRepuesto:button');
 const formulario = document.getElementById('registroRepuesto');
-button.addEventListener('click', function(e){
-    // Leer del formulario de gastos
-    const idRepuesto = document.getElementById('registroRepuesto:idRepuesto').value;
-    const nombre= document.getElementById('registroRepuesto:nombre').value;
-    const proveedor = document.getElementById('registroRepuesto:proveedor').value;
-    const marcaRepuesto = document.getElementById('registroRepuesto:marcaRepuesto').value;
-    const costo = document.getElementById('registroRepuesto:costo').value;
-    const precioVenta = document.getElementById('registroRepuesto:precioVenta').value;
-    const cantidad = document.getElementById('registroRepuesto:cantidad').value;
-    const fechaAdquisicion = document.getElementById('registroRepuesto:fechaAdquisicion').value;
 
-    // Instanciar la interfaz
+//Inputs
+const idRepuesto = document.getElementById('registroRepuesto:idRepuesto');
+const nombre= document.getElementById('registroRepuesto:nombre');
+const proveedor = document.getElementById('registroRepuesto:proveedor');
+const marcaRepuesto = document.getElementById('registroRepuesto:marcaRepuesto');
+const costo = document.getElementById('registroRepuesto:costo');
+const precioVenta = document.getElementById('registroRepuesto:precioVenta');
+const cantidad = document.getElementById('registroRepuesto:cantidad');
+const fechaAdquisicion = document.getElementById('registroRepuesto:fechaAdquisicion');
+//Instanciar la interfaz
+button.addEventListener('click', function(e){
+    //Instanciar la interfaz
     const ui = new Interfaz();
-    // Comprobar que los campos no estem vacíos
-    if(idRepuesto === '' || nombre === '' || proveedor === '' || marcaRepuesto === '' || costo === '' || precioVenta === '' || cantidad === '' || fechaAdquisicion === ''){
-        // 2 parámetros mensaje y tipo
+    //Comprobar que los campos no estem vacíos
+    if( nombre.value === '' ||  costo.value === '' || precioVenta.value === '' || cantidad.value === '' || fechaAdquisicion === ''){
        ui.camposVacios('No pueden quedar campos vacíos', 'error');
        e.preventDefault();
     }
-    if(idRepuesto.length >= 6){
-        ui.inputMensaje('ID Repuesto debe llevar solo 5 caracteres', 'error', 'idRepuestoDiv');
+
+    if(nombre.value.length >= 40){
+        ui.inputMensaje('El nombre del repuesto debe tener menos de 25 caracteres', 'error', 'nombreDiv', 'nombreClass');
         e.preventDefault();
-        }
+    }
+
+    if(costo.value < 0 ){
+        ui.inputMensaje('El costo no puede ser negativo', 'error', 'costoDiv', 'costoClass');
+        e.preventDefault();
+    } 
+    if(costo.value.length > 5){
+        ui.inputMensaje('El costo no puede superar los 4 dígitos', 'error', 'costoDiv', 'costoClass');
+        e.preventDefault();
+    }
+    if(costo.value === '0.0'){
+        ui.inputMensaje('El costo no puede ser 0', 'error', 'costoDiv', 'costoClass');
+        e.preventDefault();
+    }
+    if(precioVenta.value < 0 ){
+        ui.inputMensaje('El precio de venta no puede ser negativo', 'error', 'precioVentaDiv', 'precioVentaClass');
+        e.preventDefault();
+    }
     
-        if(nombre.length >= 40){
-            ui.inputMensaje('El nombre del repuesto debe tener menos de 25 caracteres', 'error', 'nombreDiv');
+    if(precioVenta.value.length > 5){
+            ui.inputMensaje('El precio de venta no puede superar los 4 dígitos', 'error', 'precioVentaDiv', 'precioVentaClass');
             e.preventDefault();
         }
-        
-        if(marcaRepuesto.length >= 25){
-            ui.inputMensaje('La marca del repuesto debe tener menos de 25 caracteres', 'error', 'marcaRepuestoDiv');
-            e.preventDefault();
-        }
-        
-        const dia = new Date().getDate();
-        const mes = new Date().getMonth();
-        const año = new Date().getFullYear();
-        const fechaSeleccionada = fechaAdquisicion.split('-');
-        if(fechaSeleccionada[2] > dia || fechaSeleccionada[1] > (mes+1) || fechaSeleccionada[0] > año){
-            ui.inputMensaje(`La fecha seleccionada no puede ser mayor que hoy ${dia}/${mes}/${año}`, 'error', 'fechaAdquisicionDiv');
-            e.preventDefault();
-        }
-        if(costo < 0 ){
-            ui.inputMensaje('El costo no puede ser negativo', 'error', 'costoDiv');
-            e.preventDefault();
-        } 
-        if(costo.length > 3){
-            ui.inputMensaje('El costo no puede superar los 4 dígitos', 'error', 'costoDiv');
-            e.preventDefault();
-        }
+    if(precioVenta.value === '0.0'){
+        ui.inputMensaje('El precio de venta no puede ser 0', 'error', 'precioVentaDiv', 'precioVentaClass');
+        e.preventDefault();
+    }
 
-        if(precioVenta < 0 ){
-            ui.inputMensaje('El precio de venta no puede ser negativo', 'error', 'precioVentaDiv');
-            e.preventDefault();
-        }
-        
-        if(precioVenta.length > 3){
-                ui.inputMensaje('El precio de venta no puede superar los 4 dígitos', 'error', 'precioVentaDiv');
-                e.preventDefault();
-            }
-
-        if(cantidad < 0 ){
-            ui.inputMensaje('La cantidad no puede ser negativo', 'error', 'cantidadDiv');
-            e.preventDefault();
-        }
-
-   
+    if(cantidad.value < 0 ){
+        ui.inputMensaje('La cantidad no puede ser negativo', 'error', 'cantidadDiv', 'cantidadClass');
+        e.preventDefault();
+    }
+    if(cantidad.value === '0' ){
+        ui.inputMensaje('La cantidad no puede ser 0', 'error', 'cantidadDiv', 'cantidadClass');
+        e.preventDefault();
+    }
     
-    // ui.camposVacios('Se agregó el repuesto correctamente', 'correcto');
+    //ui.camposVacios('Se agregó el repuesto correctamente', 'correcto');
 
 })
+
+nombre.addEventListener('blur', function(e){
+    const ui = new Interfaz();
+    if(nombre.value.length >= 40){
+        ui.inputMensaje('El nombre del repuesto debe tener menos de 25 caracteres', 'error', 'nombreDiv', 'nombreClass');
+        e.preventDefault();
+    }
+
+    if(nombre.value.length > 0){
+        document.querySelector('.nombreClass').remove();
+    }
+
+    if(nombre.value.length <= 0){
+        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','nombreDiv', 'nombreClass');
+    }
+})
+fechaAdquisicion.addEventListener('blur', function(e){
+    const ui = new Interfaz();
+    if(fechaAdquisicion.value.length <= 0){
+        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','fechaAdquisicionDiv', 'fechaAdquisicionClass');
+    }
+    if(fechaAdquisicion.value.length > 0){
+        document.querySelector('.fechaAdquisicionClass').remove();
+    }
+})
+
+costo.addEventListener('blur', function(e){
+    const ui = new Interfaz();
+    const costoFloat = parseFloat(costo.value);
+    if(costo.value.length > 0){
+        document.querySelector('.costoClass').remove();
+    }
+
+    if(costo.value.length <= 0){
+        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','costoDiv','costoClass');
+    } 
+    if(costoFloat <= 0 ){
+        ui.inputMensaje('El costo no puede ser negativo', 'error', 'costoDiv', 'costoClass');
+        e.preventDefault();
+    } 
+    if(costo.value.length > 5){
+        ui.inputMensaje('El costo no puede superar los 4 dígitos', 'error', 'costoDiv', 'costoClass');
+        e.preventDefault();
+    }
+    if(costo.value === '0.0'){
+        ui.inputMensaje('El costo no puede ser 0', 'error', 'costoDiv', 'costoClass');
+        e.preventDefault();
+    }
+    if(costo.value === '0'){
+        ui.inputMensaje('El costo no puede ser 0', 'error', 'costoDiv', 'costoClass');
+        e.preventDefault();
+    }
+  
+    
+})
+precioVenta.addEventListener('blur', function(e){
+    const ui = new Interfaz();
+    if(precioVenta.value < 0){
+        ui.inputMensaje('El precio de venta no puede ser negativo', 'error', 'precioVentaDiv', 'precioVentaClass');
+        e.preventDefault();
+    }
+    if(precioVenta.value.length > 5){
+            ui.inputMensaje('El precio de venta no puede superar los 4 dígitos', 'error', 'precioVentaDiv', 'precioVentaClass');
+            e.preventDefault();
+    }
+    if(precioVenta.value.length > 0){
+        document.querySelector('.precioVentaClass').remove();
+    }
+
+    if(precioVenta.value.length <= 0){
+        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','precioVentaDiv', 'precioVentaClass');
+    }
+    
+    if(precioVenta.value === '0.0'){
+        ui.inputMensaje('El precio de venta no puede ser 0', 'error', 'precioVentaDiv', 'precioVentaClass');
+        e.preventDefault();
+    }
+    if(precioVenta.value === '0'){
+        ui.inputMensaje('El precio de venta no puede ser 0', 'error', 'precioVentaDiv', 'precioVentaClass');
+        e.preventDefault();
+    }
+    
+})
+cantidad.addEventListener('focus', function(e){
+    const ui = new Interfaz();
+    if(cantidad.value.includes('-')){
+        ui.inputMensaje('La cantidad no puede ser negativo', 'error', 'cantidadDiv', 'cantidadClass');
+        e.preventDefault();
+    }
+    if(cantidad.value === '0' ){
+        ui.inputMensaje('La cantidad no puede ser 0', 'error', 'cantidadDiv', 'cantidadClass');
+        e.preventDefault();
+    }
+    if(cantidad.value === '0.0' ){
+        ui.inputMensaje('La cantidad no puede ser 0', 'error', 'cantidadDiv', 'cantidadClass');
+        e.preventDefault();
+    }
+    if(cantidad.value.length > 0){
+        document.querySelector('.cantidadClass').remove();
+    }
+
+    if(cantidad.value.length <= 0){
+        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','cantidadDiv', 'cantidadClass');
+    }
+    
+})
+cantidad.addEventListener('blur', function(e){
+    const ui = new Interfaz();
+    if(cantidad.value < 0 ){
+        ui.inputMensaje('La cantidad no puede ser negativo', 'error', 'cantidadDiv', 'cantidadClass');
+        e.preventDefault();
+    }
+    if(cantidad.value === 0 ){
+        ui.inputMensaje('La cantidad no puede ser 0', 'error', 'cantidadDiv', 'cantidadClass');
+        e.preventDefault();
+    }
+    if(cantidad.value.length > 0){
+        document.querySelector('.cantidadClass').remove();
+    }
+
+    if(cantidad.value.length <= 0){
+        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','cantidadDiv', 'cantidadClass');
+    }
+    
+})
+
 
 class Interfaz{
 
@@ -78,35 +196,42 @@ class Interfaz{
         const divMensaje = document.createElement('div');
         divMensaje.classList.add('text-center', 'alert');
         if(tipo === 'error'){
-            divMensaje.classList.add('alert-danger');
+            divMensaje.classList.add('alert-danger','alert-dismissible','fade','show');
         }else{
             divMensaje.classList.add('alert-success');
         }
 
-        divMensaje.appendChild(document.createTextNode(mensaje));
-        // Insertar en el DOM
+        const texto = `
+        ${mensaje}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        `;
+        divMensaje.innerHTML = texto;
         document.querySelector('.mensaje').insertBefore(divMensaje, formulario);
-        // Quitar el alert después de 3 segundos
-        setTimeout(function(){
-            document.querySelector('.mensaje .alert').remove();
-        },5000)
     }
-    inputMensaje(mensaje,tipo, id){
+ 
+    inputMensaje(mensaje,tipo, id, classes){
         const divMensaje = document.createElement('div');
         divMensaje.classList.add('text-center', 'alert');
         if(tipo === 'error'){
-            divMensaje.classList.add('alert-danger');
+            divMensaje.classList.add('alert-danger','alert-dismissible','fade','show', classes);
         }else{
             divMensaje.classList.add('alert-success');
         }
 
-        divMensaje.appendChild(document.createTextNode(mensaje));
-        // Insertar en el DOM
+        const texto = `
+        ${mensaje}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        `;
+        divMensaje.innerHTML = texto;
+        //Insertar en el DOM
         document.querySelector(`#${id}`).appendChild(divMensaje);
-        // Quitar el alert después de 3 segundos
-        setTimeout(function(){
-            document.querySelector('.alert-danger').remove();
+        //Quitar el alert después de 3 segundos
             
-        },5000)
+            
+       
     }
 }
