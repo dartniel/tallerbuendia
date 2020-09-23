@@ -15,9 +15,6 @@ public interface RepuestoRepository {
 	
 	public void eliminar(Repuesto repuesto);
 	
-	public void restarCantidad(Repuesto repuesto, int cantidad);
-	
 	public List<Repuesto> mostrar();
 	
-	public List<Repuesto> buscar(String repuesto);
 }

@@ -1,6 +1,7 @@
 package sv.com.taller.services;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
@@ -22,7 +23,7 @@ public class RepuestoService implements RepuestoRepository{
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			entity.getTransaction().begin();
-			Repuesto repuestos = new Repuesto(repuesto.getIdRepuesto(),repuesto.getCantidad(),repuesto.getCosto(),
+			Repuesto repuestos = new Repuesto(generarCodigo(),repuesto.getCantidad(),repuesto.getCosto(),
 					repuesto.getFechaAdquisicion(), repuesto.getNombre(),repuesto.getPrecioVenta(),repuesto.getMarcaProveedor());
 			entity.persist(repuestos);
 			entity.getTransaction().commit();
@@ -62,21 +63,6 @@ public class RepuestoService implements RepuestoRepository{
 		
 	}
 	
-	@Override
-	public void restarCantidad(Repuesto repuesto, int cantidad) {
-		try {
-			Repuesto cantidad1 = new Repuesto();
-			entity.getTransaction().begin();
-			entity.merge(cantidad1.getCantidad());
-			entity.getTransaction().commit();
-			System.out.println("Repuesto Elimado");
-		}catch(Exception e) {
-			entity.close();
-			e.printStackTrace();
-		}
-		
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Repuesto> mostrar() {
@@ -86,17 +72,10 @@ public class RepuestoService implements RepuestoRepository{
 		return repuestos;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Repuesto> buscar(String repuesto) {
-		List<Repuesto> repuestos = null;
-		if(repuesto.equals("codigo")) {
-			
-		}
-		Query query = entity.createQuery("FROM Repuesto r WHERE r.idRepuesto = :idRepuesto");
-		query.setParameter("idRepuesto", repuesto);
-		repuestos = query.getResultList();
-		return repuestos;
+	
+	public String generarCodigo() {
+		 Random rand = new Random(); 
+		int nuevoCodigo = rand.nextInt(10000); 
+		return String.valueOf(nuevoCodigo);
 	}
-
 }
