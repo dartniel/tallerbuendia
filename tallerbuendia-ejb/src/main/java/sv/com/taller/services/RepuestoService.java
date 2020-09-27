@@ -28,7 +28,7 @@ public class RepuestoService implements RepuestoRepository{
 					repuesto.getFechaAdquisicion(), repuesto.getNombre(),repuesto.getPrecioVenta(),repuesto.getMarcaProveedor());
 			entity.persist(repuestos);
 			entity.getTransaction().commit();
-			FacesMessage message = new FacesMessage("El Repuesto "+ codigo +" se agrego al invetario");
+			FacesMessage message = new FacesMessage("El Repuesto con ID: "+ codigo +" se agrego al invetario");
 	        FacesContext context = FacesContext.getCurrentInstance();
 	        context.addMessage(null, message);
 		}catch(Exception e) {
