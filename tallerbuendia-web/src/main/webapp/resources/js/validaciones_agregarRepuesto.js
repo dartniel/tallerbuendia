@@ -10,6 +10,7 @@ const costo = document.getElementById('registroRepuesto:costo');
 const precioVenta = document.getElementById('registroRepuesto:precioVenta');
 const cantidad = document.getElementById('registroRepuesto:cantidad');
 const fechaAdquisicion = document.getElementById('registroRepuesto:fechaAdquisicion');
+const mensajeExito = document.getElementById('registroRepuesto:mensajeExito');
 //Instanciar la interfaz
 button.addEventListener('click', function(e){
     //Instanciar la interfaz
@@ -59,9 +60,17 @@ button.addEventListener('click', function(e){
         ui.inputMensaje('La cantidad no puede ser 0', 'error', 'cantidadDiv', 'cantidadClass');
         e.preventDefault();
     }
-    
+
     //ui.camposVacios('Se agregó el repuesto correctamente', 'correcto');
 
+})
+
+document.addEventListener('DOMContentLoaded', function(e){
+    const ui = new Interfaz();
+    if(mensajeExito.firstChild){
+        ui.camposVacios(mensajeExito.textContent, 'exito');
+        mensajeExito.removeChild(mensajeExito.firstChild)
+    }
 })
 
 nombre.addEventListener('blur', function(e){
@@ -198,7 +207,7 @@ class Interfaz{
         if(tipo === 'error'){
             divMensaje.classList.add('alert-danger','alert-dismissible','fade','show');
         }else{
-            divMensaje.classList.add('alert-success');
+            divMensaje.classList.add('alert-success','alert-dismissible','fade','show', 'exito');
         }
 
         const texto = `

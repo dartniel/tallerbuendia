@@ -20,14 +20,17 @@ public class RepuestoService implements RepuestoRepository{
 	
 	@Override
 	public void agregar(Repuesto repuesto) {
-		FacesContext context = FacesContext.getCurrentInstance();
+		
 		try {
 			entity.getTransaction().begin();
-			Repuesto repuestos = new Repuesto(generarCodigo(),repuesto.getCantidad(),repuesto.getCosto(),
+			String codigo = generarCodigo();
+			Repuesto repuestos = new Repuesto(codigo,repuesto.getCantidad(),repuesto.getCosto(),
 					repuesto.getFechaAdquisicion(), repuesto.getNombre(),repuesto.getPrecioVenta(),repuesto.getMarcaProveedor());
 			entity.persist(repuestos);
 			entity.getTransaction().commit();
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "El Repuesto se agrego al invetario", null));
+			FacesMessage message = new FacesMessage("El Repuesto "+ codigo +" se agrego al invetario");
+	        FacesContext context = FacesContext.getCurrentInstance();
+	        context.addMessage(null, message);
 		}catch(Exception e) {
 			entity.close();
 			e.printStackTrace();
