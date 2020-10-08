@@ -14,6 +14,17 @@ import java.util.List;
 @NamedQuery(name="Automovil.findAll", query="SELECT a FROM Automovil a")
 public class Automovil implements Serializable {
 	private static final long serialVersionUID = 1L;
+	public Automovil() {}
+	public Automovil(Automovil automovil) {}
+	public Automovil(String chasis, String color, String observacion, String placa, Cliente cliente, DetalleCarro detalleCarro) {
+		this.chasis = chasis;
+		this.color = color;
+		this.observacion = observacion;
+		this.placa = placa;
+		this.detalleCarro = detalleCarro;
+		
+		
+	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -50,8 +61,7 @@ public class Automovil implements Serializable {
 	@OneToMany(mappedBy="automovil")
 	private List<Reparacion> reparacions;
 
-	public Automovil() {
-	}
+
 
 	public int getIdAutomovil() {
 		return this.idAutomovil;
@@ -159,6 +169,13 @@ public class Automovil implements Serializable {
 		reparacion.setAutomovil(null);
 
 		return reparacion;
+	}
+	@Override
+	public String toString() {
+		return "Automovil [idAutomovil=" + idAutomovil + ", chasis=" + chasis + ", color=" + color + ", fechaRegistro="
+				+ fechaRegistro + ", observacion=" + observacion + ", placa=" + placa + ", cliente=" + cliente
+				+ ", detalleCarro=" + detalleCarro + ", pertenciaAutomovils=" + pertenciaAutomovils + ", reparacions="
+				+ reparacions + "]";
 	}
 
 }

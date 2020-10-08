@@ -13,10 +13,28 @@ import java.util.List;
 @Entity
 @NamedQuery(name="Cliente.findAll", query="SELECT c FROM Cliente c")
 public class Cliente implements Serializable {
+
 	private static final long serialVersionUID = 1L;
+	
+	public Cliente() {}
+	public Cliente(Cliente cliente) {}
+	public Cliente(String idCliente, String apellido, String aseguradora,String tipoSeguro,String dui, Date fechaNacimiento, String lugarTrabajo, String telefonoTrabajo,
+			String nit, String nombre, String telefono, String fechaRegistro) {
+		this.idCliente = idCliente;
+		this.apellido = apellido;
+		this.aseguradora = aseguradora;
+		this.tipoSeguro = tipoSeguro;
+		this.dui = dui;
+		this.fechaNacimiento = fechaNacimiento;
+		this.lugarTrabajo = lugarTrabajo;
+		this.telefonoTrabajo = telefonoTrabajo;
+		this.nit = nit;
+		this.nombre = nombre;
+		this.telefono = telefono;
+		
+	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_CLIENTE")
 	private String idCliente;
 
@@ -56,9 +74,6 @@ public class Cliente implements Serializable {
 	//bi-directional many-to-one association to Chequeo
 	@OneToMany(mappedBy="cliente")
 	private List<Chequeo> chequeos;
-
-	public Cliente() {
-	}
 
 	public String getIdCliente() {
 		return this.idCliente;
@@ -198,6 +213,15 @@ public class Cliente implements Serializable {
 		chequeo.setCliente(null);
 
 		return chequeo;
+	}
+	
+	@Override
+	public String toString() {
+		return "Cliente [idCliente=" + idCliente + ", apellido=" + apellido + ", aseguradora=" + aseguradora + ", dui="
+				+ dui + ", fechaNacimiento=" + fechaNacimiento + ", fechaRegistro=" + fechaRegistro + ", lugarTrabajo="
+				+ lugarTrabajo + ", nit=" + nit + ", nombre=" + nombre + ", telefono=" + telefono + ", telefonoTrabajo="
+				+ telefonoTrabajo + ", tipoSeguro=" + tipoSeguro + ", automovils=" + automovils + ", chequeos="
+				+ chequeos + "]";
 	}
 
 }
