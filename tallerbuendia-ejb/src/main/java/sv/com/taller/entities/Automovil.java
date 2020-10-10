@@ -1,6 +1,8 @@
 package sv.com.taller.entities;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -16,12 +18,14 @@ public class Automovil implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public Automovil() {}
 	public Automovil(Automovil automovil) {}
-	public Automovil(String chasis, String color, String observacion, String placa, Cliente cliente, DetalleCarro detalleCarro) {
+	public Automovil(String chasis, String color, String observacion, String placa, Cliente cliente, DetalleCarro detalleCarro, Timestamp fechaRegistro) {
 		this.chasis = chasis;
 		this.color = color;
 		this.observacion = observacion;
 		this.placa = placa;
+		this.cliente = cliente;
 		this.detalleCarro = detalleCarro;
+		this.fechaRegistro = fechaRegistro;
 		
 		
 	}

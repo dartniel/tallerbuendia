@@ -1,5 +1,5 @@
 const button = document.getElementById('registroRepuesto:button');
-const formulario = document.getElementById('registroRepuesto');
+const formularioRepuesto = document.getElementById('registroRepuesto');
 
 //Inputs
 const idRepuesto = document.getElementById('registroRepuesto:idRepuesto');
@@ -10,18 +10,19 @@ const costo = document.getElementById('registroRepuesto:costo');
 const precioVenta = document.getElementById('registroRepuesto:precioVenta');
 const cantidad = document.getElementById('registroRepuesto:cantidad');
 const fechaAdquisicion = document.getElementById('registroRepuesto:fechaAdquisicion');
-const mensajeExito = document.getElementById('registroRepuesto:mensajeExito');
-//Instanciar la interfaz
+const mensajeExitoRepuesto = document.getElementById('registroRepuesto:mensajeExito');
+
+//Instanciar la InterfazRepuesto
 button.addEventListener('click', function(e){
-    //Instanciar la interfaz
-    const ui = new Interfaz();
+    //Instanciar la InterfazRepuesto
+    const ui = new InterfazRepuesto();
     //Comprobar que los campos no estem vacíos
-    if( nombre.value === '' ||  costo.value === '' || precioVenta.value === '' || cantidad.value === '' || fechaAdquisicion === ''){
+    if( nombre.value === '' ||  costo.value === '' || precioVenta.value === '' || cantidad.value === '' || fechaAdquisicion === '' || proveedor.value === ''){
        ui.camposVacios('No pueden quedar campos vacíos', 'error');
        e.preventDefault();
     }
 
-    if(nombre.value.length >= 40){
+    if(nombre.value.length > 25 ){
         ui.inputMensaje('El nombre del repuesto debe tener menos de 25 caracteres', 'error', 'nombreDiv', 'nombreClass');
         e.preventDefault();
     }
@@ -60,22 +61,27 @@ button.addEventListener('click', function(e){
         ui.inputMensaje('La cantidad no puede ser 0', 'error', 'cantidadDiv', 'cantidadClass');
         e.preventDefault();
     }
+    if(proveedor.value === ''){
+        ui.inputMensaje('Este campo no puede quedar vacío', 'error', 'proveedorDiv', 'proveedorClass');
+        e.preventDefault();
+    }
 
-    //ui.camposVacios('Se agregó el repuesto correctamente', 'correcto');
+
+
 
 })
 
 document.addEventListener('DOMContentLoaded', function(e){
-    const ui = new Interfaz();
-    if(mensajeExito.firstChild){
-        ui.camposVacios(mensajeExito.textContent, 'exito');
-        mensajeExito.removeChild(mensajeExito.firstChild)
+    const ui = new InterfazRepuesto();
+    if(mensajeExitoRepuesto.firstChild){
+        ui.camposVacios(mensajeExitoRepuesto.textContent, 'exito');
+        mensajeExitoRepuesto.removeChild(mensajeExitoRepuesto.firstChild)
     }
 })
 
 nombre.addEventListener('blur', function(e){
-    const ui = new Interfaz();
-    if(nombre.value.length >= 40){
+    const ui = new InterfazRepuesto();
+    if(nombre.value.length > 25){
         ui.inputMensaje('El nombre del repuesto debe tener menos de 25 caracteres', 'error', 'nombreDiv', 'nombreClass');
         e.preventDefault();
     }
@@ -89,7 +95,7 @@ nombre.addEventListener('blur', function(e){
     }
 })
 fechaAdquisicion.addEventListener('blur', function(e){
-    const ui = new Interfaz();
+    const ui = new InterfazRepuesto();
     if(fechaAdquisicion.value.length <= 0){
         ui.inputMensaje('Este campo no puede quedar vacío.', 'error','fechaAdquisicionDiv', 'fechaAdquisicionClass');
     }
@@ -99,7 +105,7 @@ fechaAdquisicion.addEventListener('blur', function(e){
 })
 
 costo.addEventListener('blur', function(e){
-    const ui = new Interfaz();
+    const ui = new InterfazRepuesto();
     const costoFloat = parseFloat(costo.value);
     if(costo.value.length > 0){
         document.querySelector('.costoClass').remove();
@@ -128,7 +134,7 @@ costo.addEventListener('blur', function(e){
     
 })
 precioVenta.addEventListener('blur', function(e){
-    const ui = new Interfaz();
+    const ui = new InterfazRepuesto();
     if(precioVenta.value < 0){
         ui.inputMensaje('El precio de venta no puede ser negativo', 'error', 'precioVentaDiv', 'precioVentaClass');
         e.preventDefault();
@@ -156,7 +162,7 @@ precioVenta.addEventListener('blur', function(e){
     
 })
 cantidad.addEventListener('focus', function(e){
-    const ui = new Interfaz();
+    const ui = new InterfazRepuesto();
     if(cantidad.value.includes('-')){
         ui.inputMensaje('La cantidad no puede ser negativo', 'error', 'cantidadDiv', 'cantidadClass');
         e.preventDefault();
@@ -179,7 +185,7 @@ cantidad.addEventListener('focus', function(e){
     
 })
 cantidad.addEventListener('blur', function(e){
-    const ui = new Interfaz();
+    const ui = new InterfazRepuesto();
     if(cantidad.value < 0 ){
         ui.inputMensaje('La cantidad no puede ser negativo', 'error', 'cantidadDiv', 'cantidadClass');
         e.preventDefault();
@@ -199,7 +205,7 @@ cantidad.addEventListener('blur', function(e){
 })
 
 
-class Interfaz{
+class InterfazRepuesto{
 
     camposVacios(mensaje,tipo){
         const divMensaje = document.createElement('div');
@@ -217,7 +223,7 @@ class Interfaz{
         </button>
         `;
         divMensaje.innerHTML = texto;
-        document.querySelector('.mensaje').insertBefore(divMensaje, formulario);
+        document.querySelector('.mensaje').insertBefore(divMensaje, formularioRepuesto);
     }
  
     inputMensaje(mensaje,tipo, id, classes){

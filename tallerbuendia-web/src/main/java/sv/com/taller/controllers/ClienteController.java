@@ -68,7 +68,6 @@ public class ClienteController implements Serializable {
 	public void agregarCliente() {
 		clienteRepository.agregarCliente(cliente);
 		automovilRepository.agregarAutomovil(automovil, cliente);
-		System.out.println(automovil);
 		this.cliente.setIdCliente("");
 		this.cliente.setApellido("");
 		this.cliente.setAseguradora("");

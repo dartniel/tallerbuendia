@@ -44,6 +44,7 @@
 											<f:ajax event="change" listener="#{proveedorController.mostrarMarca()}" render="registroRepuesto:marcaRepuesto" />
 									</h:selectOneMenu>
 								</div>
+								<div id="proveedorDiv"></div>
 							</div>
 						</div>
 						<div class="row">
@@ -56,11 +57,11 @@
 											height="20px" /></span>
 									</div>
 									<h:selectOneMenu id="marcaRepuesto" class="form-control" value="#{repuestoController.repuesto.marcaProveedor.idMarcaProveedor}">
-									<f:selectItem itemLabel="Seleccionar Marca de Repuesto" itemValue="" />
 										<f:selectItems value="#{proveedorController.mostrarMarcaProveedor}" var="m" itemLabel="#{m.marca.nombre}"
 										itemValue="#{m.idMarcaProveedor}" />
 									</h:selectOneMenu>
 								</div>
+								<div id="marcaRepuestoDiv"></div>
 							</div>
 							<div class="col-md-6">
 								<label for="costo">Costo</label>

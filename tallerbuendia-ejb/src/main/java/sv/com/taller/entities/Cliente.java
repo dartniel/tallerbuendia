@@ -1,6 +1,8 @@
 package sv.com.taller.entities;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +21,7 @@ public class Cliente implements Serializable {
 	public Cliente() {}
 	public Cliente(Cliente cliente) {}
 	public Cliente(String idCliente, String apellido, String aseguradora,String tipoSeguro,String dui, Date fechaNacimiento, String lugarTrabajo, String telefonoTrabajo,
-			String nit, String nombre, String telefono, String fechaRegistro) {
+			String nit, String nombre, String telefono, Timestamp fechaRegistro) {
 		this.idCliente = idCliente;
 		this.apellido = apellido;
 		this.aseguradora = aseguradora;
@@ -31,6 +33,7 @@ public class Cliente implements Serializable {
 		this.nit = nit;
 		this.nombre = nombre;
 		this.telefono = telefono;
+		this.fechaRegistro = fechaRegistro;
 		
 	}
 

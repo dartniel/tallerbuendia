@@ -18,7 +18,6 @@ import sv.com.taller.repositories.ClienteRepository;
 public class ClienteService implements ClienteRepository{
 
 	String codigo = generarCodigo();
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	EntityManager entity = JPAUtil.getEntityManagerFactory().createEntityManager();
 	@Override
 	public void agregarCliente(Cliente cliente) {
@@ -29,12 +28,11 @@ public class ClienteService implements ClienteRepository{
 			String cod = cliente.getNombre().substring(0,1)+ cliente.getApellido().substring(0,1) + codigo;
 			cliente.setIdCliente(cod);
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		    System.out.println(sdf.format(timestamp));
 			Cliente clientes = new Cliente(cod, cliente.getApellido(),cliente.getAseguradora(),cliente.getTipoSeguro(),
-					cliente.getDui(), cliente.getFechaNacimiento(), cliente.getLugarTrabajo(), cliente.getTelefonoTrabajo(),cliente.getNit(), cliente.getNombre(), cliente.getTelefono(), sdf.format(timestamp));
+					cliente.getDui(), cliente.getFechaNacimiento(), cliente.getLugarTrabajo(), cliente.getTelefonoTrabajo(),cliente.getNit(), cliente.getNombre(), cliente.getTelefono(), timestamp);
 			entity.persist(clientes);
 			entity.getTransaction().commit();
-			FacesMessage message = new FacesMessage("El Cliente "+ cliente.getNombre()+" con <strong>ID: "+ codigo +" </strong>se agregó al invetario");
+			FacesMessage message = new FacesMessage("El Cliente "+ cliente.getNombre()+" con <strong>ID: "+ cod +" </strong>se agregó.");
 	        FacesContext context = FacesContext.getCurrentInstance();
 	        context.addMessage(null, message);
 		}catch(Exception e) {
