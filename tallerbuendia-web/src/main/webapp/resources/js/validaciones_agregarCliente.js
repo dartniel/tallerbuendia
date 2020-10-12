@@ -28,6 +28,11 @@ buttonCliente.addEventListener('click', function(e){
        e.preventDefault();
     }
 
+    if(dui.value.length < 8){
+        ui.inputMensaje('Este campo debe tener 9 dígitos.', 'error','duiClienteDiv','duiClienteClass');
+        e.preventDefault();
+    }
+   
 })
 
 document.addEventListener('DOMContentLoaded', function(e){
@@ -36,15 +41,11 @@ document.addEventListener('DOMContentLoaded', function(e){
         ui.camposVacios(mensajeExitoCliente.textContent, 'exito');
         mensajeExitoCliente.removeChild(mensajeExitoCliente.firstChild)
     }
+
 })
 
 nombreCliente.addEventListener('blur', function(e){
     const ui = new InterfazCliente();
-    if(nombreCliente.value.length > 50 ){
-        ui.inputMensaje('Este campo debe tener menos de 50 caracteres', 'error', 'nombreClienteDiv', 'nombreClienteClass');
-        e.preventDefault();
-    }
-
     if(nombreCliente.value.length > 0){
         document.querySelector('.nombreClienteClass').remove();
     }
@@ -56,11 +57,6 @@ nombreCliente.addEventListener('blur', function(e){
 
 apellidoCliente.addEventListener('blur', function(e){
     const ui = new InterfazCliente();
-    if(apellidoCliente.value.length > 50 ){
-        ui.inputMensaje('Este campo debe tener menos de 50 caracteres', 'error', 'apellidoClienteDiv', 'apellidoClienteClass');
-        e.preventDefault();
-    }
-
     if(apellidoCliente.value.length > 0){
         document.querySelector('.apellidoClienteClass').remove();
     }
@@ -88,26 +84,12 @@ dui.addEventListener('blur', function(e){
     if(dui.value.length <= 0){
         ui.inputMensaje('Este campo no puede quedar vacío.', 'error','duiClienteDiv','duiClienteClass');
     } 
-    if(dui.value <= 0 ){
-        ui.inputMensaje('Este campo no puede ser negativo', 'error', 'duiClienteDiv', 'duiClienteClass');
-        e.preventDefault();
-    } 
-    if(dui.value.length > 9){
-        ui.inputMensaje('Este campo no puede superar los 9 dígitos', 'error', 'duiClienteDiv', 'duiClienteClass');
-        e.preventDefault();
+    if(dui.value.length < 9){
+        ui.inputMensaje('Este campo debe tener 9 dígitos.', 'error','duiClienteDiv','duiClienteClass');
     }
-    
 })
 nit.addEventListener('blur', function(e){
     const ui = new InterfazCliente();
-    if(nit.value < 0){
-        ui.inputMensaje('Este campo puede ser negativo', 'error', 'nitClienteDiv', 'nitClienteClass');
-        e.preventDefault();
-    }
-    if(nit.value.length > 5){
-            ui.inputMensaje('Este campo no puede superar los 4 dígitos', 'error', 'nitClienteDiv', 'nitClienteClass');
-            e.preventDefault();
-    }
     if(nit.value.length > 0){
         document.querySelector('.nitClienteClass').remove();
     }
@@ -115,20 +97,9 @@ nit.addEventListener('blur', function(e){
     if(nit.value.length <= 0){
         ui.inputMensaje('Este campo no puede quedar vacío.', 'error','nitClienteDiv', 'nitClienteClass');
     }
-    
-    
 })
 telefonoCliente.addEventListener('blur', function(e){
     const ui = new InterfazCliente();
-
-    if(telefonoCliente.value < 0){
-        ui.inputMensaje('Este campo puede ser negativo', 'error', 'telefonoClienteDiv', 'telefonoClienteClass');
-        e.preventDefault();
-    }
-    if(telefonoCliente.value.length > 8){
-            ui.inputMensaje('Este campo no puede superar los 8 dígitos', 'error', 'telefonoClienteDiv', 'telefonoClienteClass');
-            e.preventDefault();
-    }
     if(telefonoCliente.value.length > 0){
         document.querySelector('.telefonoClienteClass').remove();
     }
@@ -140,11 +111,6 @@ telefonoCliente.addEventListener('blur', function(e){
 
 lugarTrabajo.addEventListener('blur', function(e){
     const ui = new InterfazCliente();
-    if(lugarTrabajo.value.length > 100 ){
-        ui.inputMensaje('Este campo debe tener menos de 100 caracteres', 'error', 'lugarTrabajoDiv', 'lugarTrabajoClass');
-        e.preventDefault();
-    }
-
     if(lugarTrabajo.value.length > 0){
         document.querySelector('.lugarTrabajoClass').remove();
     }
@@ -156,15 +122,6 @@ lugarTrabajo.addEventListener('blur', function(e){
 
 telefonoTrabajo.addEventListener('blur', function(e){
     const ui = new InterfazCliente();
-
-    if(telefonoTrabajo.value < 0){
-        ui.inputMensaje('Este campo puede ser negativo', 'error', 'telefonoTrabajoDiv', 'telefonoTrabajoClass');
-        e.preventDefault();
-    }
-    if(telefonoTrabajo.value.length > 8){
-            ui.inputMensaje('Este campo no puede superar los 8 dígitos', 'error', 'telefonoTrabajoDiv', 'telefonoTrabajoClass');
-            e.preventDefault();
-    }
     if(telefonoTrabajo.value.length > 0){
         document.querySelector('.telefonoTrabajoClass').remove();
     }
@@ -176,11 +133,6 @@ telefonoTrabajo.addEventListener('blur', function(e){
 
 tipoSeguro.addEventListener('blur', function(e){
     const ui = new InterfazCliente();
-    if(tipoSeguro.value.length > 50 ){
-        ui.inputMensaje('Este campo debe tener menos de 50 caracteres', 'error', 'tipoSeguroDiv', 'tipoSeguroClass');
-        e.preventDefault();
-    }
-
     if(tipoSeguro.value.length > 0){
         document.querySelector('.tipoSeguroClass').remove();
     }
@@ -192,11 +144,6 @@ tipoSeguro.addEventListener('blur', function(e){
 
 aseguradoraCliente.addEventListener('blur', function(e){
     const ui = new InterfazCliente();
-    if(aseguradoraCliente.value.length > 100 ){
-        ui.inputMensaje('Este campo debe tener menos de 100 caracteres', 'error', 'aseguradoraDiv', 'aseguradoraClass');
-        e.preventDefault();
-    }
-
     if(aseguradoraCliente.value.length > 0){
         document.querySelector('.aseguradoraClass').remove();
     }
@@ -209,11 +156,6 @@ aseguradoraCliente.addEventListener('blur', function(e){
 
 placa.addEventListener('blur', function(e){
     const ui = new InterfazCliente();
-    if(placa.value.length > 7 ){
-        ui.inputMensaje('Este campo debe tener menos de 7 caracteres', 'error', 'placaDiv', 'placaClass');
-        e.preventDefault();
-    }
-
     if(placa.value.length > 0){
         document.querySelector('.placaClass').remove();
     }
@@ -225,11 +167,6 @@ placa.addEventListener('blur', function(e){
 
 color.addEventListener('blur', function(e){
     const ui = new InterfazCliente();
-    if(color.value.length > 25 ){
-        ui.inputMensaje('Este campo debe tener menos de 25 caracteres', 'error', 'colorDiv', 'colorClass');
-        e.preventDefault();
-    }
-
     if(color.value.length > 0){
         document.querySelector('.colorClass').remove();
     }
@@ -241,11 +178,6 @@ color.addEventListener('blur', function(e){
 
 chasis.addEventListener('blur', function(e){
     const ui = new InterfazCliente();
-    if(chasis.value.length > 50){
-        ui.inputMensaje('Este campo debe tener menos de 50 caracteres', 'error', 'chasisDiv', 'chasisClass');
-        e.preventDefault();
-    }
-
     if(chasis.value.length > 0){
         document.querySelector('.chasisClass').remove();
     }
@@ -257,16 +189,12 @@ chasis.addEventListener('blur', function(e){
 
 marcaCarro.addEventListener('change', function(e){
     const ui = new InterfazCliente();
-  
     if(marcaCarro.value.length <= 0){
         ui.inputMensaje('Este campo no puede quedar vacío.', 'error','marcaDiv', 'marcaCarroClass');
     }else{
         document.querySelector('.marcaCarroClass').remove();
     }
 })
-
-
-
 
 class InterfazCliente{
 
@@ -313,3 +241,19 @@ class InterfazCliente{
        
     }
 }
+
+function validarSoloNumerosCliente(regexString) {
+    var theEvent = window.event || event;
+    var key = theEvent.keyCode || theEvent.which;
+    if (key >= 46 || key <= 57) {
+        key = String.fromCharCode(key);
+        var regex = new RegExp("^" + regexString + "$");
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) {
+                theEvent.preventDefault();
+            }
+        }
+    }
+}
+

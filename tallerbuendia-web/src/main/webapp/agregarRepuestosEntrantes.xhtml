@@ -27,7 +27,7 @@
 										<span class="input-group-text"><img src="./resources/icon/miscellaneous_services-24px.svg"
 										width="20px" height="20px" /></span>
 									</div>
-									<h:inputText id="nombre" class="form-control" a:placeholder="Nombre de Producto" value="#{repuestoController.repuesto.nombre}" />
+									<h:inputText id="nombre" class="form-control" a:placeholder="Nombre de Producto" value="#{repuestoController.repuesto.nombre}" maxlength="25"/>
 								</div>
 								<div id="nombreDiv"></div>
 							</div>
@@ -69,7 +69,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text"> <img src="./resources/icon/attach_money-24px.svg" width="20px" height="20px" /></span>
 									</div>
-									<h:inputText a:type="number" id="costo" class="form-control" value="#{repuestoController.repuesto.costo}" />
+									<h:inputText  id="costo" class="form-control"  a:placeholder="Costo" value="#{repuestoController.repuesto.costo}" onkeypress="validarCosto('[0-9]*')" maxlength="10"/>
 								</div>
 								<div id="costoDiv"></div>
 							</div>
@@ -83,7 +83,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text"> <img src="./resources/icon/monetization_on-24px.svg" width="20px" height="20px" /></span>
 									</div>
-									<h:inputText a:type="number" id="precioVenta" class="form-control" a:placeholder="Precio de Venta" value="#{repuestoController.repuesto.precioVenta}" />
+									<h:inputText id="precioVenta" class="form-control" a:placeholder="Precio de Venta" value="#{repuestoController.repuesto.precioVenta}" onkeypress="validarPrecioVenta('[0-9]*')" maxlength="10"/>
 								</div>
 								<div id="precioVentaDiv"></div>
 							</div>
@@ -93,7 +93,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text"> <img src="./resources/icon/assignment_returned-24px.svg" width="20px" height="20px" /></span>
 									</div>
-									<h:inputText a:type="number" id="cantidad" class="form-control" a:placeholder="Cantidad" value="#{repuestoController.repuesto.cantidad}" />
+									<h:inputText id="cantidad" class="form-control" a:placeholder="Cantidad" value="#{repuestoController.repuesto.cantidad}" onkeypress="validarSoloNumerosRepuesto('[0-9]*')" maxlength="11"/>
 								</div>
 								<div id="cantidadDiv"></div>
 							</div>

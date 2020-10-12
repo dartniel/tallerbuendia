@@ -21,40 +21,12 @@ button.addEventListener('click', function(e){
        ui.camposVacios('No pueden quedar campos vacíos', 'error');
        e.preventDefault();
     }
-
-    if(nombre.value.length > 25 ){
-        ui.inputMensaje('El nombre del repuesto debe tener menos de 25 caracteres', 'error', 'nombreDiv', 'nombreClass');
-        e.preventDefault();
-    }
-
-    if(costo.value < 0 ){
-        ui.inputMensaje('El costo no puede ser negativo', 'error', 'costoDiv', 'costoClass');
-        e.preventDefault();
-    } 
-    if(costo.value.length > 5){
-        ui.inputMensaje('El costo no puede superar los 4 dígitos', 'error', 'costoDiv', 'costoClass');
-        e.preventDefault();
-    }
-    if(costo.value === '0.0'){
+    if(costo.value === '0.0'|| costo.value === '0'){
         ui.inputMensaje('El costo no puede ser 0', 'error', 'costoDiv', 'costoClass');
         e.preventDefault();
     }
-    if(precioVenta.value < 0 ){
-        ui.inputMensaje('El precio de venta no puede ser negativo', 'error', 'precioVentaDiv', 'precioVentaClass');
-        e.preventDefault();
-    }
-    
-    if(precioVenta.value.length > 5){
-            ui.inputMensaje('El precio de venta no puede superar los 4 dígitos', 'error', 'precioVentaDiv', 'precioVentaClass');
-            e.preventDefault();
-        }
-    if(precioVenta.value === '0.0'){
+    if(precioVenta.value === '0.0' || precioVenta.value === '0'){
         ui.inputMensaje('El precio de venta no puede ser 0', 'error', 'precioVentaDiv', 'precioVentaClass');
-        e.preventDefault();
-    }
-
-    if(cantidad.value < 0 ){
-        ui.inputMensaje('La cantidad no puede ser negativo', 'error', 'cantidadDiv', 'cantidadClass');
         e.preventDefault();
     }
     if(cantidad.value === '0' ){
@@ -65,10 +37,6 @@ button.addEventListener('click', function(e){
         ui.inputMensaje('Este campo no puede quedar vacío', 'error', 'proveedorDiv', 'proveedorClass');
         e.preventDefault();
     }
-
-
-
-
 })
 
 document.addEventListener('DOMContentLoaded', function(e){
@@ -77,14 +45,14 @@ document.addEventListener('DOMContentLoaded', function(e){
         ui.camposVacios(mensajeExitoRepuesto.textContent, 'exito');
         mensajeExitoRepuesto.removeChild(mensajeExitoRepuesto.firstChild)
     }
+
+   costo.value = '';
+   precioVenta.value = '';
+   cantidad.value = '';
 })
 
 nombre.addEventListener('blur', function(e){
     const ui = new InterfazRepuesto();
-    if(nombre.value.length > 25){
-        ui.inputMensaje('El nombre del repuesto debe tener menos de 25 caracteres', 'error', 'nombreDiv', 'nombreClass');
-        e.preventDefault();
-    }
 
     if(nombre.value.length > 0){
         document.querySelector('.nombreClass').remove();
@@ -114,14 +82,7 @@ costo.addEventListener('blur', function(e){
     if(costo.value.length <= 0){
         ui.inputMensaje('Este campo no puede quedar vacío.', 'error','costoDiv','costoClass');
     } 
-    if(costoFloat <= 0 ){
-        ui.inputMensaje('El costo no puede ser negativo', 'error', 'costoDiv', 'costoClass');
-        e.preventDefault();
-    } 
-    if(costo.value.length > 5){
-        ui.inputMensaje('El costo no puede superar los 4 dígitos', 'error', 'costoDiv', 'costoClass');
-        e.preventDefault();
-    }
+ 
     if(costo.value === '0.0'){
         ui.inputMensaje('El costo no puede ser 0', 'error', 'costoDiv', 'costoClass');
         e.preventDefault();
@@ -138,10 +99,6 @@ precioVenta.addEventListener('blur', function(e){
     if(precioVenta.value < 0){
         ui.inputMensaje('El precio de venta no puede ser negativo', 'error', 'precioVentaDiv', 'precioVentaClass');
         e.preventDefault();
-    }
-    if(precioVenta.value.length > 5){
-            ui.inputMensaje('El precio de venta no puede superar los 4 dígitos', 'error', 'precioVentaDiv', 'precioVentaClass');
-            e.preventDefault();
     }
     if(precioVenta.value.length > 0){
         document.querySelector('.precioVentaClass').remove();
@@ -161,36 +118,10 @@ precioVenta.addEventListener('blur', function(e){
     }
     
 })
-cantidad.addEventListener('focus', function(e){
-    const ui = new InterfazRepuesto();
-    if(cantidad.value.includes('-')){
-        ui.inputMensaje('La cantidad no puede ser negativo', 'error', 'cantidadDiv', 'cantidadClass');
-        e.preventDefault();
-    }
-    if(cantidad.value === '0' ){
-        ui.inputMensaje('La cantidad no puede ser 0', 'error', 'cantidadDiv', 'cantidadClass');
-        e.preventDefault();
-    }
-    if(cantidad.value === '0.0' ){
-        ui.inputMensaje('La cantidad no puede ser 0', 'error', 'cantidadDiv', 'cantidadClass');
-        e.preventDefault();
-    }
-    if(cantidad.value.length > 0){
-        document.querySelector('.cantidadClass').remove();
-    }
 
-    if(cantidad.value.length <= 0){
-        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','cantidadDiv', 'cantidadClass');
-    }
-    
-})
 cantidad.addEventListener('blur', function(e){
     const ui = new InterfazRepuesto();
-    if(cantidad.value < 0 ){
-        ui.inputMensaje('La cantidad no puede ser negativo', 'error', 'cantidadDiv', 'cantidadClass');
-        e.preventDefault();
-    }
-    if(cantidad.value === 0 ){
+    if(cantidad.value === '0' ){
         ui.inputMensaje('La cantidad no puede ser 0', 'error', 'cantidadDiv', 'cantidadClass');
         e.preventDefault();
     }
@@ -248,5 +179,65 @@ class InterfazRepuesto{
             
             
        
+    }
+}
+
+function validarSoloNumerosRepuesto(regexString) {
+    var theEvent = window.event || event;
+    var key = theEvent.keyCode || theEvent.which;
+    if (key >= 46 || key <= 57) {
+        key = String.fromCharCode(key);
+        var regex = new RegExp("^" + regexString + "$");
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) {
+                theEvent.preventDefault();
+            }
+        }
+    }
+}
+
+function validarCosto(regexString) {
+    var theEvent = window.event || event;
+    var key = theEvent.keyCode || theEvent.which;
+    const longitudCosto = costo.value.length;
+    const longitudPrecioVenta = precioVenta.value.length;
+    if(costo.value.includes('.')){
+        const posicion = costo.value.indexOf('.');
+        if(longitudCosto === (posicion+3)){
+        	theEvent.returnValue = false;
+        }
+    }
+    if (key> 31 && (key< 48 || key> 57) && key!= 46){
+        key = String.fromCharCode(key);
+        var regex = new RegExp("^" + regexString + "$");
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) {
+                theEvent.preventDefault();
+            }
+        }
+    }
+}
+function validarPrecioVenta(regexString) {
+    var theEvent = window.event || event;
+    var key = theEvent.keyCode || theEvent.which;
+    const longitudPrecioVenta = precioVenta.value.length;
+    if(precioVenta.value.includes('.')){
+        const posicion = precioVenta.value.indexOf('.');
+        if(longitudPrecioVenta=== (posicion+3)){
+                theEvent.returnValue = false;
+        }
+
+    }
+    if (key> 31 && (key< 48 || key> 57) && key!= 46){
+        key = String.fromCharCode(key);
+        var regex = new RegExp("^" + regexString + "$");
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) {
+                theEvent.preventDefault();
+            }
+        }
     }
 }

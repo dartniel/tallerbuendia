@@ -39,7 +39,7 @@
 										<span class="input-group-text"><img src="./resources/icon/Nombre_cliente.svg"
 										width="20px" height="20px" /></span>
 									</div>
-									<h:inputText id="nombreCliente" class="form-control" a:placeholder="Nombre del Cliente" value="#{clienteController.cliente.nombre}" />
+									<h:inputText id="nombreCliente" class="form-control" a:placeholder="Nombre del Cliente" value="#{clienteController.cliente.nombre}" maxlength="50"/>
 								</div>
 								<div id="nombreClienteDiv"></div>
 							</div>
@@ -50,7 +50,7 @@
 										<span class="input-group-text"> <img src="./resources/icon/Nombre_cliente.svg" width="20px"
 										height="20px" /></span>
 									</div>
-									<h:inputText id="apellidoCliente" class="form-control" a:placeholder="Apellido del Cliente" value="#{clienteController.cliente.apellido}" />
+									<h:inputText id="apellidoCliente" class="form-control" a:placeholder="Apellido del Cliente" value="#{clienteController.cliente.apellido}" maxlength="50"/>
 								</div>
 								<div id="apellidoClienteDiv"></div>
 							</div>
@@ -64,7 +64,7 @@
 											src="./resources/icon/Fecha_Nac.svg" width="20px"
 											height="20px" /></span>
 									</div>
-								<h:inputText a:type="date" id="fechaNacimientoCliente" class="form-control" a:placeholder="DD/MM/YYYY" value="#{clienteController.cliente.fechaNacimiento}">
+								<h:inputText a:type="date" id="fechaNacimientoCliente" class="form-control" a:placeholder="DD/MM/YYYY" value="#{clienteController.cliente.fechaNacimiento}" >
 										<f:convertDateTime pattern="yyyy-mm-dd" />
 								</h:inputText>
 								</div>
@@ -76,7 +76,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text"> <img src="./resources/icon/DUI.svg" width="20px" height="20px" /></span>
 									</div>
-									<h:inputText a:type="tel" id="dui" class="form-control" value="#{clienteController.cliente.dui}" maxlength="9"/>
+									<h:inputText  id="dui" class="form-control dui" value="#{clienteController.cliente.dui}" maxlength="9" onkeypress="validarSoloNumerosCliente('[0-9]*')"/>
 								</div>
 								<div id="duiClienteDiv"></div>
 							</div>
@@ -90,7 +90,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text"> <img src="./resources/icon/NIT.svg" width="20px" height="20px" /></span>
 									</div>
-									<h:inputText a:type="tel" id="nit" class="form-control" a:placeholder="" value="#{clienteController.cliente.nit}" maxlength="14" />
+									<h:inputText a:type="tel" id="nit" class="form-control nit" a:placeholder="" value="#{clienteController.cliente.nit}" maxlength="14" onkeypress="validarSoloNumerosCliente('[0-9]*')" />
 								</div>
 								<div id="nitCLienteDiv"></div>
 							</div>
@@ -100,7 +100,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text"> <img src="./resources/icon/Telefono.svg" width="20px" height="20px" /></span>
 									</div>
-									<h:inputText a:type="tel" id="telefonoCliente" class="form-control" a:placeholder="Teléfono" value="#{clienteController.cliente.telefono}" maxlength="8" />
+									<h:inputText a:type="tel" id="telefonoCliente" class="form-control telefono" a:placeholder="Teléfono" value="#{clienteController.cliente.telefono}" maxlength="8" onkeypress="validarSoloNumerosCliente('[0-9]*')" />
 								</div>
 								<div id="telefonoClienteDiv"></div>
 							</div>
@@ -112,7 +112,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text"> <img src="./resources/icon/Lugar_trabajo.svg" width="20px" height="20px" /></span>
 									</div>
-									<h:inputText  id="lugarTrabajo" class="form-control" a:placeholder="Lugar de Trabajo" value="#{clienteController.cliente.lugarTrabajo}" />
+									<h:inputText  id="lugarTrabajo" class="form-control" a:placeholder="Lugar de Trabajo" value="#{clienteController.cliente.lugarTrabajo}" maxlength="100"/>
 								</div>
 								<div id="lugarTrabajoDiv"></div>
 							</div>
@@ -122,7 +122,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text"> <img src="./resources/icon/Telefono_t.svg" width="20px" height="20px" /></span>
 									</div>
-									<h:inputText a:type="tel" id="telefonoTrabajo" class="form-control" a:placeholder="Teléfono de Trabajo" value="#{clienteController.cliente.telefonoTrabajo}" maxlength="8" />
+									<h:inputText a:type="tel" id="telefonoTrabajo" class="form-control telefono" a:placeholder="Teléfono de Trabajo" value="#{clienteController.cliente.telefonoTrabajo}" maxlength="8" onkeypress="validarSoloNumerosCliente('[0-9]*')"/>
 								</div>
 								<div id="telefonoTrabajoDiv"></div>
 							</div>
@@ -134,7 +134,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text"> <img src="./resources/icon/Seguro_tipo.svg" width="20px" height="20px" /></span>
 									</div>
-									<h:inputText id="tipoSeguro" class="form-control" a:placeholder="Tipo de Seguro" value="#{clienteController.cliente.tipoSeguro}" />
+									<h:inputText id="tipoSeguro" class="form-control" a:placeholder="Tipo de Seguro" value="#{clienteController.cliente.tipoSeguro}" maxlength="50"/>
 								</div>
 								<div id="tipoSeguroDiv"></div>
 							</div>
@@ -144,7 +144,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text"> <img src="./resources/icon/Seguro.svg" width="20px" height="20px" /></span>
 									</div>
-									<h:inputText id="aseguradoraCliente" class="form-control" a:placeholder="Aseguradora" value="#{clienteController.cliente.aseguradora}" />
+									<h:inputText id="aseguradoraCliente" class="form-control" a:placeholder="Aseguradora" value="#{clienteController.cliente.aseguradora}" maxlength="100"/>
 								</div>
 								<div id="aseguradoraDiv"></div>
 							</div>
@@ -172,7 +172,7 @@
 										<span class="input-group-text"> <img src="./resources/icon/Color.svg" width="20px"
 										height="20px" /></span>
 									</div>
-									<h:inputText id="color" class="form-control" a:placeholder="Color" value="#{clienteController.automovil.color}" />
+									<h:inputText id="color" class="form-control" a:placeholder="Color" value="#{clienteController.automovil.color}" maxlength="25" />
 								</div>
 								<div id="colorDiv"></div>
 							</div>
@@ -185,7 +185,7 @@
 										<span class="input-group-text"><img src="./resources/icon/Chasis.svg"
 										width="20px" height="20px" /></span>
 									</div>
-									<h:inputText id="chasis" class="form-control" a:placeholder="Chasis" value="#{clienteController.automovil.chasis}" />
+									<h:inputText id="chasis" class="form-control" a:placeholder="Chasis" value="#{clienteController.automovil.chasis}" maxlength="50" />
 								</div>
 								<div id="chasisDiv"></div>
 							</div>
