@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Templates/Plantilla.xhtml">
+
+	<h:head>
+		<title>Ver Clientes</title>
+	</h:head>
+	<body>
+		<ui:define name="titulo">
+			<h2>Clientes</h2>
+		</ui:define>
+		
+		<ui:define name="contenido">
+			<div class="container fondo-automovil">
+				<div class="col-md-12 mt-3 ">
+					<h:dataTable id="vistaClienteAutomovil" var="a"
+						value="#{Automovil.mostrarAutomovilCliente}"
+						class="table table-sm">
+						<h:column>
+							<f:facet name="header">Codigo</f:facet>
+							#{a.cliente.idCliente}
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">Nombres</f:facet>
+							#{a.cliente.nombre}
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Apellidos</f:facet>
+							#{a.cliente.apellido}
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Placa</f:facet>
+							#{a.placa}
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Marca</f:facet>
+							#{a.detalleCarro.marcarNombre}
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Modelo</f:facet>
+							#{a.detalleCarro.modelo}
+						</h:column>
+
+					
+
+						<h:column>
+							<f:facet name="header"></f:facet>
+							<div class="row">
+								<div class="col-md-4">
+									<h:commandLink style="color:black; text-decoration:none;" class="fas fa-wrench"
+										action="#{Automovil.modificarAutomovil(a.idAutomovil)}">
+										
+											
+										
+									</h:commandLink>
+								</div>
+							</div>
+						</h:column>
+					</h:dataTable>
+				</div>
+			</div>
+
+
+		</ui:define>
+
+	</body>
+</ui:composition>

@@ -36,6 +36,31 @@ public class AutomovilService implements AutomovilRepository{
 			}
 			
 		}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Automovil> mostrarAutomovilCliente() {
+		List<Automovil> automovilCliente=null;
+		Query query=entity.createQuery("FROM Automovil as a");
+		automovilCliente=query.getResultList();
+		return automovilCliente;
+	}
+	@Override
+	public void modificarAutomovil(Automovil automovil) {
+	
+		
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public Automovil llenarAutomovil(int id) {
+		
+		Automovil automovilCliente=null;
+		Query query=entity.createQuery("FROM Automovil as a where a.idAutomovil=:idAutomovil");
+		query.setParameter("idAutomovil",id);
+		automovilCliente=(Automovil) query.getSingleResult();
+		System.out.println(automovilCliente);
+		return automovilCliente;
+		
+	}
 
 
 	
