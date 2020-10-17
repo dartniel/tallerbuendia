@@ -59,7 +59,7 @@
 							<div class="row">
 								<div class="col-md-4">
 									<h:commandLink style="color:black; text-decoration:none;" class="fas fa-wrench"
-										onclick="$('#modalModificar').modal('show');">
+										onclick="$('#modalModificarRepuesto').modal('show');">
 										<f:setPropertyActionListener value="#{r}"
 											target="#{repuestoController.accionRepuesto}" />
 										<f:ajax execute="@this" render=":formModificar" />
@@ -71,77 +71,125 @@
 				</div>
 			</div>
 
-			<div class="modal fade" id="modalModificar" tabindex="-1"
+			<div class="modal fade" id="modalModificarRepuesto" tabindex="-1"
 				aria-labelledby="modalModificarLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Modificar</h5>
+							<h5 class="modal-title" id="exampleModalLabel">Modificar Repuesto</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div id="mensaje">
 							<h:form id="formModificar">
 								<div class="modal-body">
 									<div class="row">
-										<div class="col-md-4">
+										<div class="col-md-6">
+											<label for="fechaAdquisicion">ID Producto</label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <img src="./resources/icon/id_producto.svg" width="20px" height="20px" /></span>
+												</div>
 											<h:inputText class="form-control"
 												a:placeholder="ID de Producto"
 												value="#{repuestoController.accionRepuesto.idRepuesto}"
 												disabled="true" />
+											</div>
 										</div>
-										<div class="col-md-4">
-											<h:inputText class="form-control"
-												a:placeholder="Nombre de Producto"
-												value="#{repuestoController.accionRepuesto.nombre}"
-												id="nombre" />
-											<div id="nombreDiv"></div>
+										<div class="col-md-6">
+										<label for="nombre">Nombre Del Repuesto</label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><img src="./resources/icon/miscellaneous_services-24px.svg"
+													width="20px" height="20px" /></span>
+												</div>
+												<h:inputText class="form-control"
+													a:placeholder="Nombre de Producto"
+													value="#{repuestoController.accionRepuesto.nombre}"
+													id="nombre" />
+											</div>
+											<div id="nombreDivModificar"></div>
 										</div>
-										<div class="col-md-4">
+									</div>
+									
+									<div class="row">
+										<div class="col-md-6">
+										<label for="marcaRepuesto">Marca de Repuesto</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <img
+												src="./resources/icon/museum-24px.svg" width="20px"
+												height="20px" /></span>
+											</div>
 											<h:inputText class="form-control"
 												a:placeholder="Marca de Producto"
 												value="#{repuestoController.accionRepuesto.marcaProveedor.marca.nombre}"
 												id="marcaRepuesto" />
-											<div id="marcaRepuestoDiv"></div>
+										</div>
+											<div id="marcaRepuestoDivModificar"></div>
+										</div>
+										
+										<div class="col-md-6 date">
+											<label for="cantidad">Cantidad</label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <img src="./resources/icon/assignment_returned-24px.svg" width="20px" height="20px" /></span>
+												</div>
+												<h:inputText class="form-control" a:type="number"
+													a:placeholder="Cantidad"
+													value="#{repuestoController.accionRepuesto.cantidad}"
+													id="cantidad" />
+										</div>
+											<div id="cantidadDivModificar"></div>
 										</div>
 									</div>
-									<br />
-									<div class="row">
-										<div class="col-md-4 date">
-											<h:inputText class="form-control" a:type="number"
-												a:placeholder="Cantidad"
-												value="#{repuestoController.accionRepuesto.cantidad}"
-												id="cantidad" />
-											<div id="cantidadDiv"></div>
-										</div>
-
-										<div class="col-md-4">
+							
+									<div class ="row">
+										<div class="col-md-6 ">
+											<label for="costo">Costo</label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <img src="./resources/icon/attach_money-24px.svg" width="20px" height="20px" /></span>
+												</div>
 											<h:inputText class="form-control" a:type="number"
 												a:placeholder="Costo de Repuesto"
 												value="#{repuestoController.accionRepuesto.costo}"
 												id="costo" />
-											<div id="costoDiv"></div>
+											</div>
+											<div id="costoDivModificar"></div>
 										</div>
-
-										<div class="col-md-4">
+										<div class="col-md-6">
+											<label for="precioVenta">Precio de Venta</label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <img src="./resources/icon/monetization_on-24px.svg" width="20px" height="20px" /></span>
+												</div>
 											<h:inputText class="form-control" a:type="number"
 												a:placeholder="Precio de Venta"
 												value="#{repuestoController.accionRepuesto.precioVenta}"
 												id="precioVenta" />
-											<div id="precioVentaDiv"></div>
+										</div>
+											<div id="precioVentaDivModificar"></div>
 										</div>
 									</div>
-									<br />
+							
 									<div class="row">
 										<div class="col-md-6">
+											<label for="fechaAdquisicion">Fecha de Adquisición</label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <img src="./resources/icon/calendar.svg" width="20px" height="20px" /></span>
+												</div>
 											<h:inputText id="fechaAdquisicion" class="form-control"
 												a:type="date" a:placeholder="Fecha de Aqusicion"
 												value="#{repuestoController.accionRepuesto.fechaAdquisicion}">
 												<f:convertDateTime pattern="yyyy-MM-dd" />
 											</h:inputText>
-											<div id="fechaAdquisicionDiv"></div>
+										</div>
+											<div id="fechaAdquisicionDivModificar"></div>
 										</div>
 									</div>
 								</div>
+								
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">Cerrar</button>
