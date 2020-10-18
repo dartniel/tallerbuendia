@@ -35,11 +35,10 @@ public class AutomovilController {
 	private AutomovilRepository automovilRepository;
 
 	public List<Automovil> getMostrarAutomovilCliente() {
-		mostrarAutomovilCliente=automovilRepository.mostrarAutomovilCliente();
 		return mostrarAutomovilCliente;
 	}
+	
 	public void modificarAutomovil(int idAutomovil) {
-		automovilRepository.llenarAutomovil(idAutomovil);
 	}
 
 }

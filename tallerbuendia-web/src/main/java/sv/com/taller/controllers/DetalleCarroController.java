@@ -9,7 +9,6 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import sv.com.taller.entities.DetalleCarro;
-import sv.com.taller.entities.MarcaProveedor;
 import sv.com.taller.repositories.DetalleCarroRepository;
 
 @Named

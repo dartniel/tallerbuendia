@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import sv.com.taller.entities.Cliente;
@@ -15,7 +15,7 @@ import sv.com.taller.repositories.AutomovilRepository;
 
 
 @Named
-@ViewScoped
+@SessionScoped
 public class ClienteController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -24,6 +24,13 @@ public class ClienteController implements Serializable {
 	private Automovil automovil;
 	
 	private Cliente accionCliente;
+	
+	private List<Cliente> mostrarCliente;
+	
+	private List<Automovil> mostrarAutomovil;
+	
+	private boolean enable = true;
+	private String typeButton = "hidden";
 
 
 	public Cliente getAccionCliente() {
@@ -42,14 +49,29 @@ public class ClienteController implements Serializable {
 		this.automovil = automovil;
 	}
 
-	private List<Cliente> mostrarCliente;
-
 	public Cliente getCliente() {
 		return cliente;
 	}
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+
+	public boolean isEnable() {
+		return enable;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
+
+	public String getTypeButton() {
+		return typeButton;
+	}
+
+	public void setTypeButton(String typeButton) {
+		this.typeButton = typeButton;
 	}
 
 	@PostConstruct
@@ -83,12 +105,12 @@ public class ClienteController implements Serializable {
 		this.automovil.setPlaca("");
 		this.automovil.setObservacion("");
 		this.automovil.setDetalleCarro(null);
-		
-	
 	}
 
 	public void modificarCliente() {
 		clienteRepository.modificar(accionCliente);
+		this.setEnable(true);
+		this.setTypeButton("hidden");
 	}
 
 	public void eliminarCliente() {
@@ -99,5 +121,23 @@ public class ClienteController implements Serializable {
 		this.mostrarCliente = clienteRepository.mostrar();
 		return mostrarCliente;
 	}
+	
+	public List<Automovil> getMostrarAutomovil() {
+		mostrarAutomovil = automovilRepository.mostrarAutomovil(this.accionCliente.getIdCliente());
+		return mostrarAutomovil;
+	}
+	
+	public String loadCliente() {
+		return "editClienteAutomovil";
+	}
 
+	public void enableEdit (){
+		if(this.enable == true) {
+			this.setEnable(false);
+			this.setTypeButton("submit");
+		}else {
+			this.setEnable(true);
+			this.setTypeButton("hidden");
+		}
+	}
 }

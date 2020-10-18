@@ -13,255 +13,321 @@
 		<ui:define name="titulo">
 			<h2>Registro de Clientes</h2>
 		</ui:define>
-		
+
 		<ui:define name="contenido">
 			<div class="container fondo-cliente">
 				<div class="mensaje">
-				<h:form id="registroCliente">
-				<ul class="nav nav-tabs" id="myTab" role="tablist">
-				  <li class="nav-item">
-				    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos del Cliente</a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos del Vehículo</a>
-				  </li>
-				</ul>
-				<div class="tab-content" id="myTabContent">
-				  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-				  <br></br>
-				  <br></br>
-						<h:messages globalOnly="true" id="mensajeExito"/>
-						<div class="row">
-							<div class="col-md-6">
-								<label for="nombreCliente">Nombre Del Cliente</label>
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><img src="./resources/icon/Nombre_cliente.svg"
-										width="20px" height="20px" /></span>
+					<h:form id="registroCliente">
+						<ul class="nav nav-tabs" id="myTab" role="tablist">
+							<li class="nav-item"><a class="nav-link active"
+								id="home-tab" data-toggle="tab" href="#home" role="tab"
+								aria-controls="home" aria-selected="true">Datos del Cliente</a>
+							</li>
+							<li class="nav-item"><a class="nav-link" id="profile-tab"
+								data-toggle="tab" href="#profile" role="tab"
+								aria-controls="profile" aria-selected="false">Datos del
+									Vehículo</a></li>
+						</ul>
+						<div class="tab-content" id="myTabContent">
+							<div class="tab-pane fade show active" id="home" role="tabpanel"
+								aria-labelledby="home-tab">
+								<br></br> <br></br>
+								<h:messages globalOnly="true" id="mensajeExito" />
+								<div class="row">
+									<div class="col-md-6">
+										<label for="nombreCliente">Nombre Del Cliente</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text"><img
+													src="./resources/icon/Nombre_cliente.svg" width="20px"
+													height="20px" /></span>
+											</div>
+											<h:inputText id="nombreCliente" class="form-control"
+												a:placeholder="Nombre del Cliente"
+												value="#{clienteController.cliente.nombre}" maxlength="50" />
+										</div>
+										<div id="nombreClienteDiv"></div>
 									</div>
-									<h:inputText id="nombreCliente" class="form-control" a:placeholder="Nombre del Cliente" value="#{clienteController.cliente.nombre}" maxlength="50"/>
+									<div class="col-md-6">
+										<label for="apellidoCliente">Apellido Del Cliente</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <img
+													src="./resources/icon/Nombre_cliente.svg" width="20px"
+													height="20px" /></span>
+											</div>
+											<h:inputText id="apellidoCliente" class="form-control"
+												a:placeholder="Apellido del Cliente"
+												value="#{clienteController.cliente.apellido}" maxlength="50" />
+										</div>
+										<div id="apellidoClienteDiv"></div>
+									</div>
 								</div>
-								<div id="nombreClienteDiv"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<label for="fechaNacimientoCliente">Fecha de
+											Nacimiento</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <img
+													src="./resources/icon/Fecha_Nac.svg" width="20px"
+													height="20px" /></span>
+											</div>
+											<h:inputText a:type="date" id="fechaNacimientoCliente"
+												class="form-control" a:placeholder="DD/MM/YYYY"
+												value="#{clienteController.cliente.fechaNacimiento}">
+												<f:convertDateTime pattern="yyyy-mm-dd" />
+											</h:inputText>
+										</div>
+										<div id="fechaNacimientoDiv"></div>
+									</div>
+									<div class="col-md-6">
+										<label for="dui">DUI</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <img
+													src="./resources/icon/DUI.svg" width="20px" height="20px" /></span>
+											</div>
+											<h:inputText id="dui" class="form-control dui"
+												value="#{clienteController.cliente.dui}" maxlength="9"
+												onkeypress="validarSoloNumerosCliente('[0-9]*')" />
+										</div>
+										<div id="duiClienteDiv"></div>
+									</div>
+
+								</div>
+
+								<div class="row">
+									<div class="col-md-6">
+										<label for="nit">NIT</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <img
+													src="./resources/icon/NIT.svg" width="20px" height="20px" /></span>
+											</div>
+											<h:inputText a:type="tel" id="nit" class="form-control nit"
+												a:placeholder="" value="#{clienteController.cliente.nit}"
+												maxlength="14"
+												onkeypress="validarSoloNumerosCliente('[0-9]*')" />
+										</div>
+										<div id="nitCLienteDiv"></div>
+									</div>
+									<div class="col-md-6">
+										<label for="telefonoCliente">Teléfono</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <img
+													src="./resources/icon/Telefono.svg" width="20px"
+													height="20px" /></span>
+											</div>
+											<h:inputText a:type="tel" id="telefonoCliente"
+												class="form-control telefono" a:placeholder="Teléfono"
+												value="#{clienteController.cliente.telefono}" maxlength="8"
+												onkeypress="validarSoloNumerosCliente('[0-9]*')" />
+										</div>
+										<div id="telefonoClienteDiv"></div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<label for="lugarTrabajo">Lugar de Trabajo</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <img
+													src="./resources/icon/Lugar_trabajo.svg" width="20px"
+													height="20px" /></span>
+											</div>
+											<h:inputText id="lugarTrabajo" class="form-control"
+												a:placeholder="Lugar de Trabajo"
+												value="#{clienteController.cliente.lugarTrabajo}"
+												maxlength="100" />
+										</div>
+										<div id="lugarTrabajoDiv"></div>
+									</div>
+									<div class="col-md-6">
+										<label for="telefonoTrabajo">Teléfono de Trabajo</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <img
+													src="./resources/icon/Telefono_t.svg" width="20px"
+													height="20px" /></span>
+											</div>
+											<h:inputText a:type="tel" id="telefonoTrabajo"
+												class="form-control telefono"
+												a:placeholder="Teléfono de Trabajo"
+												value="#{clienteController.cliente.telefonoTrabajo}"
+												maxlength="8"
+												onkeypress="validarSoloNumerosCliente('[0-9]*')" />
+										</div>
+										<div id="telefonoTrabajoDiv"></div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<label for="tipoSeguro">Tipo de Seguro</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <img
+													src="./resources/icon/Seguro_tipo.svg" width="20px"
+													height="20px" /></span>
+											</div>
+											<h:inputText id="tipoSeguro" class="form-control"
+												a:placeholder="Tipo de Seguro"
+												value="#{clienteController.cliente.tipoSeguro}"
+												maxlength="50" />
+										</div>
+										<div id="tipoSeguroDiv"></div>
+									</div>
+									<div class="col-md-6">
+										<label for="aseguradoraCliente">Aseguradora</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <img
+													src="./resources/icon/Seguro.svg" width="20px"
+													height="20px" /></span>
+											</div>
+											<h:inputText id="aseguradoraCliente" class="form-control"
+												a:placeholder="Aseguradora"
+												value="#{clienteController.cliente.aseguradora}"
+												maxlength="100" />
+										</div>
+										<div id="aseguradoraDiv"></div>
+									</div>
+								</div>
 							</div>
-							<div class="col-md-6">
-								<label for="apellidoCliente">Apellido Del Cliente</label>
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <img src="./resources/icon/Nombre_cliente.svg" width="20px"
-										height="20px" /></span>
+							<div class="tab-pane fade" id="profile" role="tabpanel"
+								aria-labelledby="profile-tab">
+								<br></br> <br></br>
+								<div class="row">
+									<div class="col-md-6">
+										<label for="placa">Placa</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text"><img
+													src="./resources/icon/Placa.svg" width="20px" height="20px" /></span>
+											</div>
+											<h:inputText a:type="tel" id="placa" class="form-control"
+												a:placeholder="Placa"
+												value="#{clienteController.automovil.placa}" maxlength="7" />
+										</div>
+										<div id="placaDiv"></div>
 									</div>
-									<h:inputText id="apellidoCliente" class="form-control" a:placeholder="Apellido del Cliente" value="#{clienteController.cliente.apellido}" maxlength="50"/>
+									<div class="col-md-6">
+										<label for="color">Color</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <img
+													src="./resources/icon/Color.svg" width="20px" height="20px" /></span>
+											</div>
+											<h:inputText id="color" class="form-control"
+												a:placeholder="Color"
+												value="#{clienteController.automovil.color}" maxlength="25" />
+										</div>
+										<div id="colorDiv"></div>
+									</div>
 								</div>
-								<div id="apellidoClienteDiv"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<label for="chasis">Chasis</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text"><img
+													src="./resources/icon/Chasis.svg" width="20px"
+													height="20px" /></span>
+											</div>
+											<h:inputText id="chasis" class="form-control"
+												a:placeholder="Chasis"
+												value="#{clienteController.automovil.chasis}" maxlength="50" />
+										</div>
+										<div id="chasisDiv"></div>
+									</div>
+									<div class="col-md-6">
+										<label for="observacion">Observación</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text"> <img
+													src="./resources/icon/Observaciones.svg" width="20px"
+													height="20px" /></span>
+											</div>
+											<h:inputText id="observacion" class="form-control"
+												a:placeholder="Observacion"
+												value="#{clienteController.automovil.observacion}" />
+										</div>
+										<div id="observacionDiv"></div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<label for="detalleCarro">Detalles del Automovil</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text"><img
+													src="./resources/icon/Observaciones_2.svg" width="20px"
+													height="20px" /></span>
+											</div>
+											<h:selectOneMenu id="marcaCarro" class="form-control"
+												value="#{detalleCarroController.detalleCarro.marcarNombre}">
+												<f:selectItem itemLabel="Seleccionar Marca" itemValue="" />
+												<f:selectItems
+													value="#{detalleCarroController.mostrarMarca}" var="d"
+													itemLabel="#{d.marcarNombre}" itemValue="#{d.marcarNombre}" />
+												<f:ajax event="change"
+													listener="#{detalleCarroController.mostrarModelo()}"
+													render="registroCliente:modeloCarro" />
+											</h:selectOneMenu>
+											<h:selectOneMenu id="modeloCarro" class="form-control"
+												value="#{clienteController.automovil.detalleCarro.idDetalleCarro}">
+												<f:selectItems
+													value="#{detalleCarroController.mostrarModelo}" var="d"
+													itemLabel="#{d.modelo}" itemValue="#{d.idDetalleCarro}" />
+											</h:selectOneMenu>
+										</div>
+										<div id="marcaDiv"></div>
+									</div>
+
+								</div>
+								<div class="row">
+									<div class="col-md-6"></div>
+									<div class="col-md-6">
+										<div class="input-group mb-3">
+											<h:commandLink class="btn btn-primary"
+												onclick="$('#modalAgregarCliente').modal('show');"
+												value="Añadir Cliente">
+												<f:ajax execute="@this" render="modalAgregarCliente" />
+												<i class="fas fa-wrench"></i>
+											</h:commandLink>
+										</div>
+									</div>
+
+								</div>
+								<div class="modal fade" id="modalAgregarCliente" tabindex="-1"
+									aria-labelledby="modalAgregarClienteLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Agregar</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">¿Desea agregar este Cliente?</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Cerrar</button>
+												<h:commandButton class="btn btn-danger"
+													actionListener="#{clienteController.agregarCliente()}"
+													value="Agregar"
+													onclick="$('#modalAgregarCliente').modal('hide');"
+													id="buttonCliente" />
+											</div>
+										</div>
+									</div>
+								</div>
+
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<label for="fechaNacimientoCliente">Fecha de Nacimiento</label>
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <img
-											src="./resources/icon/Fecha_Nac.svg" width="20px"
-											height="20px" /></span>
-									</div>
-								<h:inputText a:type="date" id="fechaNacimientoCliente" class="form-control" a:placeholder="DD/MM/YYYY" value="#{clienteController.cliente.fechaNacimiento}" >
-										<f:convertDateTime pattern="yyyy-mm-dd" />
-								</h:inputText>
-								</div>
-								<div id="fechaNacimientoDiv"></div>
-							</div>
-							<div class="col-md-6">
-								<label for="dui">DUI</label>
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <img src="./resources/icon/DUI.svg" width="20px" height="20px" /></span>
-									</div>
-									<h:inputText  id="dui" class="form-control dui" value="#{clienteController.cliente.dui}" maxlength="9" onkeypress="validarSoloNumerosCliente('[0-9]*')"/>
-								</div>
-								<div id="duiClienteDiv"></div>
-							</div>
-							
-						</div>
-						
-						<div class="row">
-							<div class="col-md-6">
-								<label for="nit">NIT</label>
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <img src="./resources/icon/NIT.svg" width="20px" height="20px" /></span>
-									</div>
-									<h:inputText a:type="tel" id="nit" class="form-control nit" a:placeholder="" value="#{clienteController.cliente.nit}" maxlength="14" onkeypress="validarSoloNumerosCliente('[0-9]*')" />
-								</div>
-								<div id="nitCLienteDiv"></div>
-							</div>
-							<div class="col-md-6">
-								<label for="telefonoCliente">Teléfono</label>
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <img src="./resources/icon/Telefono.svg" width="20px" height="20px" /></span>
-									</div>
-									<h:inputText a:type="tel" id="telefonoCliente" class="form-control telefono" a:placeholder="Teléfono" value="#{clienteController.cliente.telefono}" maxlength="8" onkeypress="validarSoloNumerosCliente('[0-9]*')" />
-								</div>
-								<div id="telefonoClienteDiv"></div>
-							</div>
-						</div>
-							<div class="row">
-							<div class="col-md-6">
-								<label for="lugarTrabajo">Lugar de Trabajo</label>
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <img src="./resources/icon/Lugar_trabajo.svg" width="20px" height="20px" /></span>
-									</div>
-									<h:inputText  id="lugarTrabajo" class="form-control" a:placeholder="Lugar de Trabajo" value="#{clienteController.cliente.lugarTrabajo}" maxlength="100"/>
-								</div>
-								<div id="lugarTrabajoDiv"></div>
-							</div>
-							<div class="col-md-6">
-								<label for="telefonoTrabajo">Teléfono de Trabajo</label>
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <img src="./resources/icon/Telefono_t.svg" width="20px" height="20px" /></span>
-									</div>
-									<h:inputText a:type="tel" id="telefonoTrabajo" class="form-control telefono" a:placeholder="Teléfono de Trabajo" value="#{clienteController.cliente.telefonoTrabajo}" maxlength="8" onkeypress="validarSoloNumerosCliente('[0-9]*')"/>
-								</div>
-								<div id="telefonoTrabajoDiv"></div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<label for="tipoSeguro">Tipo de Seguro</label>
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <img src="./resources/icon/Seguro_tipo.svg" width="20px" height="20px" /></span>
-									</div>
-									<h:inputText id="tipoSeguro" class="form-control" a:placeholder="Tipo de Seguro" value="#{clienteController.cliente.tipoSeguro}" maxlength="50"/>
-								</div>
-								<div id="tipoSeguroDiv"></div>
-							</div>
-							<div class="col-md-6">
-								<label for="aseguradoraCliente">Aseguradora</label>
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <img src="./resources/icon/Seguro.svg" width="20px" height="20px" /></span>
-									</div>
-									<h:inputText id="aseguradoraCliente" class="form-control" a:placeholder="Aseguradora" value="#{clienteController.cliente.aseguradora}" maxlength="100"/>
-								</div>
-								<div id="aseguradoraDiv"></div>
-							</div>
-						</div>
-				  </div>
-				  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-				  <br></br>
-				  <br></br>
-				  <div class="row">
-							<div class="col-md-6">
-								<label for="placa">Placa</label>
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><img src="./resources/icon/Placa.svg"
-										width="20px" height="20px" /></span>
-									</div>
-									<h:inputText a:type="tel" id="placa" class="form-control" a:placeholder="Placa" value="#{clienteController.automovil.placa}" maxlength="7"/>
-								</div>
-								<div id="placaDiv"></div>
-							</div>
-							<div class="col-md-6">
-								<label for="color">Color</label>
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <img src="./resources/icon/Color.svg" width="20px"
-										height="20px" /></span>
-									</div>
-									<h:inputText id="color" class="form-control" a:placeholder="Color" value="#{clienteController.automovil.color}" maxlength="25" />
-								</div>
-								<div id="colorDiv"></div>
-							</div>
-					</div>
-					<div class="row">
-							<div class="col-md-6">
-								<label for="chasis">Chasis</label>
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><img src="./resources/icon/Chasis.svg"
-										width="20px" height="20px" /></span>
-									</div>
-									<h:inputText id="chasis" class="form-control" a:placeholder="Chasis" value="#{clienteController.automovil.chasis}" maxlength="50" />
-								</div>
-								<div id="chasisDiv"></div>
-							</div>
-							<div class="col-md-6">
-								<label for="observacion">Observación</label>
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <img src="./resources/icon/Observaciones.svg" width="20px"
-										height="20px" /></span>
-									</div>
-									<h:inputText id="observacion" class="form-control" a:placeholder="Observacion" value="#{clienteController.automovil.observacion}" />
-								</div>
-								<div id="observacionDiv"></div>
-							</div>
-					</div>
-				  	<div class="row">
-				  	<div class="col-md-6">
-								<label for="detalleCarro">Detalles del Automovil</label>
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><img src="./resources/icon/Observaciones_2.svg"
-										width="20px" height="20px" /></span>
-									</div>
-									<h:selectOneMenu id="marcaCarro" class="form-control" value="#{detalleCarroController.detalleCarro.marcarNombre}">
-									<f:selectItem itemLabel="Seleccionar Marca" itemValue="" />
-										<f:selectItems value="#{detalleCarroController.mostrarMarca}" var="d" itemLabel="#{d.marcarNombre}"
-										itemValue="#{d.marcarNombre}" />
-										<f:ajax event="change" listener="#{detalleCarroController.mostrarModelo()}" render="registroCliente:modeloCarro" />
-									</h:selectOneMenu>
-									<h:selectOneMenu id="modeloCarro" class="form-control" value="#{clienteController.automovil.detalleCarro.idDetalleCarro}">
-										<f:selectItems value="#{detalleCarroController.mostrarModelo}" var="d" itemLabel="#{d.modelo}"
-										itemValue="#{d.idDetalleCarro}" />
-									</h:selectOneMenu>
-								</div>
-								<div id="marcaDiv"></div>
-							</div>
-							
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								
-							</div>
-							<div class="col-md-6">
-								<div class="input-group mb-3">
-									<h:commandLink class="btn btn-primary" onclick="$('#modalAgregarCliente').modal('show');" value="Añadir Cliente">
-										<f:ajax execute="@this" render="modalAgregarCliente" />
-										<i class="fas fa-wrench"></i>
-									</h:commandLink>
-								</div>
-							</div>
-							
-					</div>
-				  		<div class="modal fade" id="modalAgregarCliente" tabindex="-1" aria-labelledby="modalAgregarClienteLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Agregar</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body">
-										¿Desea agregar este Cliente?
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-										<h:commandButton class="btn btn-danger" actionListener="#{clienteController.agregarCliente()}"
-										value="Agregar" onclick="$('#modalAgregarCliente').modal('hide');" id="buttonCliente" />
-									</div>
-								</div>
-							</div>
-						</div>
-					
-				  </div>
-				</div>
-				</h:form>
+					</h:form>
 				</div>
 			</div>
 		</ui:define>

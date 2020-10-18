@@ -1,12 +1,8 @@
 package sv.com.taller.services;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Random;
 
 import javax.ejb.Stateless;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -38,9 +34,10 @@ public class AutomovilService implements AutomovilRepository{
 		}
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Automovil> mostrarAutomovilCliente() {
+	public List<Automovil> mostrarAutomovil(String idCliente) {
 		List<Automovil> automovilCliente=null;
-		Query query=entity.createQuery("FROM Automovil as a");
+		Query query=entity.createQuery("FROM Automovil as a WHERE a.cliente.idCliente = :idCliente");
+		query.setParameter("idCliente", idCliente);
 		automovilCliente=query.getResultList();
 		return automovilCliente;
 	}
@@ -49,19 +46,5 @@ public class AutomovilService implements AutomovilRepository{
 	
 		
 	}
-	@SuppressWarnings("unchecked")
-	@Override
-	public Automovil llenarAutomovil(int id) {
-		
-		Automovil automovilCliente=null;
-		Query query=entity.createQuery("FROM Automovil as a where a.idAutomovil=:idAutomovil");
-		query.setParameter("idAutomovil",id);
-		automovilCliente=(Automovil) query.getSingleResult();
-		System.out.println(automovilCliente);
-		return automovilCliente;
-		
-	}
-
-
 	
 }

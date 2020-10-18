@@ -1,6 +1,6 @@
 package sv.com.taller.services;
+
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Random;
 
@@ -48,7 +48,9 @@ public class ClienteService implements ClienteRepository{
 			entity.getTransaction().begin();
 			entity.merge(cliente);
 			entity.getTransaction().commit();
-			System.out.println("Cliente Modificado");
+			FacesMessage message = new FacesMessage("Datos modificados satisfactoriamente");
+	        FacesContext context = FacesContext.getCurrentInstance();
+	        context.addMessage(null, message);
 		}catch(Exception e) {
 			entity.close();
 			e.printStackTrace();
