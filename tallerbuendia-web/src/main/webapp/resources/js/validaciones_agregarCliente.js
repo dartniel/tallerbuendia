@@ -68,10 +68,10 @@ apellidoCliente.addEventListener('blur', function(e){
 
 fechaNacimientoCliente.addEventListener('blur', function(e){
     const ui = new InterfazCliente();
-    if(fechaAdquisicion.value.length <= 0){
+    if(fechaNacimientoCliente.value.length <= 0){
         ui.inputMensaje('Este campo no puede quedar vacío.', 'error','fechaNacimientoDiv', 'fechaNacimientoClass');
     }
-    if(fechaAdquisicion.value.length > 0){
+    if(fechaNacimientoCliente.value.length > 0){
         document.querySelector('.fechaNacimientoClass').remove();
     }
 })

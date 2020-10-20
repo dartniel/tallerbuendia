@@ -30,6 +30,7 @@
 			<div id="mensaje">
 				<h:form id="formModificarCliente">
 					<div class="modal-body">
+					<h:messages globalOnly="true" id="mensajeExito" />
 						<div class="row">
 							<div class="col-md-3">
 								<label for="nombreCliente">Nombre Del Cliente</label>
@@ -112,7 +113,7 @@
 										value="#{clienteController.accionCliente.nit}" maxlength="14"
 										onkeypress="validarSoloNumerosCliente('[0-9]*')" />
 								</div>
-								<div id="nitCLienteDivModificar"></div>
+								<div id="nitClienteDivModificar"></div>
 							</div>
 							<div class="col-md-3">
 								<label for="telefonoCliente">Teléfono</label>
@@ -203,7 +204,7 @@
 					</div>
 					<h:commandButton a:type="#{clienteController.typeButton}"
 						class="btn btn-primary"
-						action="#{clienteController.modificarCliente()}" value="Guardar" />
+						action="#{clienteController.modificarCliente()}" value="Guardar" id="buttonCliente"/>
 				</h:form>
 			</div>
 
