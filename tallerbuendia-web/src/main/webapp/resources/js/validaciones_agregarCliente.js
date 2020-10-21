@@ -8,10 +8,11 @@ const fechaNacimientoCliente = document.getElementById('registroCliente:fechaNac
 const dui = document.getElementById('registroCliente:dui');
 const nit = document.getElementById('registroCliente:nit');
 const telefonoCliente= document.getElementById('registroCliente:telefonoCliente');
-const lugarTrabajo = document.getElementById('registroCliente:lugarTrabajo');
+/*const lugarTrabajo = document.getElementById('registroCliente:lugarTrabajo');
 const telefonoTrabajo = document.getElementById('registroCliente:telefonoTrabajo');
 const tipoSeguro = document.getElementById('registroCliente:tipoSeguro');
 const aseguradoraCliente = document.getElementById('registroCliente:aseguradoraCliente');
+*/
 const placa = document.getElementById('registroCliente:placa');
 const color = document.getElementById('registroCliente:color');
 const chasis = document.getElementById('registroCliente:chasis');
@@ -22,8 +23,8 @@ buttonCliente.addEventListener('click', function(e){
     //Instanciar la interfaz
     const ui = new InterfazCliente();
     //Comprobar que los campos no estem vacíos
-    if( nombreCliente.value === '' ||  apellidoCliente.value === '' || fechaNacimientoCliente.value === '' || dui.value === '' || nit.value === '' || telefonoCliente.value === '' || lugarTrabajo.value === ''
-    || telefonoTrabajo.value === '' || tipoSeguro.value === '' || aseguradoraCliente.value === '' || placa.value === '' || color.value === '' || chasis.value === '' || marcaCarro.value === ''){
+    if( nombreCliente.value === '' ||  apellidoCliente.value === '' || fechaNacimientoCliente.value === '' || dui.value === '' || nit.value === '' || telefonoCliente.value === '' ||
+    		placa.value === '' || color.value === '' || chasis.value === '' || marcaCarro.value === ''){
        ui.camposVacios('No pueden quedar campos vacíos', 'error');
        e.preventDefault();
     }
@@ -106,50 +107,6 @@ telefonoCliente.addEventListener('blur', function(e){
 
     if(telefonoCliente.value.length <= 0){
         ui.inputMensaje('Este campo no puede quedar vacío.', 'error','telefonoClienteDiv', 'telefonoClienteClass');
-    }
-})
-
-lugarTrabajo.addEventListener('blur', function(e){
-    const ui = new InterfazCliente();
-    if(lugarTrabajo.value.length > 0){
-        document.querySelector('.lugarTrabajoClass').remove();
-    }
-
-    if(lugarTrabajo.value.length <= 0){
-        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','lugarTrabajoDiv', 'lugarTrabajoClass');
-    }
-})
-
-telefonoTrabajo.addEventListener('blur', function(e){
-    const ui = new InterfazCliente();
-    if(telefonoTrabajo.value.length > 0){
-        document.querySelector('.telefonoTrabajoClass').remove();
-    }
-
-    if(telefonoTrabajo.value.length <= 0){
-        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','telefonoTrabajoDiv', 'telefonoTrabajoClass');
-    }
-})
-
-tipoSeguro.addEventListener('blur', function(e){
-    const ui = new InterfazCliente();
-    if(tipoSeguro.value.length > 0){
-        document.querySelector('.tipoSeguroClass').remove();
-    }
-
-    if(tipoSeguro.value.length <= 0){
-        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','tipoSeguroDiv', 'tipoSeguroClass');
-    }
-})
-
-aseguradoraCliente.addEventListener('blur', function(e){
-    const ui = new InterfazCliente();
-    if(aseguradoraCliente.value.length > 0){
-        document.querySelector('.aseguradoraClass').remove();
-    }
-
-    if(aseguradoraCliente.value.length <= 0){
-        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','aseguradoraDiv', 'aseguradoraClass');
     }
 })
 

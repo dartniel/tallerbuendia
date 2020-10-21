@@ -202,12 +202,31 @@
 							</div>
 						</div>
 					</div>
-					<h:commandButton a:type="#{clienteController.typeButton}"
-						class="btn btn-primary"
-						action="#{clienteController.modificarCliente()}" value="Guardar" id="buttonCliente"/>
+						<h:commandLink class="btn btn-primary" onclick="$('#modalModificarCliente').modal('show');" value="Modificar Cliente">
+							<f:ajax execute="@this" render="modalModificarCliente" />
+							<i class="fas fa-wrench"></i>
+						</h:commandLink>
+						<div class="modal fade" id="modalModificarCliente" tabindex="-1" aria-labelledby="modalModificarClienteLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Modificar</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<!--<span aria-hidden="true">&times;</span> -->
+										</button>
+									</div>
+									<div class="modal-body">¿Desea modificar este Cliente?</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+										<h:commandButton a:type="#{clienteController.typeButton}" class="btn btn-primary" action="#{clienteController.modificarCliente()}" value="Guardar" 
+										id="buttonCliente" onclick="$('#modalModificarCliente').modal('hide');"/>
+									</div>
+								</div>
+							</div>
+						</div>
+					
 				</h:form>
 			</div>
-
 
 			<div class="row mt-5">
 				<div class="col-md-9">

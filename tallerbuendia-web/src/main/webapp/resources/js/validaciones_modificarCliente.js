@@ -18,7 +18,7 @@ buttonModificarCliente.addEventListener('click', function(e){
     //Instanciar la interfaz
     const ui = new InterfazModificarCliente();
     //Comprobar que los campos no estem vacíos
-    if( nombreModificarCliente.value === '' ||  apellidoModificarCliente.value === '' || fechaModificarCliente.value === '' || duiModificar.value === '' || nitModificar.value === '' || telefonoModificarCliente.value === '' || lugarTrabajoModificar.value === ''|| telefonoTrabajoModificar.value === '' || tipoSeguroModificar.value === '' || aseguradoraModificarCliente.value === ''){
+    if( nombreModificarCliente.value === '' ||  apellidoModificarCliente.value === '' || fechaModificarCliente.value === '' || duiModificar.value === '' || nitModificar.value === '' || telefonoModificarCliente.value === '' ){
        ui.camposVacios('No pueden quedar campos vacíos', 'error');
        e.preventDefault();
     }
@@ -103,51 +103,6 @@ telefonoModificarCliente.addEventListener('blur', function(e){
         ui.inputMensaje('Este campo no puede quedar vacío.', 'error','telefonoClienteDivModificar', 'telefonoClienteClass');
     }
 })
-
-lugarTrabajoModificar.addEventListener('blur', function(e){
-    const ui = new InterfazModificarCliente();
-    if(lugarTrabajoModificar.value.length > 0){
-        document.querySelector('.lugarTrabajoClass').remove();
-    }
-
-    if(lugarTrabajoModificar.value.length <= 0){
-        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','lugarTrabajoDivModificar', 'lugarTrabajoClass');
-    }
-})
-
-telefonoTrabajoModificar.addEventListener('blur', function(e){
-    const ui = new InterfazModificarCliente();
-    if(telefonoTrabajoModificar.value.length > 0){
-        document.querySelector('.telefonoTrabajoClass').remove();
-    }
-
-    if(telefonoTrabajoModificar.value.length <= 0){
-        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','telefonoTrabajoDivModificar', 'telefonoTrabajoClass');
-    }
-})
-
-tipoSeguroModificar.addEventListener('blur', function(e){
-    const ui = new InterfazModificarCliente();
-    if(tipoSeguroModificar.value.length > 0){
-        document.querySelector('.tipoSeguroClass').remove();
-    }
-
-    if(tipoSeguroModificar.value.length <= 0){
-        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','tipoSeguroDivModificar', 'tipoSeguroClass');
-    }
-})
-
-aseguradoraModificarCliente.addEventListener('blur', function(e){
-    const ui = new InterfazModificarCliente();
-    if(aseguradoraModificarCliente.value.length > 0){
-        document.querySelector('.aseguradoraClass').remove();
-    }
-
-    if(aseguradoraModificarCliente.value.length <= 0){
-        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','aseguradoraDivModificar', 'aseguradoraClass');
-    }
-})
-
 
 
 class InterfazModificarCliente{
