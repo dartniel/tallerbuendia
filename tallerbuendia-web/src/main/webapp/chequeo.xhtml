@@ -1,0 +1,116 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Templates/Plantilla.xhtml">
+
+	<h:head>
+		<title>Ver Clientes</title>
+	</h:head>
+	<body>
+		<ui:define name="titulo">
+			<div class="row">
+				<div class="col-md-9">
+					<h2>Chequeo de Vehiculos</h2>
+				</div>
+			</div>
+		</ui:define>
+
+		<ui:define name="contenido">
+
+			<h:commandButton value="Agregar Servicio" class="btn btn-success"
+				onclick="$('#modalAgregarServicio').modal('show');" />
+			<h:form>
+				<div class="form-group">
+					<h:outputLabel value="Diagnostico" />
+					<h:inputTextarea class="form-control"
+						a:placeholder="Ingresar el diagnostico" />
+				</div>
+
+				<br />
+				<div class="row">
+					<div class="col-md-2">
+						<h2 style="color: grey;">Servicios</h2>
+					</div>
+				</div>
+				<div class="accordion" id="accordionServicioRepuesto">
+					<div class="card">
+						<div class="card-header" id="headingOne">
+							<h2 class="mb-0">
+								<button class="btn btn-link" type="button"
+									data-toggle="collapse" data-target="#collapseOne"
+									aria-expanded="true" aria-controls="collapseOne">#{ServicioRepuesto.nombreServicio}</button>
+							</h2>
+						</div>
+
+						<div id="collapseOne" class="collapse"
+							aria-labelledby="headingOne" data-parent="#accordionExample">
+							<div class="card-body">
+								#{ServicioRepuesto.checkServicioRepuesto}
+							</div>
+						</div>
+					</div>
+				</div>
+			</h:form>
+
+			<!-- Modal -->
+			<div class="modal fade" id="modalAgregarServicio" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<h:form id="agregarServicioRepuesto">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">Agregar Servicio</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true"></span>
+								</button>
+							</div>
+							<div class="modal-body">
+
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<h:outputLabel value="Servicios" />
+											<h:selectOneMenu class="form-control"
+												value="#{ServicioRepuesto.nombreServicio}">
+												<f:selectItem itemLabel="Seleccionar Servicio" itemValue="" />
+												<f:selectItems value="#{ServicioRepuesto.servicio}" var="sr"
+													itemLabel="#{sr.nombreServicio}"
+													itemValue="#{sr.nombreServicio}" />
+												<f:ajax event="change"
+													listener="#{ServicioRepuesto.mostrarRepuesto()}"
+													render="agregarServicioRepuesto:repuesto" />
+											</h:selectOneMenu>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<h:outputLabel value="Repuestos" />
+										<div class="form-group">
+											<h:selectManyCheckbox id="repuesto"
+												value="#{ServicioRepuesto.checkServicioRepuesto}">
+												<f:selectItems value="#{ServicioRepuesto.repuesto}" var="sr"
+													itemLabel="#{sr.repuesto.nombre}"
+													itemValue="#{sr.repuesto.idRepuesto}" />
+											</h:selectManyCheckbox>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Close</button>
+								<h:commandButton value="Añadir" action="#{ServicioRepuesto.agregarServicioRepuesto()}">
+								
+								</h:commandButton>
+							</div>
+						</div>
+					</div>
+				</h:form>
+			</div>
+		</ui:define>
+
+	</body>
+</ui:composition>

@@ -36,7 +36,9 @@
 
 						<h:column>
 							<f:facet name="header">ADQUISICION</f:facet>
-							#{r.fechaAdquisicion}
+							<h:outputText value="#{r.fechaAdquisicion}">
+								<f:convertDateTime pattern="d-MM-YYYY" />
+							</h:outputText>
 						</h:column>
 
 						<h:column>
@@ -106,7 +108,7 @@
 												<h:inputText class="form-control"
 													a:placeholder="Nombre de Producto"
 													value="#{repuestoController.accionRepuesto.nombre}"
-													id="nombre" />
+													id="nombre" required="true"/>
 											</div>
 											<div id="nombreDivModificar"></div>
 										</div>
@@ -194,8 +196,10 @@
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">Cerrar</button>
-									<h:commandButton class="btn btn-success" actionListener="#{repuestoController.modificarRepuesto()}"
-										value="Guardar" onclick="$('#modalModificar').modal('hide');" id="button1" />
+									<h:commandButton class="btn btn-success"
+										value="Guardar" onclick="$('#modalModificarRepuesto').modal('hide');" id="button1" >
+										<f:ajax execute="@form" listener="#{repuestoController.modificarRepuesto()}" render="vistaRepuesto"/>
+									</h:commandButton>
 								</div>
 							</h:form>
 						</div>

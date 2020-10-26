@@ -14,6 +14,21 @@ import javax.persistence.*;
 public class DetalleChequeo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	public DetalleChequeo() {}
+	
+	public DetalleChequeo(DetalleChequeo detalleChequeo) {}
+	
+	public DetalleChequeo(ServicioRepuesto servicioRepuesto) {
+		this.servicioRepuesto = servicioRepuesto;
+	}
+	
+	public DetalleChequeo(int cantidad, float precioUnitario, Chequeo chequeo, ServicioRepuesto servicioRepuesto) {
+		this.cantidad = cantidad;
+		this.precioUnitario = precioUnitario;
+		this.chequeo = chequeo;
+		this.servicioRepuesto = servicioRepuesto;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_DETALLE_CHEQUEO")
@@ -35,9 +50,6 @@ public class DetalleChequeo implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_SERVICIO_REPUESTO")
 	private ServicioRepuesto servicioRepuesto;
-
-	public DetalleChequeo() {
-	}
 
 	public int getIdDetalleChequeo() {
 		return this.idDetalleChequeo;
@@ -85,6 +97,13 @@ public class DetalleChequeo implements Serializable {
 
 	public void setServicioRepuesto(ServicioRepuesto servicioRepuesto) {
 		this.servicioRepuesto = servicioRepuesto;
+	}
+
+	@Override
+	public String toString() {
+		return "DetalleChequeo [idDetalleChequeo=" + idDetalleChequeo + ", cantidad=" + cantidad + ", estado=" + estado
+				+ ", precioUnitario=" + precioUnitario + ", chequeo=" + chequeo + ", servicioRepuesto="
+				+ servicioRepuesto + "]";
 	}
 
 }
