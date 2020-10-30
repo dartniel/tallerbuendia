@@ -12,5 +12,10 @@ public interface DetalleChequeoRepository {
 
 	public List<DetalleChequeo> mostrar(Chequeo chequeo);
 	
+	public List<DetalleChequeo> mostrarCotizacion();
+	
 	public void actualizarExistencia(DetalleChequeo detalleChequeo);
+	
+	public void cotizacion(DetalleChequeo cotizacion, String diagnostico);
+	
 }

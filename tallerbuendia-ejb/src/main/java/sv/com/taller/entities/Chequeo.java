@@ -14,6 +14,14 @@ import java.util.List;
 public class Chequeo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	public Chequeo() {}
+	
+	public Chequeo(Chequeo chequeo) {}
+	
+	public Chequeo(String diagnostico) {
+		this.diagnostico = diagnostico;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_CHEQUEO")
@@ -33,9 +41,6 @@ public class Chequeo implements Serializable {
 	//bi-directional many-to-one association to DetalleChequeo
 	@OneToMany(mappedBy="chequeo")
 	private List<DetalleChequeo> detalleChequeos;
-
-	public Chequeo() {
-	}
 
 	public int getIdChequeo() {
 		return this.idChequeo;
@@ -97,6 +102,12 @@ public class Chequeo implements Serializable {
 		detalleChequeo.setChequeo(null);
 
 		return detalleChequeo;
+	}
+
+	@Override
+	public String toString() {
+		return "Chequeo [idChequeo=" + idChequeo + ", adicionales=" + adicionales + ", diagnostico=" + diagnostico
+				+ ", estado=" + estado + ", cliente=" + cliente + "]";
 	}
 
 }

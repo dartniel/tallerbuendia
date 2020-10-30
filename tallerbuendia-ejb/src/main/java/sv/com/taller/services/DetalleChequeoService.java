@@ -12,14 +12,14 @@ import sv.com.taller.JPAUtils.JPAUtil;
 import sv.com.taller.entities.Chequeo;
 import sv.com.taller.entities.DetalleChequeo;
 import sv.com.taller.entities.Repuesto;
+import sv.com.taller.entities.ServicioRepuesto;
 import sv.com.taller.repositories.DetalleChequeoRepository;
 
 @Stateless
 public class DetalleChequeoService implements DetalleChequeoRepository {
 
 	EntityManager entity = JPAUtil.getEntityManagerFactory().createEntityManager();
-	
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<DetalleChequeo> mostrar(Chequeo chequeo) {
@@ -30,32 +30,109 @@ public class DetalleChequeoService implements DetalleChequeoRepository {
 		return detalleChequeo;
 	}
 
-
 	@Override
 	public void actualizarExistencia(DetalleChequeo detalleChequeo) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			Repuesto valorExistencia = null;
-			
+
 			Query query = entity.createQuery("FROM Repuesto r WHERE r.idRepuesto = :idRepuesto");
 			query.setParameter("idRepuesto", detalleChequeo.getServicioRepuesto().getRepuesto().getIdRepuesto());
 			valorExistencia = (Repuesto) query.getSingleResult();
-			
+
 			int nuevaExistencia = valorExistencia.getCantidad() - detalleChequeo.getCantidad();
-			
-			if(nuevaExistencia < 0) {
-				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El stock no tiene los suministros necesarios", null));
-			}else {
+
+			if (nuevaExistencia < 0) {
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"El stock no tiene los suministros necesarios", null));
+			} else {
 				valorExistencia.setCantidad(nuevaExistencia);
 				entity.getTransaction().begin();
 				entity.merge(valorExistencia);
 				entity.getTransaction().commit();
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			entity.close();
 			e.printStackTrace();
 		}
-		
+
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DetalleChequeo> mostrarCotizacion() {
+		List<DetalleChequeo> detalleChequeo = null;
+		Query query = entity.createQuery("FROM DetalleChequeo as d");
+		detalleChequeo = query.getResultList();
+		return detalleChequeo;
+	}
+
+	public void generarCotizacion(int idChequeo, DetalleChequeo detalles) {
+
+		Query query = entity.createQuery("FROM Chequeo as c WHERE c.idChequeo = :idChequeo");
+		query.setParameter("idChequeo", idChequeo).getSingleResult();
+		Chequeo id = (Chequeo) query;
+
+		try {
+			detalles.getChequeo().setIdChequeo(id.getIdChequeo());
+
+			entity.getTransaction().begin();
+			DetalleChequeo cotizacion = new DetalleChequeo(detalles.getCantidad(), detalles.getPrecioUnitario(),
+					detalles.getChequeo(), detalles.getServicioRepuesto());
+			entity.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity.close();
+		}
+	}
+
+	@Override
+	public void cotizacion(DetalleChequeo cotizacion, String diagnostico) {
+		System.out.println(cotizacion);
+
+		ServicioRepuesto servRepuesto = servicioRepuesto(cotizacion.getServicioRepuesto().getIdServicioRepuesto());
+
+		float totalServicioRepuesto = calcularServicioRepuesto(cotizacion.getCantidad(),
+				servRepuesto.getServicio().getPrecio(), servRepuesto.getRepuesto().getPrecioVenta());
+
+		System.out.println("ID SERVICIOREPUESTO = " + cotizacion.getServicioRepuesto().getIdServicioRepuesto());
+		System.out.println("ID CHEQUEO = " + chequeo(diagnostico));
+		System.out.println("CANTIDAD DE REPUESTOS = " + cotizacion.getCantidad());
+		System.out.println("TOTAL POR SERVICIO Y REPUESTO = " + totalServicioRepuesto);
+
+		try {
+			entity.getTransaction().begin();
+			DetalleChequeo detalles = new DetalleChequeo(cotizacion.getCantidad(), totalServicioRepuesto,
+					chequeo(diagnostico), cotizacion.getServicioRepuesto());
+			entity.persist(detalles);
+			System.out.println(detalles);
+			System.out.println("GUARDADO");
+
+			entity.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity.close();
+		}
+	}
+
+	public float calcularServicioRepuesto(int cantidad, float precioServicio, float precioRepuesto) {
+		float total = 0;
+		total = (precioServicio + precioRepuesto) * cantidad;
+		return total;
+	}
+
+	public Chequeo chequeo(String diagnostico) {
+		Query query = entity.createQuery("FROM Chequeo as c WHERE c.diagnostico = :diagnostico");
+		query.setParameter("diagnostico", diagnostico);
+		Chequeo cheq = (Chequeo) query.getSingleResult();
+		return cheq;
+	}
+
+	public ServicioRepuesto servicioRepuesto(int idServicioRepuesto) {
+		Query query = entity
+				.createQuery("FROM ServicioRepuesto as sr WHERE sr.idServicioRepuesto = :idServicioRepuesto");
+		query.setParameter("idServicioRepuesto", idServicioRepuesto);
+		ServicioRepuesto sr = (ServicioRepuesto) query.getSingleResult();
+		return sr;
+	}
 }

@@ -13,6 +13,7 @@ import sv.com.taller.entities.Chequeo;
 import sv.com.taller.entities.DetalleChequeo;
 import sv.com.taller.entities.Servicio;
 import sv.com.taller.entities.ServicioRepuesto;
+import sv.com.taller.repositories.DetalleChequeoRepository;
 import sv.com.taller.repositories.ServicioRepuestoRepository;
 
 @Named("ServicioRepuesto")
@@ -26,36 +27,6 @@ public class ServicioRepuestoController implements Serializable {
 	private List<ServicioRepuesto> repuesto;
 
 	private DetalleChequeo detalleChequeo;
-
-	private String nombreServicio;
-	
-	private List<ServicioRepuesto> servicioRepuesto = new ArrayList<ServicioRepuesto>();
-
-	private List<String> checkServicioRepuesto = new ArrayList<String>();
-
-	public List<ServicioRepuesto> getServicioRepuesto() {
-		return servicioRepuesto;
-	}
-
-	public void setServicioRepuesto(List<ServicioRepuesto> servicioRepuesto) {
-		this.servicioRepuesto = servicioRepuesto;
-	}
-
-	public List<String> getCheckServicioRepuesto() {
-		return checkServicioRepuesto;
-	}
-
-	public void setCheckServicioRepuesto(List<String> checkServicioRepuesto) {
-		this.checkServicioRepuesto = checkServicioRepuesto;
-	}
-
-	public String getNombreServicio() {
-		return nombreServicio;
-	}
-
-	public void setNombreServicio(String nombreServicio) {
-		this.nombreServicio = nombreServicio;
-	}
 
 	public List<ServicioRepuesto> getRepuesto() {
 		return repuesto;
@@ -79,17 +50,17 @@ public class ServicioRepuestoController implements Serializable {
 	@EJB
 	private ServicioRepuestoRepository servicioRepuestoRepository;
 
+	@EJB
+	private DetalleChequeoRepository detalleChequeoRepository;
+
 	public List<Servicio> getServicio() {
 		servicio = servicioRepuestoRepository.mostrarServcio();
 		return servicio;
 	}
 
 	public void mostrarRepuesto() {
-		repuesto = servicioRepuestoRepository.mostrarRepuesto(nombreServicio);
-	}
-	
-	public void agregarServicioRepuesto() {
-		servicioRepuestoRepository.agregarDetalleChequeo(checkServicioRepuesto);
+		repuesto = servicioRepuestoRepository
+				.mostrarRepuesto(detalleChequeo.getServicioRepuesto().getServicio().getNombreServicio());
 	}
 
 }

@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Templates/Plantilla.xhtml">
+
+	<h:head>
+		<title>Ver Clientes</title>
+	</h:head>
+	<body>
+		<ui:define name="titulo">
+			<div class="row">
+				<div class="col-md-9">
+					<h2>Chequeo de Vehiculos</h2>
+				</div>
+			</div>
+		</ui:define>
+
+		<ui:define name="contenido">
+
+			<h:commandButton value="Agregar Servicio" class="btn btn-success"
+				onclick="$('#modalAgregarServicio').modal('show');" />
+
+			<h:form>
+				<h:inputText value="#{Cotizacion.accionChequeo.diagnostico}" />
+
+				<div class="modal fade" id="modalAgregarServicio" tabindex="-1"
+					role="dialog" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">Agregar Servicio</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true"></span>
+								</button>
+							</div>
+							<div class="modal-body">
+
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<h:outputLabel value="Servicios" />
+											<h:selectOneMenu class="form-control"
+												value="#{Cotizacion.nombreServicio}">
+												<f:selectItem itemLabel="Seleccionar Servicio" itemValue="" />
+												<f:selectItems value="#{Cotizacion.servicio}" var="sr"
+													itemLabel="#{sr.nombreServicio}"
+													itemValue="#{sr.nombreServicio}" />
+												<f:ajax event="change"
+													listener="#{Cotizacion.mostrarRepuesto()}"
+													render="repuesto" />
+											</h:selectOneMenu>
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<h:outputLabel value="Canitdad de repuesto" />
+											<h:inputText value="#{Cotizacion.detalleChequeo.cantidad}"
+												a:placeholder="Cantidad" />
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<h:outputLabel value="Repuestos" />
+										<div class="form-group">
+											<h:selectOneMenu id="repuesto"
+												value="#{Cotizacion.detalleChequeo.servicioRepuesto.idServicioRepuesto}">
+												<f:selectItems value="#{Cotizacion.repuesto}" var="sr"
+													itemLabel="#{sr.repuesto.nombre}"
+													itemValue="#{sr.idServicioRepuesto}" />
+											</h:selectOneMenu>
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Close</button>
+								<h:commandButton value="Añadir" action="#{Cotizacion.agregar()}" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</h:form>
+			
+			<ui:repeat var="" value=""></ui:repeat>
+		</ui:define>
+
+	</body>
+</ui:composition>

@@ -3,11 +3,13 @@ package sv.com.taller.controllers;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import sv.com.taller.entities.Chequeo;
+import sv.com.taller.entities.Cliente;
 import sv.com.taller.entities.DetalleChequeo;
 import sv.com.taller.repositories.ChequeoRepository;
 import sv.com.taller.repositories.DetalleChequeoRepository;
@@ -22,7 +24,6 @@ public class ChequeoController implements Serializable {
 	
 	private List<DetalleChequeo> mostrarDetalleChequeo;
 	
-
 	@EJB
 	private ChequeoRepository chequeoRepository;
 	
@@ -42,5 +43,4 @@ public class ChequeoController implements Serializable {
 	public void cambioExistencia(DetalleChequeo detalleChequeo) {
 		detalleChequeoRepository.actualizarExistencia(detalleChequeo);
 	}
-	
 }

@@ -85,8 +85,8 @@ public class ServicioRepuesto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ServicioRepuesto [idServicioRepuesto=" + idServicioRepuesto + ", detalleChequeos=" + detalleChequeos
-				+ ", repuesto=" + repuesto + ", servicio=" + servicio + "]";
+		return "ServicioRepuesto [idServicioRepuesto=" + idServicioRepuesto + ", repuesto=" + repuesto + ", servicio="
+				+ servicio + "]";
 	}
 
 }

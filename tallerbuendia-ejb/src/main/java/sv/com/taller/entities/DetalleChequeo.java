@@ -3,11 +3,6 @@ package sv.com.taller.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
-/**
- * The persistent class for the detalle_chequeo database table.
- * 
- */
 @Entity
 @Table(name="detalle_chequeo")
 @NamedQuery(name="DetalleChequeo.findAll", query="SELECT d FROM DetalleChequeo d")
@@ -21,7 +16,7 @@ public class DetalleChequeo implements Serializable {
 	public DetalleChequeo(ServicioRepuesto servicioRepuesto) {
 		this.servicioRepuesto = servicioRepuesto;
 	}
-	
+
 	public DetalleChequeo(int cantidad, float precioUnitario, Chequeo chequeo, ServicioRepuesto servicioRepuesto) {
 		this.cantidad = cantidad;
 		this.precioUnitario = precioUnitario;
@@ -102,8 +97,7 @@ public class DetalleChequeo implements Serializable {
 	@Override
 	public String toString() {
 		return "DetalleChequeo [idDetalleChequeo=" + idDetalleChequeo + ", cantidad=" + cantidad + ", estado=" + estado
-				+ ", precioUnitario=" + precioUnitario + ", chequeo=" + chequeo + ", servicioRepuesto="
-				+ servicioRepuesto + "]";
+				+ ", precioUnitario=" + precioUnitario + ", chequeo=" + chequeo.getIdChequeo() + ", servicioRepuesto="
+				+ servicioRepuesto.getIdServicioRepuesto() + "]";
 	}
-
 }

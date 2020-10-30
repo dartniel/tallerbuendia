@@ -15,6 +15,20 @@ public class ChequeoService implements ChequeoRepository {
 
 	EntityManager entity = JPAUtil.getEntityManagerFactory().createEntityManager();
 	
+	@Override
+	public void agregarChequeo(Chequeo chequeo) {
+		try {
+			entity.getTransaction().begin();
+			Chequeo nuevoChequeo = new Chequeo(chequeo.getDiagnostico());
+			entity.persist(nuevoChequeo);
+			entity.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity.close();
+		}
+
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Chequeo> mostrar() {
