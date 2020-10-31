@@ -18,4 +18,10 @@ public interface DetalleChequeoRepository {
 	
 	public void cotizacion(DetalleChequeo cotizacion, String diagnostico);
 	
+	public List<DetalleChequeo> detalleSerRepuesto(String diagnostico);
+	
+	public void eliminarCotizacion(DetalleChequeo cotizacion);
+	
+	public void cancelarCotizacion(String diagnostico);
+	
 }

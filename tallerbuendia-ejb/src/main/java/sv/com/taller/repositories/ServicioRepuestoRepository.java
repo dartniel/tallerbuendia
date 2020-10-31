@@ -16,4 +16,6 @@ public interface ServicioRepuestoRepository {
 	public List<Servicio> mostrarServcio();
 	
 	public List<ServicioRepuesto> mostrarRepuesto(String nombreServicio);
+	
+	public List<ServicioRepuesto> buscarServicioRepuesto(DetalleChequeo idServicioRepuesto);
 }

@@ -37,7 +37,15 @@ public class ServicioRepuestoService implements ServicioRepuestoRepository {
 		return mostrarRepuesto;
 	}
 
-
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ServicioRepuesto> buscarServicioRepuesto(DetalleChequeo idServicioRepuesto) {
+		List<ServicioRepuesto> mostrarRepuesto = null;
+		Query query = entity.createQuery("FROM ServicioRepuesto as sr WHERE sr.idServicioRepuesto = :idServicioRepuesto");
+		query.setParameter("idServicioRepuesto", idServicioRepuesto.getServicioRepuesto().getIdServicioRepuesto());
+		mostrarRepuesto = query.getResultList();
+		return mostrarRepuesto;
+	}
 	
 	@Override
 	public DetalleChequeo agregarDetalleChequeo(String idRepuesto, int cantidad, String nombreServicio) {

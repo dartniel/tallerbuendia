@@ -11,6 +11,7 @@ import javax.inject.Named;
 import sv.com.taller.entities.Chequeo;
 import sv.com.taller.entities.Cliente;
 import sv.com.taller.entities.DetalleChequeo;
+import sv.com.taller.entities.Repuesto;
 import sv.com.taller.entities.Servicio;
 import sv.com.taller.entities.ServicioRepuesto;
 import sv.com.taller.repositories.ChequeoRepository;
@@ -29,11 +30,17 @@ public class CotizacionController implements Serializable {
 
 	private DetalleChequeo detalleChequeo;
 	
+	private DetalleChequeo accionDetalleChequeo;
+	
 	private String nombreServicio;
 	
 	private Chequeo chequeo;
 	
 	private Chequeo accionChequeo;
+	
+	private List<DetalleChequeo> mostrarDetalleChequeo;
+	
+	private List<ServicioRepuesto> buscarServicioRepuesto;
 
 	public List<ServicioRepuesto> getRepuesto() {
 		return repuesto;
@@ -70,6 +77,22 @@ public class CotizacionController implements Serializable {
 	public void setAccionChequeo(Chequeo accionChequeo) {
 		this.accionChequeo = accionChequeo;
 	}
+	
+	public List<DetalleChequeo> getMostrarDetalleChequeo() {
+		return mostrarDetalleChequeo;
+	}
+
+	public List<ServicioRepuesto> getBuscarServicioRepuesto() {
+		return buscarServicioRepuesto;
+	}
+
+	public DetalleChequeo getAccionDetalleChequeo() {
+		return accionDetalleChequeo;
+	}
+
+	public void setAccionDetalleChequeo(DetalleChequeo accionDetalleChequeo) {
+		this.accionDetalleChequeo = accionDetalleChequeo;
+	}
 
 	@PostConstruct
 	public void init() {
@@ -104,10 +127,21 @@ public class CotizacionController implements Serializable {
 		this.accionChequeo.setDiagnostico(this.chequeo.getDiagnostico());
 		System.out.println(accionChequeo.getDiagnostico());
 		detalleChequeoRepository.cotizacion(detalleChequeo,accionChequeo.getDiagnostico());
+		mostrarDetalleChequeo = detalleChequeoRepository.detalleSerRepuesto(accionChequeo.getDiagnostico());
+		buscarServicioRepuesto = servicioRepuestoRepository.buscarServicioRepuesto(detalleChequeo);
 	}
 	
 	public String agregarChequeo() {
 		chequeoRepository.agregarChequeo(chequeo);
 		return "cotizacion";
+	}
+	
+	public void eliminar() {
+		detalleChequeoRepository.eliminarCotizacion(accionDetalleChequeo);
+		mostrarDetalleChequeo = detalleChequeoRepository.detalleSerRepuesto(accionChequeo.getDiagnostico());
+	}
+	
+	public void cancelarCotizacion() {
+		detalleChequeoRepository.cancelarCotizacion(accionChequeo.getDiagnostico());
 	}
 }

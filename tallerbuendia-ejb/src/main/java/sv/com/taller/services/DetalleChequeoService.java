@@ -114,6 +114,17 @@ public class DetalleChequeoService implements DetalleChequeoRepository {
 			entity.close();
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DetalleChequeo> detalleSerRepuesto(String diagnostico) {
+		List<DetalleChequeo> detalles = null;
+		
+		Query query = entity.createQuery("FROM DetalleChequeo as dc WHERE dc.chequeo = :chequeo");
+		query.setParameter("chequeo", chequeo(diagnostico));
+		detalles = query.getResultList();
+		return detalles;
+	}
 
 	public float calcularServicioRepuesto(int cantidad, float precioServicio, float precioRepuesto) {
 		float total = 0;
@@ -135,4 +146,38 @@ public class DetalleChequeoService implements DetalleChequeoRepository {
 		ServicioRepuesto sr = (ServicioRepuesto) query.getSingleResult();
 		return sr;
 	}
+
+	@Override
+	public void eliminarCotizacion(DetalleChequeo cotizacion) {
+
+		try {
+			entity.getTransaction().begin();
+			entity.remove(cotizacion);
+			entity.getTransaction().commit();
+			System.out.println("Eliminado");
+		}catch(Exception e) {
+			e.printStackTrace();
+			entity.close();
+		}
+	}
+
+	@Override
+	public void cancelarCotizacion(String diagnostico) {
+		
+		Query query = entity.createQuery("FROM Chequeo as c WHERE c.diagnostico = :diagnostico");
+		query.setParameter("diagnostico", diagnostico);
+		Chequeo idChequeo = (Chequeo) query.getSingleResult();
+		
+		try {
+			entity.getTransaction().begin();
+			entity.remove(idChequeo);
+			entity.getTransaction().commit();
+			System.out.println("Cotizacion Cancelada");
+		}catch(Exception e) {
+			e.printStackTrace();
+			entity.close();
+		}
+	}
+
+	
 }
