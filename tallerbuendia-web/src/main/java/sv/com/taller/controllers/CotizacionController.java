@@ -5,13 +5,14 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import sv.com.taller.entities.Chequeo;
 import sv.com.taller.entities.Cliente;
 import sv.com.taller.entities.DetalleChequeo;
-import sv.com.taller.entities.Repuesto;
 import sv.com.taller.entities.Servicio;
 import sv.com.taller.entities.ServicioRepuesto;
 import sv.com.taller.repositories.ChequeoRepository;
@@ -141,7 +142,10 @@ public class CotizacionController implements Serializable {
 		mostrarDetalleChequeo = detalleChequeoRepository.detalleSerRepuesto(accionChequeo.getDiagnostico());
 	}
 	
-	public void cancelarCotizacion() {
+	public String cancelarCotizacion() {
 		detalleChequeoRepository.cancelarCotizacion(accionChequeo.getDiagnostico());
+		this.chequeo.setDiagnostico("");
+		mostrarDetalleChequeo = null;
+		return "chequeo?faces-redirect=true";
 	}
 }

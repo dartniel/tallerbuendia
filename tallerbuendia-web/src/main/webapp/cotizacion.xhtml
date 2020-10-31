@@ -19,8 +19,43 @@
 
 		<ui:define name="contenido">
 
-			<h:commandButton value="Agregar Servicio" class="btn btn-success"
-				onclick="$('#modalAgregarServicio').modal('show');" />
+			<div class="row">
+				<div class="col-md-2">
+					<h:commandButton value="Agregar Servicio" class="btn btn-success"
+						onclick="$('#modalAgregarServicio').modal('show');" />
+				</div>
+
+				<div class="col-md-2">
+					<h:commandButton value="Cancelar Cotizacion" class="btn btn-danger"
+						onclick="$('#modalCancelarCotizacion').modal('show');" />
+
+					<div class="modal fade" id="modalCancelarCotizacion" tabindex="-1"
+						aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Cancelar Cotizacion</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<h:form id="formEliminar">
+									<div class="modal-body">
+										<h3>Diagnostico: #{Cotizacion.accionChequeo.diagnostico}</h3>
+										<b>Desea cancelar todo?</b>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Cerrar</button>
+										<h:commandButton action="#{Cotizacion.cancelarCotizacion()}"
+											value="Aceptar" />
+									</div>
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
 
 			<h:form>
 				<div class="modal fade" id="modalAgregarServicio" tabindex="-1"
@@ -131,7 +166,8 @@
 															<div class="modal-footer">
 																<button type="button" class="btn btn-secondary"
 																	data-dismiss="modal">Close</button>
-																<h:commandButton action="#{Cotizacion.eliminar()}" value="Eliminar" />
+																<h:commandButton action="#{Cotizacion.eliminar()}"
+																	value="Eliminar" />
 															</div>
 														</h:form>
 													</div>
