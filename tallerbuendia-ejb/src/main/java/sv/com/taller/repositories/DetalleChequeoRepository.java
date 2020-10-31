@@ -24,4 +24,6 @@ public interface DetalleChequeoRepository {
 	
 	public void cancelarCotizacion(String diagnostico);
 	
+	public Double totalCotizacion(String diagnostico);
+	
 }

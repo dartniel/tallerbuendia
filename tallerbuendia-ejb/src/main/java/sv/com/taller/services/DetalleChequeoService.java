@@ -179,5 +179,15 @@ public class DetalleChequeoService implements DetalleChequeoRepository {
 		}
 	}
 
+	@Override
+	public Double  totalCotizacion(String diagnostico) {
+		Query query= entity.createQuery("SELECT sum(dc.precioUnitario) FROM DetalleChequeo as dc WHERE dc.chequeo.diagnostico = :chequeo");
+		query.setParameter("chequeo", diagnostico);
+		
+		System.out.println(query.getSingleResult());
+		Double  total = (Double ) query.getSingleResult();
+		return total;
+	}
+
 	
 }

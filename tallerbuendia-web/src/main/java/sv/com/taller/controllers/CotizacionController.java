@@ -39,6 +39,8 @@ public class CotizacionController implements Serializable {
 	
 	private Chequeo accionChequeo;
 	
+	private Double total;
+	
 	private List<DetalleChequeo> mostrarDetalleChequeo;
 	
 	private List<ServicioRepuesto> buscarServicioRepuesto;
@@ -95,6 +97,14 @@ public class CotizacionController implements Serializable {
 		this.accionDetalleChequeo = accionDetalleChequeo;
 	}
 
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
 	@PostConstruct
 	public void init() {
 		this.detalleChequeo = new DetalleChequeo();
@@ -126,9 +136,9 @@ public class CotizacionController implements Serializable {
 
 	public void agregar() {
 		this.accionChequeo.setDiagnostico(this.chequeo.getDiagnostico());
-		System.out.println(accionChequeo.getDiagnostico());
 		detalleChequeoRepository.cotizacion(detalleChequeo,accionChequeo.getDiagnostico());
 		mostrarDetalleChequeo = detalleChequeoRepository.detalleSerRepuesto(accionChequeo.getDiagnostico());
+		this.setTotal(detalleChequeoRepository.totalCotizacion(accionChequeo.getDiagnostico()));
 		buscarServicioRepuesto = servicioRepuestoRepository.buscarServicioRepuesto(detalleChequeo);
 	}
 	
@@ -140,12 +150,14 @@ public class CotizacionController implements Serializable {
 	public void eliminar() {
 		detalleChequeoRepository.eliminarCotizacion(accionDetalleChequeo);
 		mostrarDetalleChequeo = detalleChequeoRepository.detalleSerRepuesto(accionChequeo.getDiagnostico());
+		this.setTotal(detalleChequeoRepository.totalCotizacion(accionChequeo.getDiagnostico()));
 	}
 	
 	public String cancelarCotizacion() {
 		detalleChequeoRepository.cancelarCotizacion(accionChequeo.getDiagnostico());
 		this.chequeo.setDiagnostico("");
 		mostrarDetalleChequeo = null;
+		this.setTotal(0.0);
 		return "chequeo?faces-redirect=true";
 	}
 }
