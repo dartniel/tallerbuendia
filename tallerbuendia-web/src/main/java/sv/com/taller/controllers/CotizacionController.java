@@ -104,9 +104,6 @@ public class CotizacionController implements Serializable {
 		this.detalles.setCantidad(0);
 	}
 	
-	public void modificar() {
-		
-	}
 	
 	// Se elimina cotizacion completa
 	public String cancelarCotizacion() {
