@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import sv.com.taller.entities.Chequeo;
@@ -26,6 +25,7 @@ public class CotizacionController implements Serializable {
 	private DetalleChequeo accionDetalles;
 	private String diagnostico;
 	private List<DetalleChequeo> mostrarDetalles;
+	private Double totalFinal;
 
 	public DetalleChequeo getDetalles() {
 		return detalles;
@@ -53,6 +53,14 @@ public class CotizacionController implements Serializable {
 
 	public List<DetalleChequeo> getMostrarDetalles() {
 		return mostrarDetalles;
+	}
+
+	public Double getTotalFinal() {
+		return totalFinal;
+	}
+
+	public void setTotalFinal(Double totalFinal) {
+		this.totalFinal = totalFinal;
 	}
 
 	@PostConstruct
@@ -86,34 +94,19 @@ public class CotizacionController implements Serializable {
 		cotizacionDao.cotizar(detalles);
 		// Mostramos los detalles de la cotizacion que se hizo
 		mostrarDetalles = cotizacionDao.buscar(detalles);
-
-	}
-	
-	public String cargarDatos() {
-		return "editCotizacion";
+		Double sumandoPrecios = cotizacionDao.totalCotizacion(diagnostico);
+		this.setTotalFinal(sumandoPrecios);
+		this.detalles.setServicioRepuesto(new ServicioRepuesto());
+		this.detalles.setCantidad(0);
 	}
 	
 	public void modificar() {
-		ServicioRepuesto obtenerServRep = null;
-		Chequeo obtenerChequeo = null;
-		// Obtenemos todo el registro de servicioRepuesto que seleccionamos en el modal
-		obtenerServRep = servicioRepuestoRepository.buscar(accionDetalles);
-		// Obtenemos todo el registro del chequeo buscandolo por medio del diagnostico
-		obtenerChequeo = chequeoRepository.buscar(diagnostico);
-		// Seteamos los paramentros de detalles
-		detalles.setServicioRepuesto(obtenerServRep);
-		detalles.setChequeo(obtenerChequeo);
-		// Guardamos
-		cotizacionDao.modificar(accionDetalles);
-		// Mostramos los detalles de la cotizacion que se hizo
-		mostrarDetalles = cotizacionDao.buscar(accionDetalles);
+		
 	}
 	
-	public void eliminar(int id) {
-		
-		// Eliminamos
-		System.out.println(id);
-		//cotizacionDao.eliminar(id);
-		//mostrarDetalles = cotizacionDao.buscar(detalles);
+	// Se elimina cotizacion completa
+	public String cancelarCotizacion() {
+		cotizacionDao.cancelarCotizacion(diagnostico);
+		return "chequeo?faces-redirect=true";
 	}
 }

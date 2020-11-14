@@ -95,4 +95,42 @@ public class CotizacionImp implements CotizacionDao {
 			entity.close();
 		}
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DetalleChequeo> mostrar() {
+		List<DetalleChequeo> obtenerCotizacion = null;
+		Query query = entity.createQuery("FROM DetalleChequeo as d");
+		obtenerCotizacion = query.getResultList();
+		return obtenerCotizacion;
+	}
+	
+	@Override
+	public Double totalCotizacion(String diagnostico) {
+		Query query = entity.createQuery(
+				"SELECT sum(dc.precioUnitario) FROM DetalleChequeo as dc WHERE dc.chequeo.diagnostico = :chequeo");
+		query.setParameter("chequeo", diagnostico);
+
+		System.out.println(query.getSingleResult());
+		Double total = (Double) query.getSingleResult();
+		return total;
+	}
+	
+	@Override
+	public void cancelarCotizacion(String diagnostico) {
+
+		Query query = entity.createQuery("FROM Chequeo as c WHERE c.diagnostico = :diagnostico");
+		query.setParameter("diagnostico", diagnostico);
+		Chequeo idChequeo = (Chequeo) query.getSingleResult();
+
+		try {
+			entity.getTransaction().begin();
+			entity.remove(idChequeo);
+			entity.getTransaction().commit();
+			System.out.println("Cotizacion Cancelada");
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity.close();
+		}
+	}
 }

@@ -15,4 +15,7 @@ public interface CotizacionDao {
 	public void eliminar(int id);
 	public void eliminarTodo(Chequeo chequeo);
 	public List<DetalleChequeo> buscar(DetalleChequeo cotizacion);
+	public List<DetalleChequeo> mostrar();
+	public Double totalCotizacion(String diagnostico);
+	public void cancelarCotizacion(String diagnostico);
 }

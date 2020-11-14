@@ -41,13 +41,15 @@
 								</div>
 								<h:form id="formEliminar">
 									<div class="modal-body">
-										<h3>Diagnostico:</h3>
+										<h:inputText a:type="hidden" value="#{Cotizacion.diagnostico}"/>
+										<h3>Diagnostico: #{Cotizacion.diagnostico}</h3>
 										<b>Desea cancelar todo?</b>
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">Cerrar</button>
-										<h:commandButton value="Aceptar" />
+										<h:commandButton value="Aceptar" class="btn btn-danger"
+										action="#{Cotizacion.cancelarCotizacion()}"/>
 									</div>
 								</h:form>
 							</div>
@@ -56,7 +58,7 @@
 				</div>
 
 				<div class="col-md-2">
-					<h3>Total:</h3>
+					<h3>Total: $#{Cotizacion.totalFinal}</h3>
 				</div>
 			</div>
 
@@ -64,43 +66,24 @@
 				<div class="row">
 					<div class="col-md-12">
 						<span> <b>Diagnostico:</b> <i>#{Cotizacion.diagnostico}</i>
-						</span><br/>
+						</span><br />
 					</div>
 				</div>
-			</div>
+			</div><br />
+			
 			<div class="row">
-				
-				
-				<h:dataTable var="m" value="#{Cotizacion.mostrarDetalles}">
-					<h:column>
-						<f:facet name="header">id</f:facet>
-						<h:outputLabel value="#{m.servicioRepuesto.servicio.nombreServicio}" />
-					</h:column>
-					
-					<h:column>
-						<f:facet name="header">Repuesto</f:facet>
-						<h:outputLabel value="#{m.servicioRepuesto.repuesto.nombre}" />
-					</h:column>
-					
-					<h:column>
-						<f:facet name="header">Cantidad</f:facet>
-						<h:outputLabel value="#{m.cantidad}" />
-					</h:column>
-					
-					<h:column>
-						<f:facet name="header">Precio</f:facet>
-						<h:outputLabel value="#{m.precioUnitario}" />
-					</h:column>
-					
-					<h:column>
-						<f:facet name="header"></f:facet>
-						<h:commandLink style="color:#E7A507; text-decoration:none;" 
-							class="fas fa-pen-square" action="editCotizacion">
-							<f:setPropertyActionListener value="#{m}"
-								target="#{Cotizacion.accionDetalles}" />
-						</h:commandLink>
-					</h:column>
-				</h:dataTable>
+				<ui:repeat var="m" value="#{Cotizacion.mostrarDetalles}" id="cotizaciones">
+					<div class="col-md-4">
+						<div class="card">
+							<div class="card-header">#{m.servicioRepuesto.servicio.nombreServicio}</div>
+							<div class="card-body">
+								<span class="card-text">Repuesto: #{m.servicioRepuesto.repuesto.nombre}</span><br/>
+								<span class="card-text">Cantidad: #{m.cantidad}</span><br/>
+								<span class="card-text">Precio: $ #{m.precioUnitario} </span><br/>
+							</div>
+						</div>
+					</div>
+				</ui:repeat>
 			</div>
 
 
@@ -125,8 +108,7 @@
 											<h:outputLabel value="Repuesto" />
 											<h:selectOneMenu class="form-control form-control-sm"
 												value="#{Cotizacion.detalles.servicioRepuesto.idServicioRepuesto}">
-												<f:selectItem itemLabel="Seleccionar Repuesto"
-													itemDisabled="true" />
+												<f:selectItem itemLabel="Seleccionar Repuesto" />
 												<f:selectItems value="#{ServicioRepuesto.servicioRepuesto}"
 													var="r" itemLabel="#{r.repuesto.nombre}"
 													itemValue="#{r.idServicioRepuesto}" />
@@ -145,7 +127,9 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">Cancelar</button>
-								<h:commandButton value="Añadir" class="btn btn-info" action="#{Cotizacion.agregar()}" />
+								<h:commandButton value="Añadir" class="btn btn-info"
+									action="#{Cotizacion.agregar()}" >
+								</h:commandButton>
 
 							</div>
 						</h:form>
