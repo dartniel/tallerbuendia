@@ -46,6 +46,7 @@ public class RepuestoController implements Serializable {
 		this.repuesto = new Repuesto();
 		this.repuesto.setMarcaProveedor(new MarcaProveedor());
 		this.accionRepuesto = new Repuesto();
+		this.accionRepuesto.setMarcaProveedor(new MarcaProveedor());
 	}
 
 	@EJB

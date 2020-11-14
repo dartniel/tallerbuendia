@@ -22,14 +22,14 @@
 				<div class="form-group">
 					<h:outputLabel value="Diagnostico" />
 					<h:inputTextarea class="form-control"
-						value="#{Cotizacion.chequeo.diagnostico}"
+						value="#{Chequeo.chequeo.diagnostico}"
 						a:placeholder="Ingresar el diagnostico" />
 				</div>
 
-				<h:commandButton action="#{Cotizacion.agregarChequeo()}"
+				<h:commandButton action="#{Chequeo.agregarChequeo()}"
 					value="Guardar">
 					<f:setPropertyActionListener
-						value="#{Cotizacion.chequeo.diagnostico}" target="#{Cotizacion.accionChequeo.diagnostico}" />
+						value="#{Chequeo.chequeo.diagnostico}" target="#{Cotizacion.diagnostico}" />
 				</h:commandButton>
 			</h:form>
 		</ui:define>
