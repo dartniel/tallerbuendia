@@ -1,36 +1,27 @@
 package sv.com.taller.controllers;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 import sv.com.taller.entities.Chequeo;
 import sv.com.taller.entities.DetalleChequeo;
-import sv.com.taller.entities.Servicio;
 import sv.com.taller.entities.ServicioRepuesto;
 import sv.com.taller.repositories.DetalleChequeoRepository;
 import sv.com.taller.repositories.ServicioRepuestoRepository;
 
 @Named("ServicioRepuesto")
-@ViewScoped
+@RequestScoped
 public class ServicioRepuestoController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private List<Servicio> servicio;
-
-	private List<ServicioRepuesto> repuesto;
-
+	private List<ServicioRepuesto> servicioRepuesto;
 	private DetalleChequeo detalleChequeo;
-
-	public List<ServicioRepuesto> getRepuesto() {
-		return repuesto;
-	}
 
 	public DetalleChequeo getDetalleChequeo() {
 		return detalleChequeo;
@@ -53,14 +44,10 @@ public class ServicioRepuestoController implements Serializable {
 	@EJB
 	private DetalleChequeoRepository detalleChequeoRepository;
 
-	public List<Servicio> getServicio() {
-		servicio = servicioRepuestoRepository.mostrarServcio();
-		return servicio;
+	public List<ServicioRepuesto> getServicioRepuesto() {
+		servicioRepuesto = servicioRepuestoRepository.mostrar();
+		return servicioRepuesto;
 	}
 
-	public void mostrarRepuesto() {
-		repuesto = servicioRepuestoRepository
-				.mostrarRepuesto(detalleChequeo.getServicioRepuesto().getServicio().getNombreServicio());
-	}
-
+	
 }

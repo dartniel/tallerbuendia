@@ -5,157 +5,112 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+<<<<<<< HEAD
 import javax.enterprise.context.SessionScoped;
+=======
+import javax.enterprise.context.RequestScoped;
+>>>>>>> cotizacion
 import javax.inject.Named;
 
 import sv.com.taller.entities.Chequeo;
-import sv.com.taller.entities.Cliente;
 import sv.com.taller.entities.DetalleChequeo;
-import sv.com.taller.entities.Servicio;
 import sv.com.taller.entities.ServicioRepuesto;
 import sv.com.taller.repositories.ChequeoRepository;
-import sv.com.taller.repositories.DetalleChequeoRepository;
+import sv.com.taller.repositories.CotizacionDao;
 import sv.com.taller.repositories.ServicioRepuestoRepository;
 
 @Named("Cotizacion")
-@SessionScoped
+@RequestScoped
 public class CotizacionController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	private List<Servicio> servicio;
-
-	private List<ServicioRepuesto> repuesto;
-
-	private DetalleChequeo detalleChequeo;
 	
-	private DetalleChequeo accionDetalleChequeo;
-	
-	private String nombreServicio;
-	
-	private Chequeo chequeo;
-	
-	private Chequeo accionChequeo;
-	
-	private Double total;
-	
-	private List<DetalleChequeo> mostrarDetalleChequeo;
-	
-	private List<ServicioRepuesto> buscarServicioRepuesto;
+	private DetalleChequeo detalles;
+	private DetalleChequeo accionDetalles;
+	private String diagnostico;
+	private List<DetalleChequeo> mostrarDetalles;
+	private Double totalFinal;
 
-	public List<ServicioRepuesto> getRepuesto() {
-		return repuesto;
+	public DetalleChequeo getDetalles() {
+		return detalles;
 	}
 
-	public DetalleChequeo getDetalleChequeo() {
-		return detalleChequeo;
+	public void setDetalles(DetalleChequeo detalles) {
+		this.detalles = detalles;
 	}
 
-	public void setDetalleChequeo(DetalleChequeo detalleChequeo) {
-		this.detalleChequeo = detalleChequeo;
+	public DetalleChequeo getAccionDetalles() {
+		return accionDetalles;
 	}
 
-	public String getNombreServicio() {
-		return nombreServicio;
+	public void setAccionDetalles(DetalleChequeo accionDetalles) {
+		this.accionDetalles = accionDetalles;
 	}
 
-	public void setNombreServicio(String nombreServicio) {
-		this.nombreServicio = nombreServicio;
+	public String getDiagnostico() {
+		return diagnostico;
 	}
 
-	public Chequeo getChequeo() {
-		return chequeo;
+	public void setDiagnostico(String diagnostico) {
+		this.diagnostico = diagnostico;
 	}
 
-	public void setChequeo(Chequeo chequeo) {
-		this.chequeo = chequeo;
+	public List<DetalleChequeo> getMostrarDetalles() {
+		return mostrarDetalles;
 	}
 
-	public Chequeo getAccionChequeo() {
-		return accionChequeo;
+	public Double getTotalFinal() {
+		return totalFinal;
 	}
 
-	public void setAccionChequeo(Chequeo accionChequeo) {
-		this.accionChequeo = accionChequeo;
-	}
-	
-	public List<DetalleChequeo> getMostrarDetalleChequeo() {
-		return mostrarDetalleChequeo;
-	}
-
-	public List<ServicioRepuesto> getBuscarServicioRepuesto() {
-		return buscarServicioRepuesto;
-	}
-
-	public DetalleChequeo getAccionDetalleChequeo() {
-		return accionDetalleChequeo;
-	}
-
-	public void setAccionDetalleChequeo(DetalleChequeo accionDetalleChequeo) {
-		this.accionDetalleChequeo = accionDetalleChequeo;
-	}
-
-	public Double getTotal() {
-		return total;
-	}
-
-	public void setTotal(Double total) {
-		this.total = total;
+	public void setTotalFinal(Double totalFinal) {
+		this.totalFinal = totalFinal;
 	}
 
 	@PostConstruct
 	public void init() {
-		this.detalleChequeo = new DetalleChequeo();
-		this.detalleChequeo.setChequeo(new Chequeo());
-		this.detalleChequeo.setServicioRepuesto(new ServicioRepuesto());
-		this.chequeo = new Chequeo();
-		this.chequeo.setCliente(new Cliente());
-		this.accionChequeo = new Chequeo();
-		this.accionChequeo.setCliente(new Cliente());
+		this.detalles = new DetalleChequeo();
+		this.detalles.setChequeo(new Chequeo());
+		this.detalles.setServicioRepuesto(new ServicioRepuesto());
+		
 	}
 	
 	@EJB
 	private ServicioRepuestoRepository servicioRepuestoRepository;
-
+	
 	@EJB
-	private DetalleChequeoRepository detalleChequeoRepository;
+	private CotizacionDao cotizacionDao;
 	
 	@EJB
 	private ChequeoRepository chequeoRepository;
-
-	public List<Servicio> getServicio() {
-		servicio = servicioRepuestoRepository.mostrarServcio();
-		return servicio;
-	}
-
-	public void mostrarRepuesto() {
-		repuesto = servicioRepuestoRepository.mostrarRepuesto(nombreServicio);
-	}
-
+	
 	public void agregar() {
-		this.accionChequeo.setDiagnostico(this.chequeo.getDiagnostico());
-		detalleChequeoRepository.cotizacion(detalleChequeo,accionChequeo.getDiagnostico());
-		mostrarDetalleChequeo = detalleChequeoRepository.detalleSerRepuesto(accionChequeo.getDiagnostico());
-		this.setTotal(detalleChequeoRepository.totalCotizacion(accionChequeo.getDiagnostico()));
-		buscarServicioRepuesto = servicioRepuestoRepository.buscarServicioRepuesto(detalleChequeo);
+		ServicioRepuesto obtenerServRep = null;
+		Chequeo obtenerChequeo = null;
+		// Obtenemos todo el registro de servicioRepuesto que seleccionamos en el modal
+		obtenerServRep = servicioRepuestoRepository.buscar(detalles);
+		// Obtenemos todo el registro del chequeo buscandolo por medio del diagnostico
+		obtenerChequeo = chequeoRepository.buscar(diagnostico);
+		// Seteamos los paramentros de detalles
+		detalles.setServicioRepuesto(obtenerServRep);
+		detalles.setChequeo(obtenerChequeo);
+		// Guardamos
+		cotizacionDao.cotizar(detalles);
+		// Mostramos los detalles de la cotizacion que se hizo
+		mostrarDetalles = cotizacionDao.buscar(detalles);
+		Double sumandoPrecios = cotizacionDao.totalCotizacion(diagnostico);
+		this.setTotalFinal(sumandoPrecios);
+		this.detalles.setServicioRepuesto(new ServicioRepuesto());
+		this.detalles.setCantidad(0);
 	}
 	
-	public String agregarChequeo() {
-		chequeoRepository.agregarChequeo(chequeo);
-		return "cotizacion";
+	public void modificar() {
+		
 	}
 	
-	public void eliminar() {
-		detalleChequeoRepository.eliminarCotizacion(accionDetalleChequeo);
-		mostrarDetalleChequeo = detalleChequeoRepository.detalleSerRepuesto(accionChequeo.getDiagnostico());
-		this.setTotal(detalleChequeoRepository.totalCotizacion(accionChequeo.getDiagnostico()));
-	}
-	
+	// Se elimina cotizacion completa
 	public String cancelarCotizacion() {
-		detalleChequeoRepository.cancelarCotizacion(accionChequeo.getDiagnostico());
-		this.chequeo.setDiagnostico("");
-		mostrarDetalleChequeo = null;
-		this.setTotal(0.0);
+		cotizacionDao.cancelarCotizacion(diagnostico);
 		return "chequeo?faces-redirect=true";
 	}
 }

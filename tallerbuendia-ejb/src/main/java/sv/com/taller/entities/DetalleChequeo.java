@@ -4,15 +4,17 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name="detalle_chequeo")
-@NamedQuery(name="DetalleChequeo.findAll", query="SELECT d FROM DetalleChequeo d")
+@Table(name = "detalle_chequeo")
+@NamedQuery(name = "DetalleChequeo.findAll", query = "SELECT d FROM DetalleChequeo d")
 public class DetalleChequeo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	public DetalleChequeo() {}
-	
-	public DetalleChequeo(DetalleChequeo detalleChequeo) {}
-	
+	public DetalleChequeo() {
+	}
+
+	public DetalleChequeo(DetalleChequeo detalleChequeo) {
+	}
+
 	public DetalleChequeo(ServicioRepuesto servicioRepuesto) {
 		this.servicioRepuesto = servicioRepuesto;
 	}
@@ -25,25 +27,25 @@ public class DetalleChequeo implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID_DETALLE_CHEQUEO")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_DETALLE_CHEQUEO")
 	private int idDetalleChequeo;
 
 	private int cantidad;
 
 	private int estado = 1;
 
-	@Column(name="PRECIO_UNITARIO")
+	@Column(name = "PRECIO_UNITARIO")
 	private float precioUnitario;
 
-	//bi-directional many-to-one association to Chequeo
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_CHEQUEO")
+	// bi-directional many-to-one association to Chequeo
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_CHEQUEO")
 	private Chequeo chequeo;
 
-	//bi-directional many-to-one association to ServicioRepuesto
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_SERVICIO_REPUESTO")
+	// bi-directional many-to-one association to ServicioRepuesto
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_SERVICIO_REPUESTO")
 	private ServicioRepuesto servicioRepuesto;
 
 	public int getIdDetalleChequeo() {
@@ -97,7 +99,7 @@ public class DetalleChequeo implements Serializable {
 	@Override
 	public String toString() {
 		return "DetalleChequeo [idDetalleChequeo=" + idDetalleChequeo + ", cantidad=" + cantidad + ", estado=" + estado
-				+ ", precioUnitario=" + precioUnitario + ", chequeo=" + chequeo.getIdChequeo() + ", servicioRepuesto="
-				+ servicioRepuesto.getIdServicioRepuesto() + "]";
+				+ ", precioUnitario=" + precioUnitario + ", chequeo=" + chequeo + ", servicioRepuesto="
+				+ servicioRepuesto + "]";
 	}
 }

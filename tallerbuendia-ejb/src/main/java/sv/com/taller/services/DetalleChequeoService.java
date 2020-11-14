@@ -77,8 +77,8 @@ public class DetalleChequeoService implements DetalleChequeoRepository {
 			detalles.getChequeo().setIdChequeo(id.getIdChequeo());
 
 			entity.getTransaction().begin();
-			DetalleChequeo cotizacion = new DetalleChequeo(detalles.getCantidad(), detalles.getPrecioUnitario(),
-					detalles.getChequeo(), detalles.getServicioRepuesto());
+			/* DetalleChequeo cotizacion = new DetalleChequeo(detalles.getCantidad(), detalles.getPrecioUnitario(),
+					detalles.getServicioRepuesto());*/
 			entity.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -102,10 +102,10 @@ public class DetalleChequeoService implements DetalleChequeoRepository {
 
 		try {
 			entity.getTransaction().begin();
-			DetalleChequeo detalles = new DetalleChequeo(cotizacion.getCantidad(), totalServicioRepuesto,
-					chequeo(diagnostico), cotizacion.getServicioRepuesto());
-			entity.persist(detalles);
-			System.out.println(detalles);
+			/*DetalleChequeo detalles = new DetalleChequeo(cotizacion.getCantidad(), totalServicioRepuesto,
+					cotizacion.getServicioRepuesto());*/
+			// entity.persist(detalles);
+			// System.out.println(detalles);
 			System.out.println("GUARDADO");
 
 			entity.getTransaction().commit();
@@ -114,12 +114,12 @@ public class DetalleChequeoService implements DetalleChequeoRepository {
 			entity.close();
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<DetalleChequeo> detalleSerRepuesto(String diagnostico) {
 		List<DetalleChequeo> detalles = null;
-		
+
 		Query query = entity.createQuery("FROM DetalleChequeo as dc WHERE dc.chequeo = :chequeo");
 		query.setParameter("chequeo", chequeo(diagnostico));
 		detalles = query.getResultList();
@@ -155,7 +155,7 @@ public class DetalleChequeoService implements DetalleChequeoRepository {
 			entity.remove(cotizacion);
 			entity.getTransaction().commit();
 			System.out.println("Eliminado");
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			entity.close();
 		}
@@ -163,31 +163,31 @@ public class DetalleChequeoService implements DetalleChequeoRepository {
 
 	@Override
 	public void cancelarCotizacion(String diagnostico) {
-		
+
 		Query query = entity.createQuery("FROM Chequeo as c WHERE c.diagnostico = :diagnostico");
 		query.setParameter("diagnostico", diagnostico);
 		Chequeo idChequeo = (Chequeo) query.getSingleResult();
-		
+
 		try {
 			entity.getTransaction().begin();
 			entity.remove(idChequeo);
 			entity.getTransaction().commit();
 			System.out.println("Cotizacion Cancelada");
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			entity.close();
 		}
 	}
 
 	@Override
-	public Double  totalCotizacion(String diagnostico) {
-		Query query= entity.createQuery("SELECT sum(dc.precioUnitario) FROM DetalleChequeo as dc WHERE dc.chequeo.diagnostico = :chequeo");
+	public Double totalCotizacion(String diagnostico) {
+		Query query = entity.createQuery(
+				"SELECT sum(dc.precioUnitario) FROM DetalleChequeo as dc WHERE dc.chequeo.diagnostico = :chequeo");
 		query.setParameter("chequeo", diagnostico);
-		
+
 		System.out.println(query.getSingleResult());
-		Double  total = (Double ) query.getSingleResult();
+		Double total = (Double) query.getSingleResult();
 		return total;
 	}
 
-	
 }

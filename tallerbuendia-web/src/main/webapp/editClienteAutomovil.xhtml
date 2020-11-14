@@ -202,10 +202,11 @@
 							</div>
 						</div>
 					</div>
-						<h:commandLink class="btn btn-primary" onclick="$('#modalModificarCliente').modal('show');" value="Modificar Cliente">
-							<f:ajax execute="@this" render="modalModificarCliente" />
-							<i class="fas fa-wrench"></i>
-						</h:commandLink>
+						<h:commandButton class="btn btn-primary" onclick="$('#modalModificarCliente').modal('show'); return false;"
+						a:type="#{clienteController.typeButton}" value="Modificar Cliente">
+							
+						</h:commandButton>
+						
 						<div class="modal fade" id="modalModificarCliente" tabindex="-1" aria-labelledby="modalModificarClienteLabel" aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content">
@@ -219,7 +220,7 @@
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 										<h:commandButton a:type="#{clienteController.typeButton}" class="btn btn-primary" action="#{clienteController.modificarCliente()}" value="Guardar" 
-										id="buttonCliente" onclick="$('#modalModificarCliente').modal('hide');"/>
+										id="buttonCliente"/>
 									</div>
 								</div>
 							</div>
