@@ -5,11 +5,9 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-<<<<<<< HEAD
-import javax.enterprise.context.SessionScoped;
-=======
+
 import javax.enterprise.context.RequestScoped;
->>>>>>> cotizacion
+
 import javax.inject.Named;
 
 import sv.com.taller.entities.Chequeo;
