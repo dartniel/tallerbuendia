@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import sv.com.taller.JPAUtils.JPAUtil;
 import sv.com.taller.entities.Automovil;
 import sv.com.taller.entities.Cliente;
+import sv.com.taller.entities.Repuesto;
 import sv.com.taller.repositories.AutomovilRepository;
 
 @Stateless
@@ -43,8 +44,19 @@ public class AutomovilService implements AutomovilRepository{
 	}
 	@Override
 	public void modificarAutomovil(Automovil automovil) {
-	
+		try {
+			entity.getTransaction().begin();
+			entity.merge(automovil);
+			entity.getTransaction().commit();
+			System.out.println("Automovil Modificado");
+		}catch(Exception e) {
+			entity.close();
+			e.printStackTrace();
+		}
+		
+	}
+
 		
 	}
 	
-}
+

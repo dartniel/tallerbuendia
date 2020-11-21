@@ -30,7 +30,7 @@
 			<div id="mensaje">
 				<h:form id="formModificarCliente">
 					<div class="modal-body">
-					<h:messages globalOnly="true" id="mensajeExito" />
+						<h:messages globalOnly="true" id="mensajeExito" />
 						<div class="row">
 							<div class="col-md-3">
 								<label for="nombreCliente">Nombre Del Cliente</label>
@@ -64,7 +64,7 @@
 								</div>
 								<div id="apellidoClienteDivModificar"></div>
 							</div>
-							
+
 							<div class="col-md-3">
 								<label for="fechaNacimientoCliente">Fecha de Nacimiento</label>
 								<div class="input-group mb-3">
@@ -82,7 +82,7 @@
 								</div>
 								<div id="fechaNacimientoDivModificar"></div>
 							</div>
-							
+
 							<div class="col-md-3">
 								<label for="dui">DUI</label>
 								<div class="input-group mb-3">
@@ -131,7 +131,7 @@
 								</div>
 								<div id="telefonoClienteDivModificar"></div>
 							</div>
-							
+
 							<div class="col-md-3">
 								<label for="lugarTrabajo">Lugar de Trabajo</label>
 								<div class="input-group mb-3">
@@ -148,7 +148,7 @@
 								</div>
 								<div id="lugarTrabajoDivModificar"></div>
 							</div>
-							
+
 							<div class="col-md-3">
 								<label for="telefonoTrabajo">Teléfono de Trabajo</label>
 								<div class="input-group mb-3">
@@ -167,7 +167,7 @@
 								<div id="telefonoTrabajoDivModificar"></div>
 							</div>
 						</div>
-						
+
 						<div class="row">
 							<div class="col-md-3">
 								<label for="tipoSeguro">Tipo de Seguro</label>
@@ -202,30 +202,36 @@
 							</div>
 						</div>
 					</div>
-						<h:commandButton class="btn btn-primary" onclick="$('#modalModificarCliente').modal('show'); return false;"
+					<h:commandButton class="btn btn-primary"
+						onclick="$('#modalModificarCliente').modal('show'); return false;"
 						a:type="#{clienteController.typeButton}" value="Modificar Cliente">
-							
-						</h:commandButton>
-						
-						<div class="modal fade" id="modalModificarCliente" tabindex="-1" aria-labelledby="modalModificarClienteLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Modificar</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<!--<span aria-hidden="true">&times;</span> -->
-										</button>
-									</div>
-									<div class="modal-body">¿Desea modificar este Cliente?</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-										<h:commandButton a:type="#{clienteController.typeButton}" class="btn btn-primary" action="#{clienteController.modificarCliente()}" value="Guardar" 
-										id="buttonCliente"/>
-									</div>
+
+					</h:commandButton>
+
+					<div class="modal fade" id="modalModificarCliente" tabindex="-1"
+						aria-labelledby="modalModificarClienteLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Modificar</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<!--<span aria-hidden="true">&times;</span> -->
+									</button>
+								</div>
+								<div class="modal-body">¿Desea modificar este Cliente?</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Cerrar</button>
+									<h:commandButton a:type="#{clienteController.typeButton}"
+										class="btn btn-primary"
+										action="#{clienteController.modificarCliente()}"
+										value="Guardar" id="buttonCliente" />
 								</div>
 							</div>
 						</div>
-					
+					</div>
+
 				</h:form>
 			</div>
 
@@ -240,7 +246,7 @@
 			</div>
 			<h:form>
 				<h:dataTable var="a" value="#{clienteController.mostrarAutomovil}"
-					class="table table-sm">
+					class="table table-sm" id="dataVehiculo">
 					<h:column>
 						<f:facet name="header">Codigo</f:facet>
 						#{a.idAutomovil}
@@ -272,13 +278,14 @@
 					</h:column>
 
 					<h:column>
-						<f:facet name="header">Fecha Registro</f:facet>
-						#{a.fechaRegistro}
-					</h:column>
-
-					<h:column>
 						<f:facet name="header"></f:facet>
-						<i class="fas fa-edit"></i>
+						<h:commandLink style="color:black; text-decoration:none;"
+							class="fas fa-edit"
+							onclick="$('#modalModificarVehiculo').modal('show');">
+							<f:setPropertyActionListener value="#{a}"
+								target="#{Automovil.accionAutomovil}" />
+							<f:ajax execute="@this" render=":formModificarVehiculo" />
+						</h:commandLink>
 						<i class="fas fa-trash"></i>
 					</h:column>
 				</h:dataTable>
@@ -297,12 +304,62 @@
 						<div id="mensaje">
 							<h:form id="formModificarVehiculo">
 								<div class="modal-body">
-									<p>inputs</p>
+									<div class="row">
+
+										<h:inputText a:type="hidden" class="form-control"
+											value="#{Automovil.accionAutomovil.idAutomovil}" />
+
+										<h:inputText a:type="hidden" class="form-control"
+											value="#{Automovil.accionAutomovil.cliente.idCliente}" />
+
+
+
+										<div class="col-md-6">
+											<h:outputLabel value="Color" />
+											<h:inputText a:type="text" id="color" class="form-control"
+												value="#{Automovil.accionAutomovil.color}" />
+										</div>
+
+										<div class="col-md-6">
+											<h:outputLabel value="Placa" />
+											<h:inputText a:type="text" id="placa" class="form-control"
+												value="#{Automovil.accionAutomovil.placa}" />
+										</div>
+
+										<div class="col-md-6">
+											<h:outputLabel value="Chasis" />
+											<h:inputText a:type="text" id="chasis" class="form-control"
+												value="#{Automovil.accionAutomovil.chasis}" />
+										</div>
+
+										<div class="col-md-6">
+											<h:outputLabel value="Observacion" />
+											<h:inputText a:type="text" id="observacion"
+												class="form-control"
+												value="#{Automovil.accionAutomovil.observacion}" />
+										</div>
+
+										<div class="col-md-6">
+											<h:outputLabel value="Marca" />
+											<h:selectOneMenu id="modeloCarro" class="form-control"
+												value="#{Automovil.accionAutomovil.detalleCarro.idDetalleCarro}">
+												<f:selectItems
+													value="#{detalleCarroController.mostrarMarca}" var="a"
+													itemLabel="#{a.marcarNombre}"
+													itemValue="#{a.idDetalleCarro}" />
+											</h:selectOneMenu>
+										</div>
+									</div>
 								</div>
 
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">Cerrar</button>
+
+									<h:commandButton class="btn btn-primary" value="Guardar"
+										onclick="$('#modalModificarVehiculo').modal('hide');"
+										action="#{Automovil.modificarAutomovil()}">
+									</h:commandButton>
 								</div>
 							</h:form>
 						</div>

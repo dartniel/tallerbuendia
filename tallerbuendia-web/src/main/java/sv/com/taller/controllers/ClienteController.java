@@ -23,6 +23,7 @@ public class ClienteController implements Serializable {
 
 	private Automovil automovil;
 	
+
 	private Cliente accionCliente;
 	
 	private List<Cliente> mostrarCliente;
@@ -130,6 +131,7 @@ public class ClienteController implements Serializable {
 	public String loadCliente() {
 		return "editClienteAutomovil";
 	}
+
 
 	public void enableEdit (){
 		if(this.enable == true) {
