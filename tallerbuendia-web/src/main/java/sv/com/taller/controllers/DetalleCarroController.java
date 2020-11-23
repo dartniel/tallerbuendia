@@ -50,6 +50,7 @@ public class DetalleCarroController implements Serializable {
 		mostrarModelo = detalleCarroRepository.mostrarModelo(detalleCarro);
 	}
 	public List<DetalleCarro> getMostrarModelo() {
+		
 		return mostrarModelo;
 	}
 
