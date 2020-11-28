@@ -24,7 +24,7 @@ public class DetalleChequeoService implements DetalleChequeoRepository {
 	@Override
 	public List<DetalleChequeo> mostrar(Chequeo chequeo) {
 		List<DetalleChequeo> detalleChequeo = null;
-		Query query = entity.createQuery("FROM DetalleChequeo d WHERE d.chequeo = :chequeo");
+		Query query = entity.createQuery("FROM DetalleChequeo d WHERE d.chequeo = :chequeo AND d.estado = 1");
 		query.setParameter("chequeo", chequeo);
 		detalleChequeo = query.getResultList();
 		return detalleChequeo;
@@ -49,6 +49,7 @@ public class DetalleChequeoService implements DetalleChequeoRepository {
 				valorExistencia.setCantidad(nuevaExistencia);
 				entity.getTransaction().begin();
 				entity.merge(valorExistencia);
+				entity.merge(detalleChequeo);
 				entity.getTransaction().commit();
 			}
 		} catch (Exception e) {

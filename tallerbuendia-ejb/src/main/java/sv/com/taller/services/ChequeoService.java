@@ -33,7 +33,7 @@ public class ChequeoService implements ChequeoRepository {
 	@Override
 	public List<Chequeo> mostrar() {
 		List<Chequeo> chequeos = null;
-		Query query = entity.createQuery("FROM Chequeo c");
+		Query query = entity.createQuery("FROM Chequeo as c WHERE c.estado = 1");
 		chequeos = query.getResultList();
 		return chequeos;
 	}
@@ -45,6 +45,19 @@ public class ChequeoService implements ChequeoRepository {
 		query.setParameter("diagnostico", diagnostico);
 		resultado = (Chequeo) query.getSingleResult();
 		return resultado;
+	}
+
+	@Override
+	public void modificar(Chequeo chequeo) {
+		chequeo.setEstado(0);
+		try {
+			entity.getTransaction().begin();
+			entity.merge(chequeo);
+			entity.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity.close();
+		}
 	}
 
 

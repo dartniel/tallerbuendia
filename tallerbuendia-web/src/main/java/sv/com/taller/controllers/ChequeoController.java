@@ -60,6 +60,11 @@ public class ChequeoController implements Serializable {
 	}
 	
 	public void cambioExistencia(DetalleChequeo detalleChequeo) {
+		detalleChequeo.setEstado(0);
 		detalleChequeoRepository.actualizarExistencia(detalleChequeo);
+	}
+	
+	public void eliminarTarjeta() {
+		chequeoRepository.modificar(chequeo);
 	}
 }

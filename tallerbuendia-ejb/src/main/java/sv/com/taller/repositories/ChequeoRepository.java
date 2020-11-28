@@ -10,7 +10,7 @@ import sv.com.taller.entities.Chequeo;
 public interface ChequeoRepository {
 
 	public void agregarChequeo(Chequeo chequeo);
-	
+	public void modificar(Chequeo chequeo);
 	public List<Chequeo> mostrar();
 	public Chequeo buscar(String diagnostico);
 }
