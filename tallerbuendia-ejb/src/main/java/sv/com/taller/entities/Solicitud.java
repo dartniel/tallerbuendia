@@ -13,7 +13,16 @@ import java.util.Date;
 @NamedQuery(name="Solicitud.findAll", query="SELECT s FROM Solicitud s")
 public class Solicitud implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	public Solicitud() {}
+	
+	public Solicitud(Date fecha, String descripcion, int cantidad, Proveedor proveedor, Empleado empleado) {
+		this.fecha = fecha;
+		this.descripcion = descripcion;
+		this.cantidad = cantidad;
+		this.proveedor = proveedor;
+		this.empleado = empleado;
+		
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_SOLICITUD")
@@ -36,8 +45,7 @@ public class Solicitud implements Serializable {
 	@JoinColumn(name="ID_PROVEEDOR")
 	private Proveedor proveedor;
 
-	public Solicitud() {
-	}
+
 
 	public int getIdSolicitud() {
 		return this.idSolicitud;

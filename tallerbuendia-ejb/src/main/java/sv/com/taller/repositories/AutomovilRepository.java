@@ -12,6 +12,7 @@ import sv.com.taller.entities.Cliente;
 public interface AutomovilRepository {
 	
 	public void agregarAutomovil(Automovil automovil, Cliente cliente);
+	public void agregarAutomovilUnico(Automovil automovil);
 	public List<Automovil> mostrarAutomovil(String idCliente);
 	public void modificarAutomovil(Automovil automovil);
 }

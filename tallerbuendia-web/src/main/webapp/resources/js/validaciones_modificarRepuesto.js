@@ -1,23 +1,23 @@
-const button1 = document.getElementById('button1');
+const button1 = document.getElementById('formModificar:button1');
 const formularioModificarRepuesto = document.getElementById('formModificar');
 
 // Inputs
-const idRepuestoModificar = document.getElementById('idRepuesto');
-const nombreModificar= document.getElementById('nombre');
-const proveedorModificar= document.getElementById(':proveedor');
-const marcaRepuestoModificar = document.getElementById('marcaRepuesto');
-const costoModificar = document.getElementById('costo');
-const precioVentaModificar= document.getElementById('precioVenta');
-const cantidadModificar = document.getElementById('cantidad');
-const fechaAdquisicionModificar = document.getElementById('fechaAdquisicion');
+const idRepuestoModificar = document.getElementById('formModificar:idRepuesto');
+const nombreModificar= document.getElementById('formModificar:nombre');
+const proveedorModificar= document.getElementById('formModificar:proveedor');
+const marcaRepuestoModificar = document.getElementById('formModificar:marcaRepuesto');
+const costoModificar = document.getElementById('formModificar:costo');
+const precioVentaModificar= document.getElementById('formModificar:precioVenta');
+const cantidadModificar = document.getElementById('formModificar:cantidad');
+const fechaAdquisicionModificar = document.getElementById('formModificar:fechaAdquisicion');
 const mensajeExitoRepuestoModificar = document.getElementById('mensajeExito');
 
 
 
-	// Instanciar la InterfazRepuesto
+	// Instanciar la InterfazModificarRepuesto
 	button1.addEventListener('click', function(e){
-	    // Instanciar la InterfazRepuesto
-	    const ui = new InterfazRepuesto();
+	    // Instanciar la InterfazModificarRepuesto
+	    const ui = new InterfazModificarRepuesto();
 	    // Comprobar que los campos no estem vacíos
 	    if( nombre.value === '' ||  costo.value === '' || precioVenta.value === '' || cantidad.value === '' || fechaAdquisicion === '' || proveedor.value === ''){
 	       ui.camposVacios('No pueden quedar campos vacíos', 'error');
@@ -42,7 +42,7 @@ const mensajeExitoRepuestoModificar = document.getElementById('mensajeExito');
 	})
 
 	document.addEventListener('DOMContentLoaded', function(e){
-	    const ui = new InterfazRepuesto();
+	    const ui = new InterfazModificarRepuesto();
 	    if(mensajeExitoRepuesto.firstChild){
 	        ui.camposVacios(mensajeExitoRepuesto.textContent, 'exito');
 	        mensajeExitoRepuesto.removeChild(mensajeExitoRepuesto.firstChild)
@@ -53,92 +53,91 @@ const mensajeExitoRepuestoModificar = document.getElementById('mensajeExito');
 	   cantidad.value = '';
 	})
 
-	nombre.addEventListener('blur', function(e){
-	    const ui = new InterfazRepuesto();
+	nombreModificar.addEventListener('blur', function(e){
+	    const ui = new InterfazModificarRepuesto();
 
-	    if(nombre.value.length > 0){
+	    if(nombreModificar.value.length > 0){
 	        document.querySelector('.nombreClass').remove();
 	    }
 
-	    if(nombre.value.length <= 0){
+	    if(nombreModificar.value.length <= 0){
 	        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','nombreDiv', 'nombreClass');
 	    }
 	})
-	fechaAdquisicion.addEventListener('blur', function(e){
-	    const ui = new InterfazRepuesto();
-	    if(fechaAdquisicion.value.length <= 0){
+	fechaAdquisicionModificar.addEventListener('blur', function(e){
+	    const ui = new InterfazModificarRepuesto();
+	    if(fechaAdquisicionModificar.value.length <= 0){
 	        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','fechaAdquisicionDiv', 'fechaAdquisicionClass');
 	    }
-	    if(fechaAdquisicion.value.length > 0){
+	    if(fechaAdquisicionModificar.value.length > 0){
 	        document.querySelector('.fechaAdquisicionClass').remove();
 	    }
 	})
 
-	costo.addEventListener('blur', function(e){
-	    const ui = new InterfazRepuesto();
-	    const costoFloat = parseFloat(costo.value);
-	    if(costo.value.length > 0){
+	costoModificar.addEventListener('blur', function(e){
+	    const ui = new InterfazModificarRepuesto();
+	    if(costoModificar.value.length > 0){
 	        document.querySelector('.costoClass').remove();
 	    }
 
-	    if(costo.value.length <= 0){
+	    if(costoModificar.value.length <= 0){
 	        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','costoDiv','costoClass');
 	    } 
 	 
-	    if(costo.value === '0.0'){
+	    if(costoModificar.value === '0.0'){
 	        ui.inputMensaje('El costo no puede ser 0', 'error', 'costoDiv', 'costoClass');
 	        e.preventDefault();
 	    }
-	    if(costo.value === '0'){
+	    if(costoModificar.value === '0'){
 	        ui.inputMensaje('El costo no puede ser 0', 'error', 'costoDiv', 'costoClass');
 	        e.preventDefault();
 	    }
 	  
 	    
 	})
-	precioVenta.addEventListener('blur', function(e){
-	    const ui = new InterfazRepuesto();
-	    if(precioVenta.value < 0){
+	precioVentaModificar.addEventListener('blur', function(e){
+	    const ui = new InterfazModificarRepuesto();
+	    if(precioVentaModificar.value < 0){
 	        ui.inputMensaje('El precio de venta no puede ser negativo', 'error', 'precioVentaDiv', 'precioVentaClass');
 	        e.preventDefault();
 	    }
-	    if(precioVenta.value.length > 0){
+	    if(precioVentaModificar.value.length > 0){
 	        document.querySelector('.precioVentaClass').remove();
 	    }
 
-	    if(precioVenta.value.length <= 0){
+	    if(precioVentaModificar.value.length <= 0){
 	        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','precioVentaDiv', 'precioVentaClass');
 	    }
 	    
-	    if(precioVenta.value === '0.0'){
+	    if(precioVentaModificar.value === '0.0'){
 	        ui.inputMensaje('El precio de venta no puede ser 0', 'error', 'precioVentaDiv', 'precioVentaClass');
 	        e.preventDefault();
 	    }
-	    if(precioVenta.value === '0'){
+	    if(precioVentaModificar.value === '0'){
 	        ui.inputMensaje('El precio de venta no puede ser 0', 'error', 'precioVentaDiv', 'precioVentaClass');
 	        e.preventDefault();
 	    }
 	    
 	})
 
-	cantidad.addEventListener('blur', function(e){
-	    const ui = new InterfazRepuesto();
-	    if(cantidad.value === '0' ){
+	cantidadModificar.addEventListener('blur', function(e){
+	    const ui = new InterfazModificarRepuesto();
+	    if(cantidadModificar.value === '0' ){
 	        ui.inputMensaje('La cantidad no puede ser 0', 'error', 'cantidadDiv', 'cantidadClass');
 	        e.preventDefault();
 	    }
-	    if(cantidad.value.length > 0){
+	    if(cantidadModificar.value.length > 0){
 	        document.querySelector('.cantidadClass').remove();
 	    }
 
-	    if(cantidad.value.length <= 0){
+	    if(cantidadModificar.value.length <= 0){
 	        ui.inputMensaje('Este campo no puede quedar vacío.', 'error','cantidadDiv', 'cantidadClass');
 	    }
 	    
 	})
 
 
-	class InterfazRepuesto{
+	class InterfazModificarRepuesto{
 
 	    camposVacios(mensaje,tipo){
 	        const divMensaje = document.createElement('div');

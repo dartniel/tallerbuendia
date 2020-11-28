@@ -3,6 +3,8 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -31,6 +33,24 @@ public class AutomovilService implements AutomovilRepository{
 				entity.close();
 				e.printStackTrace();
 			}
+			
+		}
+	@Override
+	public void agregarAutomovilUnico(Automovil automovil) {
+
+		try {
+			entity.getTransaction().begin();
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			Automovil automoviles = new Automovil(automovil.getChasis(), automovil.getColor(), automovil.getObservacion(), automovil.getPlaca(),automovil.getCliente(), automovil.getDetalleCarro(), timestamp);
+			entity.persist(automoviles);
+			entity.getTransaction().commit();
+			FacesMessage message = new FacesMessage("El vehículo se agregó con éxito");
+	        FacesContext context = FacesContext.getCurrentInstance();
+	        context.addMessage(null, message);
+		}catch(Exception e) {
+			entity.close();
+			e.printStackTrace();
+		}
 			
 		}
 	@SuppressWarnings("unchecked")

@@ -28,6 +28,7 @@ public class AutomovilController {
 
     private List<Automovil> mostrarAutomovilCliente;
     private Automovil accionAutomovil;
+    private Automovil automovil;
     
     public Automovil getAccionAutomovil() {
         return accionAutomovil;
@@ -54,6 +55,9 @@ public class AutomovilController {
 
     public List<Automovil> getMostrarAutomovilCliente() {
         return mostrarAutomovilCliente;
+    }
+    public void agregarAutomovilUnico() {
+    	automovilRepository.agregarAutomovilUnico(automovil);
     }
     
     public void modificarAutomovil() {
