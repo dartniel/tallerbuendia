@@ -24,6 +24,15 @@ public class EmpleadoService implements EmpleadoRepository {
 		return empleados;
 	}
 
+	@Override
+	public Empleado buscar(String id) {
+		Empleado obtenerEmpleado = null;
+		Query query = entity.createQuery("FROM Empleado as e WHERE e.idEmpleado = :idEmpleado");
+		query.setParameter("idEmpleado", id);
+		obtenerEmpleado = (Empleado) query.getSingleResult();
+		return obtenerEmpleado;
+	}
+
 
 
 }

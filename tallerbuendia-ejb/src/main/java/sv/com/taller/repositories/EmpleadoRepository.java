@@ -10,5 +10,6 @@ import sv.com.taller.entities.Empleado;
 public interface EmpleadoRepository {
 
 	public List<Empleado> mostrarEmpleado();
+	public Empleado buscar (String id);
 
 }

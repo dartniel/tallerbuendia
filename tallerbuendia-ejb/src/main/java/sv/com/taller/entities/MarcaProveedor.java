@@ -4,34 +4,33 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the marca_proveedor database table.
  * 
  */
 @Entity
-@Table(name="marca_proveedor")
-@NamedQuery(name="MarcaProveedor.findAll", query="SELECT m FROM MarcaProveedor m")
+@Table(name = "marca_proveedor")
+@NamedQuery(name = "MarcaProveedor.findAll", query = "SELECT m FROM MarcaProveedor m")
 public class MarcaProveedor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID_MARCA_PROVEEDOR")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_MARCA_PROVEEDOR")
 	private int idMarcaProveedor;
 
-	//bi-directional many-to-one association to Marca
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_MARCA")
+	// bi-directional many-to-one association to Marca
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_MARCA")
 	private Marca marca;
 
-	//bi-directional many-to-one association to Proveedor
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_PROVEEDOR")
+	// bi-directional many-to-one association to Proveedor
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_PROVEEDOR")
 	private Proveedor proveedor;
 
-	//bi-directional many-to-one association to Repuesto
-	@OneToMany(mappedBy="marcaProveedor")
+	// bi-directional many-to-one association to Repuesto
+	@OneToMany(mappedBy = "marcaProveedor")
 	private List<Repuesto> repuestos;
 
 	public MarcaProveedor() {

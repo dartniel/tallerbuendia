@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import sv.com.taller.entities.Repuesto;
 import sv.com.taller.entities.Solicitud;
 
 @Local

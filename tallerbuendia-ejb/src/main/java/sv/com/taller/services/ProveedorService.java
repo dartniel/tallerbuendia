@@ -35,4 +35,22 @@ public class ProveedorService implements ProveedorRepository {
 		return marcas;
 	}
 
+	@Override
+	public Proveedor buscar(int id) {
+		Proveedor obtenerProveedor = null;
+		Query query = entity.createQuery("FROM Proveedor as p WHERE p.idProveedor = :idProveedor");
+		query.setParameter("idProveedor", id);
+		obtenerProveedor = (Proveedor) query.getSingleResult();
+		return obtenerProveedor;
+	}
+
+	@Override
+	public MarcaProveedor buscarMarca(int id) {
+		MarcaProveedor obtenerMarca = null;
+		Query query = entity.createQuery("FROM MarcaProveedor as m WHERE m.idMarcaProveedor = :idMarcaProveedor");
+		query.setParameter("idMarcaProveedor", id);
+		obtenerMarca = (MarcaProveedor) query.getSingleResult();
+		return obtenerMarca;
+	}
+
 }

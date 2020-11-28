@@ -56,6 +56,8 @@ public class RepuestoController implements Serializable {
 	private ProveedorRepository proveedorRepository;
 
 	public void agregarRepuesto() {
+		MarcaProveedor marca = proveedorRepository.buscarMarca(repuesto.getMarcaProveedor().getIdMarcaProveedor());
+		repuesto.setMarcaProveedor(marca);
 		repuestoRepository.agregar(repuesto);
 		this.repuesto.setIdRepuesto("");
 		this.repuesto.setNombre("");

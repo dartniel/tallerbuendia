@@ -13,4 +13,6 @@ public interface ProveedorRepository {
 	public List<Proveedor> mostrarProveedor();
 
 	public List<MarcaProveedor> mostrarMarcaProveedor(Proveedor proveedor);
+	public Proveedor buscar(int id);
+	public MarcaProveedor buscarMarca(int id);
 }

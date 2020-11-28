@@ -95,4 +95,10 @@ public class Solicitud implements Serializable {
 		this.proveedor = proveedor;
 	}
 
+	@Override
+	public String toString() {
+		return "Solicitud [idSolicitud=" + idSolicitud + ", cantidad=" + cantidad + ", descripcion=" + descripcion
+				+ ", fecha=" + fecha + ", empleado=" + empleado + ", proveedor=" + proveedor + "]";
+	}
+
 }

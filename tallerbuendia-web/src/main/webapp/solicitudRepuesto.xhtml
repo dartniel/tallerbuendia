@@ -13,20 +13,24 @@
 		<ui:define name="titulo">
 			<h2>Solicitud de Repuestos</h2>
 		</ui:define>
-		
+
 		<ui:define name="contenido">
 			<div class="container fondo-repuesto">
 				<div class="mensaje">
 					<h:form id="registroSolicitud">
-						<h:messages globalOnly="true" id="mensajeExito"/>
+						<h:messages globalOnly="true" id="mensajeExito" />
 						<div class="row">
 							<div class="col-md-6">
 								<label for="fechaAdquisicion">Fecha de Solicitud</label>
 								<div class="input-group mb-3">
 									<div class="input-group-prepend">
-										<span class="input-group-text"> <img src="./resources/icon/Fecha_Nac.svg" width="20px" height="20px" /></span>
+										<span class="input-group-text"> <img
+											src="./resources/icon/Fecha_Nac.svg" width="20px"
+											height="20px" /></span>
 									</div>
-									<h:inputText a:type="date" id="fechaSolicitud" class="form-control" a:placeholder="DD/MM/YYYY" value="#{solicitudController.solicitud.fecha}">
+									<h:inputText a:type="date" id="fechaSolicitud"
+										class="form-control" a:placeholder="DD/MM/YYYY"
+										value="#{solicitudController.solicitud.fecha}">
 										<f:convertDateTime pattern="yyyy-mm-dd" />
 									</h:inputText>
 								</div>
@@ -36,9 +40,13 @@
 								<label for="costo">Descripción</label>
 								<div class="input-group mb-3">
 									<div class="input-group-prepend">
-										<span class="input-group-text"> <img src="./resources/icon/descripcion.svg" width="20px" height="20px" /></span>
+										<span class="input-group-text"> <img
+											src="./resources/icon/descripcion.svg" width="20px"
+											height="20px" /></span>
 									</div>
-									<h:inputText  id="descripcionSolicitud" class="form-control"  a:placeholder="Descripción" value="#{solicitudController.solicitud.descripcion}" />
+									<h:inputText id="descripcionSolicitud" class="form-control"
+										a:placeholder="Descripción"
+										value="#{solicitudController.solicitud.descripcion}" />
 								</div>
 								<div id="descripcionSolicitudDiv"></div>
 							</div>
@@ -48,9 +56,15 @@
 								<label for="cantidad">Cantidad</label>
 								<div class="input-group mb-3">
 									<div class="input-group-prepend">
-										<span class="input-group-text"> <img src="./resources/icon/assignment_returned-24px.svg" width="20px" height="20px" /></span>
+										<span class="input-group-text"> <img
+											src="./resources/icon/assignment_returned-24px.svg"
+											width="20px" height="20px" /></span>
 									</div>
-									<h:inputText id="cantidadSolicitud" class="form-control" a:placeholder="Cantidad" value="#{solicitudController.solicitud.cantidad}" onkeypress="validarSoloNumerosSolicitud('[0-9]*')" maxlength="11"/>
+									<h:inputText id="cantidadSolicitud" class="form-control"
+										a:placeholder="Cantidad"
+										value="#{solicitudController.solicitud.cantidad}"
+										onkeypress="validarSoloNumerosSolicitud('[0-9]*')"
+										maxlength="11" />
 								</div>
 								<div id="cantidadSolicitudDiv"></div>
 							</div>
@@ -58,96 +72,117 @@
 								<label for="proveedor">Proveedor</label>
 								<div class="input-group mb-3">
 									<div class="input-group-prepend">
-										<span class="input-group-text"> <img src="./resources/icon/museum-24px.svg" width="20px"
-										height="20px" /></span>
+										<span class="input-group-text"> <img
+											src="./resources/icon/museum-24px.svg" width="20px"
+											height="20px" /></span>
 									</div>
-									<h:selectOneMenu id="proveedorSolicitud" class="form-control" value="#{solicitudController.solicitud.proveedor.idProveedor}">
+									<h:selectOneMenu id="proveedorSolicitud" class="form-control"
+										value="#{solicitudController.solicitud.proveedor.idProveedor}">
 										<f:selectItem itemLabel="Seleccionar Proveedor" itemValue="" />
-										<f:selectItems value="#{proveedorController.mostrarProveedores}" var="p" itemLabel="#{p.nombre}" itemValue="#{p.idProveedor}" />
+										<f:selectItems
+											value="#{proveedorController.mostrarProveedores}" var="p"
+											itemLabel="#{p.nombre}" itemValue="#{p.idProveedor}" />
 									</h:selectOneMenu>
 								</div>
 								<div id="proveedorSolicitudDiv"></div>
 							</div>
 						</div>
 						<div class="row">
-						
+
 							<div class="col-md-6">
 								<label for="proveedor">Empleado</label>
 								<div class="input-group mb-3">
 									<div class="input-group-prepend">
-										<span class="input-group-text"> <img src="./resources/icon/Nombre_cliente.svg" width="20px"
-										height="20px" /></span>
+										<span class="input-group-text"> <img
+											src="./resources/icon/Nombre_cliente.svg" width="20px"
+											height="20px" /></span>
 									</div>
-									<h:selectOneMenu id="empleadoSolicitud" class="form-control" value="#{solicitudController.solicitud.empleado.idEmpleado}">
+									<h:selectOneMenu id="empleadoSolicitud" class="form-control"
+										value="#{solicitudController.solicitud.empleado.idEmpleado}">
 										<f:selectItem itemLabel="Seleccionar Empleado" itemValue="" />
-										<f:selectItems value="#{empleadoController.mostrarEmpleados}" var="e" itemLabel="#{e.nombre} #{e.apellido}" itemValue="#{e.idEmpleado}" />
+										<f:selectItems value="#{empleadoController.mostrarEmpleados}"
+											var="e" itemLabel="#{e.nombre} #{e.apellido}"
+											itemValue="#{e.idEmpleado}" />
 									</h:selectOneMenu>
 								</div>
 								<div id="empleadoSolicitudDiv"></div>
 							</div>
-							<div class="col-md-6">
-								<div class="input-group mb-3">
-									<h:commandLink class="btn btn-primary" onclick="$('#modalAgregarSolicitud').modal('show');" value="Añadir Solicitud">
-										<f:ajax execute="@this" render="modalAgregar" />
-										<i class="fas fa-wrench"></i>
-									</h:commandLink>
-								</div>
-							</div>
 						</div>
-						<div class="modal fade" id="modalAgregarSolicitud" tabindex="-1" aria-labelledby="modalAgregarSolicitudLabel" aria-hidden="true">
+						<div class="modal fade" id="modalAgregarSolicitud" tabindex="-1"
+							aria-labelledby="modalAgregarSolicitudLabel" aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
 										<h5 class="modal-title" id="exampleModalLabel">Agregar</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
-									<div class="modal-body">
-										¿Desea agregar la solicitud?
-									</div>
+									<div class="modal-body">¿Desea agregar la solicitud?</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-										<h:commandButton class="btn btn-danger"
-										value="Agregar" onclick="$('#modalAgregarSolicitud').modal('hide');" id="button">
-											<f:ajax execute="@form" listener="#{solicitudController.agregarSolicitud()}" render="vistaSolicitud"/>
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Cerrar</button>
+										<h:commandButton class="btn btn-danger" value="Agregar"
+											onclick="$('#modalAgregarSolicitud').modal('hide');"
+											id="button">
+											<f:ajax execute="registroSolicitud"
+												listener="#{solicitudController.agregarSolicitud()}"
+												render="vistaSolicitud" />
 										</h:commandButton>
 									</div>
 								</div>
 							</div>
-						</div>					
+						</div>
 					</h:form>
+
+					<div class="col-md-6">
+						<div class="input-group mb-3">
+							<h:commandLink class="btn btn-primary"
+								onclick="$('#modalAgregarSolicitud').modal('show');"
+								value="Añadir Solicitud">
+								<i class="fas fa-wrench"></i>
+							</h:commandLink>
+						</div>
+					</div>
 				</div>
 			</div>
 			<hr></hr>
 			<h2>Historial</h2>
-			<h:dataTable id="vistaSolicitud" var="s" value="#{solicitudController.mostrarSolicitud}" class="table table-sm">
-					<h:column>
-						<f:facet name="header">ID</f:facet>
-							#{s.idSolicitud}
-					</h:column>				
-					<h:column>
-						<f:facet name="header">Fecha de solicitud</f:facet>
-							#{s.fecha}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Descripción</f:facet>
-							#{s.descripcion}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Cantidad solicitada</f:facet>
-							#{s.cantidad}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Empleado que solicitó</f:facet>
-							#{s.empleado.nombre} #{s.empleado.apellido} 
-					</h:column>
-					<h:column>
-						<f:facet name="header">Proveedor</f:facet>
-							#{s.proveedor.nombre}
-					</h:column>
-						
-												
+			<h:dataTable id="vistaSolicitud" var="s"
+				value="#{solicitudController.mostrarSolicitud}"
+				class="table table-sm">
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputLabel value="#{s.idSolicitud}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Fecha de solicitud</f:facet>
+					<h:outputLabel value="#{s.fecha}">
+						<f:convertDateTime pattern="yyyy-MM-dd" />
+					</h:outputLabel>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Descripción</f:facet>
+					<h:outputLabel value="#{s.descripcion}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Cantidad solicitada</f:facet>
+					<h:outputLabel value="#{s.cantidad}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Empleado que solicitó</f:facet>
+					<h:outputLabel value="#{s.empleado.nombre} #{s.empleado.apellido} " />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Proveedor</f:facet>
+					<h:outputLabel value="#{s.proveedor.nombre}" />
+				</h:column>
 			</h:dataTable>
 		</ui:define>
 	</body>
