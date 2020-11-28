@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{User.onPageLoad}" />
+	</f:metadata>
+	<h:outputStylesheet library="css" name="login.css" />
+	<link
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+		rel="stylesheet" />
+</h:head>
+<body>
+
+	<div class="container">
+		<div class="login-conteiner">
+			<div class="form">
+				<h:form prependId="false" class="needs-validation">
+					<h:panelGrid>
+						<h1>Iniciar Sesion</h1>
+						<div class="form-group">
+							<h:inputText class="form-control"
+								a:placeholder="Ingresa tu usuario" id="username"
+								a:required="true" />
+						</div>
+
+						<div class="form-group">
+							<h:inputSecret class="form-control"
+								a:placeholder="Ingresa tu contraseña" id="password"
+								a:required="true" />
+						</div>
+
+						<div class="container-error">
+							<h:outputLabel value="El usuario y/o la contraseña no coinciden."
+								class="error-msg" rendered="${!empty param['error']}" />
+						</div>
+
+						<h:commandButton class="btn-login" value="Entrar" ajax="false" />
+					</h:panelGrid>
+
+
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

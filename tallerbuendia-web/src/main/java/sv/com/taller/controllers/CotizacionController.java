@@ -108,4 +108,8 @@ public class CotizacionController implements Serializable {
 		cotizacionDao.cancelarCotizacion(diagnostico);
 		return "chequeo?faces-redirect=true";
 	}
+	
+	public String imprimirCodigo() {
+		return "";
+	}
 }

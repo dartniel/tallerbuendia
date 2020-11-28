@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1366 768" style="enable-background:new 0 0 1366 768;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{display:inline;fill:#1A1A1A;}
+	.st2{font-family:'Roboto-Bold';}
+	.st3{font-size:42px;}
+	.st4{display:inline;fill:#112226;}
+	.st5{display:inline;fill:none;stroke:#808080;stroke-miterlimit:10;}
+	.st6{display:inline;fill:none;stroke:#B3B3B3;stroke-miterlimit:10;}
+	.st7{display:inline;fill:#999999;}
+	.st8{font-family:'Roboto-Light';}
+	.st9{font-size:16px;}
+	.st10{display:inline;fill:#FFFFFF;}
+	.st11{fill:#F24150;}
+	.st12{display:none;fill:#FFFFFF;}
+	.st13{font-family:'Roboto-Medium';}
+	.st14{font-size:35px;}
+	.st15{font-size:19px;}
+	.st16{display:inline;}
+	.st17{fill:#3F3D56;}
+	.st18{fill:#D0CDE1;}
+	.st19{fill:#FFFFFF;}
+	.st20{fill:#112226;}
+</style>
+<g id="Capa_1" class="st0">
+	<text transform="matrix(1 0 0 1 238 247.7534)" class="st1 st2 st3">Iniciar sesión</text>
+	<path class="st4" d="M483,488H253c-5.52,0-10-4.48-10-10v-22c0-5.52,4.48-10,10-10h230c5.52,0,10,4.48,10,10v22
+		C493,483.52,488.52,488,483,488z"/>
+	<path class="st5" d="M537.5,333"/>
+	<path class="st5" d="M178,333"/>
+	<path class="st5" d="M519,403.5"/>
+	<path class="st5" d="M161,403.5"/>
+	<path class="st6" d="M547.5,336.5h-359c-5.52,0-10-4.48-10-10v-16c0-5.52,4.48-10,10-10h359c5.52,0,10,4.48,10,10v16
+		C557.5,332.02,553.02,336.5,547.5,336.5z"/>
+	<text transform="matrix(1 0 0 1 207.48 324.1602)" class="st7 st8 st9">Ingresa tu usuario</text>
+	<path class="st5" d="M537.5,409"/>
+	<path class="st5" d="M178,409"/>
+	<path class="st6" d="M547.5,412.5h-359c-5.52,0-10-4.48-10-10v-16c0-5.52,4.48-10,10-10h359c5.52,0,10,4.48,10,10v16
+		C557.5,408.02,553.02,412.5,547.5,412.5z"/>
+	<text transform="matrix(1 0 0 1 207.48 400.1602)" class="st7 st8 st9">Ingresa tu contraseña</text>
+	<text transform="matrix(1 0 0 1 345.7202 473.0801)" class="st10 st8 st9">Entrar</text>
+</g>
+<g id="Capa_3">
+	<path class="st11" d="M782,0c0,0-90,153-75,319s284,449,284,449h375V0L782,0z"/>
+	<text transform="matrix(1 0 0 1 840.4404 122.1201)" class="st12 st13 st14">Bienvenido</text>
+	<text transform="matrix(1 0 0 1 840.7998 148.2402)" class="st0"><tspan x="0" y="0" class="st10 st8 st15">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</tspan><tspan x="459.11" y="0" class="st16 st13 st14"> </tspan></text>
+</g>
+<g id="Capa_4">
+	<rect x="1150.23" y="344.44" class="st17" width="6.66" height="47.28"/>
+	
+		<rect x="1029.1" y="163.93" transform="matrix(0.3761 -0.9266 0.9266 0.3761 369.0345 1141.8807)" class="st17" width="6.66" height="265.96"/>
+	<path class="st18" d="M1348,509.37c-10.31,17.23-551.82,15.79-551,0C807.32,492.13,1348.82,493.58,1348,509.37z"/>
+	<rect x="1222.15" y="439.67" class="st17" width="57.94" height="22.64"/>
+	<rect x="989.07" y="459.65" class="st17" width="285.69" height="25.31"/>
+	<polygon class="st18" points="1227.81,472.3 1159.22,472.3 1159.22,386.06 1210.5,386.06 1227.81,429.56 	"/>
+	<rect x="1169.87" y="391.39" class="st19" width="29.3" height="29.3"/>
+	<polygon class="st19" points="1221.15,421.02 1202.51,421.02 1202.51,391.72 1210.5,391.72 	"/>
+	<rect x="1171.21" y="437.34" class="st17" width="6.66" height="12.65"/>
+	<path class="st17" d="M1208.17,410.37h0.33c3.49,0,6.33,2.83,6.33,6.33l0,0l0,0c0,3.49-2.83,6.33-6.33,6.33l0,0h-0.33l0,0V410.37
+		L1208.17,410.37z"/>
+	<path class="st17" d="M960.43,459.65h0.33c3.49,0,6.33,2.83,6.33,6.33l0,0l0,0c0,3.49-2.83,6.33-6.33,6.33l0,0h-0.33l0,0V459.65
+		L960.43,459.65z"/>
+	<path class="st18" d="M1254.45,459.55c10.15,0,19.28,4.92,25.61,12.75h13.02l-12.65-35.25l-58.94-11.62l1.66,46.87h5.69
+		C1235.17,464.47,1244.3,459.55,1254.45,459.55z"/>
+	<circle class="st17" cx="1255.12" cy="480.63" r="28.97"/>
+	<circle class="st18" cx="1255.12" cy="480.63" r="15.25"/>
+	<circle class="st17" cx="993.4" cy="483.96" r="25.31"/>
+	<circle class="st18" cx="993.4" cy="483.96" r="13.32"/>
+	<rect x="1147.23" y="374.07" class="st17" width="13.99" height="100.89"/>
+	<rect x="960.1" y="456.65" class="st17" width="201.12" height="5.99"/>
+	
+		<rect x="849.27" y="448.71" transform="matrix(0.9649 -0.2625 0.2625 0.9649 -84.8076 268.6263)" class="st17" width="227.31" height="5.99"/>
+	
+		<rect x="1064.16" y="423.84" transform="matrix(0.8058 -0.5922 0.5922 0.8058 -55.4243 717.6349)" class="st17" width="4.66" height="38.96"/>
+	<rect x="1205.5" y="422.35" class="st17" width="6.66" height="2.66"/>
+	<path class="st17" d="M1153.56,442.33h-87.24c-0.37,0-0.67-0.3-0.67-0.67c0-0.29,0.19-0.55,0.48-0.64l85.24-25.31
+		c0.35-0.1,0.72,0.1,0.83,0.45c0.01,0.04,0.02,0.09,0.03,0.14l2,25.31c0.03,0.37-0.25,0.69-0.61,0.72
+		C1153.59,442.33,1153.58,442.33,1153.56,442.33L1153.56,442.33z M1070.9,441h81.94l-1.88-23.77L1070.9,441z"/>
+	<path class="st17" d="M917.32,413.03L917.32,413.03l-19.12-0.18c-0.37,0-0.66-0.3-0.66-0.67c0-0.02,0-0.05,0-0.07l9.93-86.67
+		c0.04-0.34,0.32-0.59,0.66-0.59h0c0.34,0,0.62,0.26,0.66,0.6l9.18,86.85c0.04,0.37-0.23,0.69-0.59,0.73
+		C917.36,413.03,917.34,413.03,917.32,413.03z M898.95,411.53l17.63,0.17l-8.47-80.1L898.95,411.53z"/>
+	<path class="st17" d="M1284.78,449.4l-0.31,0.12c-3.27,1.24-6.92-0.41-8.16-3.68l0,0l0,0c-1.24-3.27,0.41-6.92,3.68-8.16l0,0
+		l0.31-0.12l0,0L1284.78,449.4L1284.78,449.4z"/>
+	
+		<rect x="861.17" y="455.83" transform="matrix(0.963 -0.2695 0.2695 0.963 -91.0481 251.6507)" class="st17" width="19.29" height="3.06"/>
+	<path class="st20" d="M1014.21,416.43l-3.59,1.96l-145.66,40.77l-2.16-2.69c-3.75-4.6-6.14-10.15-6.92-16.03
+		c-0.55-4.39-0.15-9.02,2.92-11.84l-5.56-44.87l80.56-22.66L972,377.53c0,0,14.64-4.37,25.41,3.34c3.41,2.44,6.43,6.1,8.48,11.5
+		l1.76,5.09L1014.21,416.43z"/>
+	<circle class="st17" cx="982.01" cy="424.65" r="18.68"/>
+	<circle class="st18" cx="982.01" cy="424.65" r="9.83"/>
+	<circle class="st17" cx="893.26" cy="449.49" r="18.68"/>
+	<circle class="st18" cx="893.26" cy="449.49" r="9.83"/>
+	<polygon class="st19" points="958.79,378.05 901,394.22 896.13,376.83 932.99,366.51 	"/>
+	
+		<rect x="868.05" y="381.69" transform="matrix(0.963 -0.2695 0.2695 0.963 -72.747 251.6561)" class="st19" width="23.88" height="18.07"/>
+	
+		<rect x="905.36" y="406.68" transform="matrix(0.963 -0.2695 0.2695 0.963 -76.8354 259.6053)" class="st17" width="3.06" height="5.82"/>
+	
+		<rect x="948.71" y="385.52" transform="matrix(0.963 -0.2695 0.2695 0.963 -69.1058 270.827)" class="st17" width="5.82" height="3.06"/>
+	<path class="st17" d="M947.38,374.75l0.32-0.09c3.4-0.95,6.93,1.03,7.89,4.44l0,0c0.95,3.4-1.03,6.93-4.44,7.89l-0.32,0.09l0,0
+		L947.38,374.75L947.38,374.75z"/>
+	<path class="st17" d="M1007.65,397.46c-5.07,2.03-10.83-0.44-12.86-5.51c-1.55-3.88-0.5-8.31,2.62-11.08
+		c3.41,2.44,6.43,6.1,8.48,11.5L1007.65,397.46z"/>
+	<rect x="904.49" y="243.88" class="st17" width="6.66" height="97.23"/>
+	<circle class="st17" cx="907.82" cy="247.21" r="9.32"/>
+	<circle class="st17" cx="1153.56" cy="345.77" r="9.32"/>
+</g>
+</svg>

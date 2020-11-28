@@ -26,7 +26,7 @@
 						a:placeholder="Ingresar el diagnostico" />
 				</div>
 
-				<h:commandButton action="#{Chequeo.agregarChequeo()}"
+				<h:commandButton class="btn btn-primary" action="#{Chequeo.agregarChequeo()}"
 					value="Guardar">
 					<f:setPropertyActionListener
 						value="#{Chequeo.chequeo.diagnostico}" target="#{Cotizacion.diagnostico}" />

@@ -35,21 +35,20 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModalLabel">Cancelar
-										Cotizacion</h5>
+										Cotización</h5>
 									<button type="button" class="close" data-dismiss="modal"
 										aria-label="Close"></button>
 								</div>
 								<h:form id="formEliminar">
 									<div class="modal-body">
-										<h:inputText a:type="hidden" value="#{Cotizacion.diagnostico}"/>
-										<h3>Diagnostico: #{Cotizacion.diagnostico}</h3>
-										<b>Desea cancelar todo?</b>
+										<h:inputText a:type="hidden" value="#{Cotizacion.diagnostico}" />
+										<span>¿Está seguro de cancelar la cotización?</span>
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">Cerrar</button>
 										<h:commandButton value="Aceptar" class="btn btn-danger"
-										action="#{Cotizacion.cancelarCotizacion()}"/>
+											action="#{Cotizacion.cancelarCotizacion()}" />
 									</div>
 								</h:form>
 							</div>
@@ -69,17 +68,20 @@
 						</span><br />
 					</div>
 				</div>
-			</div><br />
-			
+			</div>
+			<br />
+
 			<div class="row">
-				<ui:repeat var="m" value="#{Cotizacion.mostrarDetalles}" id="cotizaciones">
+				<ui:repeat var="m" value="#{Cotizacion.mostrarDetalles}"
+					id="cotizaciones">
 					<div class="col-md-4">
 						<div class="card">
 							<div class="card-header">#{m.servicioRepuesto.servicio.nombreServicio}</div>
 							<div class="card-body">
-								<span class="card-text">Repuesto: #{m.servicioRepuesto.repuesto.nombre}</span><br/>
-								<span class="card-text">Cantidad: #{m.cantidad}</span><br/>
-								<span class="card-text">Precio: $ #{m.precioUnitario} </span><br/>
+								<span class="card-text">Repuesto:
+									#{m.servicioRepuesto.repuesto.nombre}</span><br /> <span
+									class="card-text">Cantidad: #{m.cantidad}</span><br /> <span
+									class="card-text">Precio: $ #{m.precioUnitario} </span><br />
 							</div>
 						</div>
 					</div>
@@ -128,7 +130,7 @@
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">Cancelar</button>
 								<h:commandButton value="Añadir" class="btn btn-info"
-									action="#{Cotizacion.agregar()}" >
+									action="#{Cotizacion.agregar()}">
 								</h:commandButton>
 
 							</div>
@@ -137,54 +139,42 @@
 				</div>
 			</div>
 
-			<div class="modal fade" id="modalModificar" tabindex="-1"
-				role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9"></div>
+					<div class="col-md-3">
+						<h:commandButton value="Guardar Cotización" class="btn btn-info"
+							onclick="$('#modalGuardarCotizacion').modal('show');" />
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="modalGuardarCotizacion" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title">Modificar</h5>
+							<h5 class="modal-title" id="exampleModalLabel">Confirmar
+								Cotización</h5>
 							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true"></span>
-							</button>
+								aria-label="Close"></button>
 						</div>
-						<h:form id="modificarDetalles">
+						<h:form id="formGuardarCotizacion">
 							<div class="modal-body">
-								<div class="container">
-									<div class="row">
-										<h:inputText a:type="text" value="#{Cotizacion.diagnostico}" />
-
-										<div class="col-md-6">
-											<h:outputLabel value="Repuesto" />
-											<h:selectOneMenu class="form-control form-control-sm"
-												value="#{Cotizacion.accionDetalles.servicioRepuesto.idServicioRepuesto}">
-												<f:selectItem itemLabel="Seleccionar Repuesto"
-													itemDisabled="true" />
-												<f:selectItems value="#{ServicioRepuesto.servicioRepuesto}"
-													var="r" itemLabel="#{r.repuesto.nombre}"
-													itemValue="#{r.idServicioRepuesto}" />
-											</h:selectOneMenu>
-										</div>
-
-										<div class="col-md-6">
-											<h:outputLabel value="Cantidad de repuestos:" />
-											<h:inputText class="form-control form-control-sm"
-												a:placeholder="Ingresar la cantidad"
-												value="#{Cotizacion.accionDetalles.cantidad}" />
-										</div>
-									</div>
-								</div>
+								<span>Presione confirmar para guardar la cotización</span>
 							</div>
 							<div class="modal-footer">
+								<h:commandButton value="Confirmar" class="btn btn-primary"
+									action="#{Cotizacion.imprimirCodigo()}" />
 								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">Cancelar</button>
-								<h:commandButton value="Modificar" class="btn btn-info"
-									action="#{Cotizacion.modificar()}" />
+									data-dismiss="modal">Cerrar</button>
 							</div>
 						</h:form>
 					</div>
 				</div>
 			</div>
+			
+			
 		</ui:define>
 
 	</body>

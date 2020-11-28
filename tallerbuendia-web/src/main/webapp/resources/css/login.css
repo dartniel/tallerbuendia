@@ -1,0 +1,60 @@
+@font-face {
+  font-family: roboto;
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+}
+
+body {
+	background-image: url("#{resource['img:background-login.svg']}");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.login-conteiner {
+	display: flex;
+	justify-content: center;
+	width: 50%;
+	height:95vh;
+}
+
+.login-conteiner .form {
+	margin: auto 0;
+	text-align: center;
+}
+.login-conteiner .form form .error-msg{
+	color:red;
+	font-family: roboto;
+	font-size:15px;
+}
+
+.login-conteiner .form form span {
+	font-size:40px;
+	font-family: roboto;
+	font-weight:700;
+}
+
+.login-conteiner .form form .input {
+	margin: 15px;
+	padding: 5px;
+	border: 0.5px solid grey;
+	border-radius: 5px;
+	width:250px;
+	font-family: roboto;
+}
+
+.login-conteiner .form form .btn-login {
+	width:150px;
+	height:30px;
+	background:#112226;
+	border:none;
+	color:#fff;
+	border-radius:5px;
+	font-family: roboto;
+	font-weight:300;
+	font-size:15px;
+	margin:10px;
+}
+
+.login-conteiner .form form .btn-login:hover {
+	background: #000;
+	cursor:pointer;
+}
