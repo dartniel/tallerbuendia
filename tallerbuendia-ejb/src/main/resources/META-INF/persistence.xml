@@ -21,6 +21,10 @@
 		<class>sv.com.taller.entities.Solicitud</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+			<property name="hibernate.connection.username" value="oumc1tng85hi4196"/>
+			<property name="hibernate.connection.password" value="iibgxa6qt5nnzbqy"/>
+			<property name="hibernate.connection.url" value="u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
 		</properties>
 	</persistence-unit>
 </persistence>
