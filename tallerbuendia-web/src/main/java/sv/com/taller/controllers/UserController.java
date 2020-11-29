@@ -37,7 +37,6 @@ public class UserController implements Serializable {
 
 	public String user() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println(authentication.getName());
 		return authentication.getName();
 	}
 
@@ -47,7 +46,6 @@ public class UserController implements Serializable {
 		} else {
 			return null;
 		}
-
 	}
 
 	// No permite regresar al login

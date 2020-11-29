@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Templates/Plantilla.xhtml">
+
+	<h:head>
+		<title>Ver Clientes</title>
+	</h:head>
+	<body>
+		<ui:define name="titulo">
+			<div class="row">
+				<div class="col-md-9">
+					<h2>Chequeo de Vehiculos</h2>
+				</div>
+			</div>
+		</ui:define>
+
+		<ui:define name="contenido">
+			<h:form>
+				<div class="form-group">
+					<h:outputLabel value="Diagnostico" />
+					<h:inputTextarea class="form-control"
+						value="#{Chequeo.chequeo.diagnostico}"
+						a:placeholder="Ingresar el diagnostico" />
+				</div>
+
+				<h:commandButton class="btn btn-primary" action="#{Chequeo.agregarChequeo()}"
+					value="Guardar">
+					<f:setPropertyActionListener
+						value="#{Chequeo.chequeo.diagnostico}" target="#{Cotizacion.diagnostico}" />
+				</h:commandButton>
+			</h:form>
+		</ui:define>
+
+	</body>
+</ui:composition>

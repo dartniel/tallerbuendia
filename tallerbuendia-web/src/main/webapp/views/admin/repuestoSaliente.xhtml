@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Templates/Plantilla.xhtml">
+
+	<h:head>
+		<title>Repuesto Saliente</title>
+	</h:head>
+	<body>
+		<ui:define name="titulo">
+			<h2>Repuestos Salientes</h2>
+		</ui:define>
+
+		<ui:define name="contenido">
+			<div class="container mt-5">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8"></div>
+						<div class="col-md-4">
+							<h:messages id="msg" class="alert alert-danger" role="alert" />
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<ui:repeat var="c" value="#{Chequeo.mostrarChequeo}">
+						<div class="col-md-6 mt-3">
+							<h:form>
+								<div class="card">
+									<div class="card-header">
+										<h:commandLink action="#{Chequeo.eliminarTarjeta()}"
+											value="#{(c.estado == 1 ? 'X' : '')}" style="color:red;">
+											<f:setPropertyActionListener value="#{c}"
+												target="#{Chequeo.chequeo}" />
+										</h:commandLink>
+									</div>
+									<div class="card-body">
+										<h5 class="card-title">#{c.diagnostico}</h5>
+										<p class="card-text">Adicional: #{c.adicionales}</p>
+
+										<hr />
+
+										<div class="row">
+											<ui:repeat id="detalle" var="d"
+												value="#{Chequeo.getMostrarDetalleChequeo(c)}">
+												<div class="col-md-4">
+													<b>Repuesto: </b>
+													<h:outputText value="#{d.servicioRepuesto.repuesto.nombre}" />
+													<br /> <b>Cantidad: </b>
+													<h:outputText value="#{d.cantidad}" />
+													<br /> <b>Existencia: </b>
+													<h:outputText
+														value="#{d.servicioRepuesto.repuesto.cantidad}" />
+													<br />
+													<h:commandLink action="#{Chequeo.cambioExistencia(d)}">
+														<i class="fas fa-check-circle"></i> Confirmar
+													</h:commandLink>
+												</div>
+											</ui:repeat>
+										</div>
+									</div>
+								</div>
+							</h:form>
+						</div>
+
+					</ui:repeat>
+				</div>
+			</div>
+		</ui:define>
+	</body>
+</ui:composition>
