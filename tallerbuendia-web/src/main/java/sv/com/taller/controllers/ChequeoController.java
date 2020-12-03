@@ -22,6 +22,7 @@ public class ChequeoController implements Serializable {
 
 	private Chequeo chequeo;
 	private List<Chequeo> mostrarChequeo;
+	private List<Chequeo> mostrar;
 	private List<DetalleChequeo> mostrarDetalleChequeo;
 	
 	public Chequeo getChequeo() {
@@ -66,5 +67,10 @@ public class ChequeoController implements Serializable {
 	
 	public void eliminarTarjeta() {
 		chequeoRepository.modificar(chequeo);
+	}
+
+	public List<Chequeo> getMostrar() {
+		this.mostrar = chequeoRepository.mostrarChequeo();
+		return mostrar;
 	}
 }

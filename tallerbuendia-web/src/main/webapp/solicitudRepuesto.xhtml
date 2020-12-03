@@ -99,7 +99,6 @@
 									</div>
 									<h:selectOneMenu id="empleadoSolicitud" class="form-control"
 										value="#{solicitudController.solicitud.empleado.idEmpleado}">
-										<f:selectItem itemLabel="Seleccionar Empleado" itemValue="" />
 										<f:selectItems value="#{empleadoController.mostrarEmpleados}"
 											var="e" itemLabel="#{e.nombre} #{e.apellido}"
 											itemValue="#{e.idEmpleado}" />

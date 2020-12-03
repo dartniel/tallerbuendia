@@ -12,5 +12,6 @@ public interface ChequeoRepository {
 	public void agregarChequeo(Chequeo chequeo);
 	public void modificar(Chequeo chequeo);
 	public List<Chequeo> mostrar();
+	public List<Chequeo> mostrarChequeo();
 	public Chequeo buscar(String diagnostico);
 }

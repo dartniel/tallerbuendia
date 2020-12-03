@@ -110,6 +110,6 @@ public class CotizacionController implements Serializable {
 	}
 	
 	public String imprimirCodigo() {
-		return "";
+		return "chequeo?faces-redirect=true";
 	}
 }

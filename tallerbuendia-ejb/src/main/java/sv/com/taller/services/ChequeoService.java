@@ -60,5 +60,14 @@ public class ChequeoService implements ChequeoRepository {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Chequeo> mostrarChequeo() {
+		List<Chequeo> chequeos = null;
+		Query query = entity.createQuery("FROM Chequeo as c");
+		chequeos = query.getResultList();
+		return chequeos;
+	}
+
 
 }

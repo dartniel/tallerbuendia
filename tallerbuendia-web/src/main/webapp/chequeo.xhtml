@@ -6,32 +6,83 @@
 	template="/Templates/Plantilla.xhtml">
 
 	<h:head>
-		<title>Ver Clientes</title>
+		<title>Cotizaciones</title>
 	</h:head>
 	<body>
 		<ui:define name="titulo">
 			<div class="row">
 				<div class="col-md-9">
-					<h2>Chequeo de Vehiculos</h2>
+					<h2>Cotizaciones</h2>
 				</div>
 			</div>
 		</ui:define>
 
 		<ui:define name="contenido">
 			<h:form>
-				<div class="form-group">
-					<h:outputLabel value="Diagnostico" />
-					<h:inputTextarea class="form-control"
-						value="#{Chequeo.chequeo.diagnostico}"
-						a:placeholder="Ingresar el diagnostico" />
-				</div>
+				<div class="modal fade" id="modalCotizacion" tabindex="-1"
+					aria-labelledby="modalModificarLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Crear
+									Cotizacion</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
 
-				<h:commandButton class="btn btn-primary" action="#{Chequeo.agregarChequeo()}"
-					value="Guardar">
-					<f:setPropertyActionListener
-						value="#{Chequeo.chequeo.diagnostico}" target="#{Cotizacion.diagnostico}" />
-				</h:commandButton>
+							<div class="modal-body">
+								<div class="form-group">
+									<h:outputLabel value="Diagnostico" />
+									<h:inputTextarea class="form-control"
+										value="#{Chequeo.chequeo.diagnostico}"
+										a:placeholder="Ingresar el diagnostico" />
+								</div>
+							</div>
+							<div class="modal-footer">
+								<h:commandButton class="btn btn-primary"
+									action="#{Chequeo.agregarChequeo()}" value="Continuar">
+									<f:setPropertyActionListener
+										value="#{Chequeo.chequeo.diagnostico}"
+										target="#{Cotizacion.diagnostico}" />
+								</h:commandButton>
+								<h:commandButton class="btn btn-secondary"
+									value="Cancelar"
+									onclick="$('#modalCotizacion').modal('hide');" />
+
+							</div>
+						</div>
+					</div>
+				</div>
 			</h:form>
+			
+			
+			<h:commandButton class="btn btn-primary" value="Crear Cotizacion"
+				onclick="$('#modalCotizacion').modal('show');" />
+
+			<div class="mt-3">
+				<h:dataTable var="c" value="#{Chequeo.mostrar}"
+					class="table table-sm">
+					<h:column>
+						<f:facet name="header">#</f:facet>
+						<h:outputText value="#{c.idChequeo}" />
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Nombre del Cliente</f:facet>
+						<h:outputText value="#{c.cliente.nombre} #{c.cliente.apellido}" />
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Diagnóstico</f:facet>
+						<h:outputText value="#{c.diagnostico}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Estado Cotización</f:facet>
+						<h:outputText value="#{c.estado == 1 ? 'En proceso' : 'Aprobada'}" />
+					</h:column>
+				</h:dataTable>
+			</div>
 		</ui:define>
 
 	</body>
