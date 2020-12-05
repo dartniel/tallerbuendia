@@ -69,5 +69,14 @@ public class ChequeoService implements ChequeoRepository {
 		return chequeos;
 	}
 
+	@Override
+	public Chequeo buscarChequeo(String id) {
+		Chequeo chequeo = null;
+		Query query = entity.createQuery("FROM Chequeo as c WHERE c.cliente.idCliente = :idCliente");
+		query.setParameter("idCliente", id);
+		chequeo = (Chequeo) query.getSingleResult();
+		return chequeo;
+	}
+
 
 }

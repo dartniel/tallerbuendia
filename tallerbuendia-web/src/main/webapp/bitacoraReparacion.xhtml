@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Templates/Plantilla.xhtml">
+
+	<h:head>
+		<title>Reparación de Automóvil</title>
+	</h:head>
+	<body>
+		<ui:define name="titulo">
+			<h2>Reparación de Automóvil</h2>
+		</ui:define>
+
+		<ui:define name="contenido">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<span><b>Cliente:</b> </span>
+						<h:outputText value="#{Automovil.accionAutomovil.cliente.nombre}" />
+						<h:outputText
+							value=" #{Automovil.accionAutomovil.cliente.apellido}" />
+					</div>
+					<div class="col-md-4">
+						<span><b>Placa de Vehículo:</b> </span>
+						<h:outputText value="#{Automovil.accionAutomovil.placa}" />
+					</div>
+
+					<div class="col-md-4">
+						<span><b>Marca/Modelo de Vehículo:</b> </span>
+						<h:outputText
+							value="#{Automovil.accionAutomovil.detalleCarro.marcarNombre}/" />
+						<h:outputText
+							value="#{Automovil.accionAutomovil.detalleCarro.modelo} " />
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-md-12">
+						<span><b>Diagnostico:</b> </span>
+						<h:outputText value="#{Automovil.chequeo.diagnostico}" />
+					</div>
+
+					<div class="col-md-12 mt-5">
+						<h3>Servicio y Repuestos</h3>
+						<h:dataTable var="a" value="#{Automovil.detalleChequeo}"
+							class="table table-sm">
+							<h:column>
+								<f:facet name="header">Servicio</f:facet>
+								<h:outputText
+									value="#{a.servicioRepuesto.servicio.nombreServicio}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Repuestos</f:facet>
+								<h:outputText value="#{a.servicioRepuesto.repuesto.nombre}" />
+							</h:column>
+						</h:dataTable>
+					</div>
+				</div>
+				<h3>Agregar Estado de Automóvil</h3>	
+				<div class="row">
+					
+					<h:commandButton value="Agregar Servicio" class="btn btn-success mt-3 mb-4"
+						onclick="$('#modalBitacora').modal('show');" />
+					
+					<div class="modal fade" id="modalBitacora" tabindex="-1"
+						aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Estado</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<h:form id="forBitacora">
+									<div class="modal-body">
+										<h:outputLabel value="Descripcion" /><br/>
+										<h:inputTextarea value="#{Reparacion.reparacion.descripcion}"
+											class="form-control" a:placeholder="Estado" /><br/>
+											
+										<h:outputLabel value="Fecha" /><br/>
+										<h:inputText a:type="date" id="fechaNacimientoCliente"
+											class="form-control" a:placeholder="yyyy-MM-dd"
+											value="#{Reparacion.reparacion.fecha}">
+											<f:convertDateTime pattern="yyyy-MM-dd" />
+										</h:inputText>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Cerrar</button>
+
+										<h:commandButton value="Aceptar" class="btn btn-danger"
+											onclick="$('#modalBitacora').modal('hide');" action="#{Reparacion.listar()}">
+										</h:commandButton>
+									</div>
+								</h:form>
+							</div>
+						</div>
+					</div>
+
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Mecanico</th>
+								<th scope="col">Fecha</th>
+								<th scope="col">Descripcion</th>
+							</tr>
+						</thead>
+						<tbody>
+							<h:form id="dataBitacora">
+								<tr>
+									<td>#{Reparacion.reparacion.mecanico}</td>
+									<td><h:outputText value="#{Reparacion.reparacion.fecha}">
+											<f:convertDateTime pattern="yyyy/MM/dd" />
+										</h:outputText></td>
+									<td>#{Reparacion.reparacion.descripcion}</td>
+								</tr>
+							</h:form>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</ui:define>
+	</body>
+</ui:composition>

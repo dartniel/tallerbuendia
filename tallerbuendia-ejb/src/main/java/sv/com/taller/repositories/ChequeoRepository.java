@@ -14,4 +14,5 @@ public interface ChequeoRepository {
 	public List<Chequeo> mostrar();
 	public List<Chequeo> mostrarChequeo();
 	public Chequeo buscar(String diagnostico);
+	public Chequeo buscarChequeo(String id);
 }

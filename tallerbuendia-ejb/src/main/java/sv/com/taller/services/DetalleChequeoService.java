@@ -191,4 +191,14 @@ public class DetalleChequeoService implements DetalleChequeoRepository {
 		return total;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DetalleChequeo> buscar(Chequeo chequeo) {
+		List<DetalleChequeo> detalleChequeo = null;
+		Query query = entity.createQuery("FROM DetalleChequeo d WHERE d.chequeo = :chequeo");
+		query.setParameter("chequeo", chequeo);
+		detalleChequeo = query.getResultList();
+		return detalleChequeo;
+	}
+
 }

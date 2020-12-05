@@ -26,4 +26,6 @@ public interface DetalleChequeoRepository {
 	
 	public Double totalCotizacion(String diagnostico);
 	
+	public List<DetalleChequeo> buscar(Chequeo chequeo);
+	
 }

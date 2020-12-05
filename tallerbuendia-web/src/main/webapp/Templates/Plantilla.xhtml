@@ -75,6 +75,12 @@
 							</a>
 						</li>
 						
+						<li class="nav-item">
+							<a class="nav-link" href="reparacionAutomovil.xhtml"> 
+								<span><i class="fas fa-car"></i></span>
+								Reparaciones
+							</a>
+						</li>
 					</ul>
 				</div>
 			</nav>
@@ -130,6 +136,11 @@
 
 		$(document).ready( function () {
 		    $('#vistaClienteAutomovil').DataTable({
+	            "language": {
+	                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+	            }
+	        }),
+	        $('#dataVehiculo').DataTable({
 	            "language": {
 	                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
 	            }

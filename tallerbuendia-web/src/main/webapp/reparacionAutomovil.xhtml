@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Templates/Plantilla.xhtml">
+
+	<h:head>
+		<title>Reparación de Automóvil</title>
+	</h:head>
+	<body>
+		<ui:define name="titulo">
+			<h2>Reparación de Automóvil</h2>
+		</ui:define>
+
+		<ui:define name="contenido">
+			<h:dataTable var="a" value="#{Automovil.mostrar}"
+				class="table table-sm" id="dataVehiculo">
+				<h:column>
+					<f:facet name="header">Cliente</f:facet>
+					#{a.cliente.nombre} #{a.cliente.apellido}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Chasis</f:facet>
+					#{a.chasis}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Color</f:facet>
+						#{a.color}
+					</h:column>
+
+				<h:column>
+					<f:facet name="header">Observacion</f:facet>
+						#{a.observacion}
+					</h:column>
+
+				<h:column>
+					<f:facet name="header">Placa</f:facet>
+						#{a.placa}
+					</h:column>
+
+				<h:column>
+					<f:facet name="header">Marca</f:facet>
+						#{a.detalleCarro.marcarNombre}
+					</h:column>
+				<h:column>
+					<f:facet name="header">Modelo</f:facet>
+						#{a.detalleCarro.modelo}
+					</h:column>
+				<h:column>
+					<f:facet name="header">Expediente</f:facet>
+					<h:form>
+						<h:commandLink style="color:black; text-decoration:none;"
+							class="fas fa-folder" action="#{Automovil.redirectBitacora()}">
+							<f:setPropertyActionListener value="#{a}"
+								target="#{Automovil.accionAutomovil}" />
+						</h:commandLink>
+					</h:form>
+				</h:column>
+			</h:dataTable>
+		</ui:define>
+	</body>
+</ui:composition>
